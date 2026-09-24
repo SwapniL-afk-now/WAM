@@ -38,6 +38,36 @@ index 1c0dc51..eebae3b 100644
          SupportedModel.COSMOS3,
          SupportedModel.CNN_POLICY,
          SupportedModel.FLOW_POLICY,
+diff --git a/rlinf/envs/__init__.py b/rlinf/envs/__init__.py
+index 2a40c26..57c40e6 100644
+--- a/rlinf/envs/__init__.py
++++ b/rlinf/envs/__init__.py
+@@ -103,6 +103,10 @@ def get_env_cls(env_type: str, env_cfg=None):
+ 
+         return ManiskillRLTEnv
+     elif env_type == SupportedEnvType.LIBERO:
++        if env_cfg is not None and (env_cfg.get("imago_randomization", None) or {}).get("enabled", False):
++            from imago.envs.libero_randomized import RandomizedLiberoEnv
++
++            return RandomizedLiberoEnv
+         from rlinf.envs.sim.libero.libero_env import LiberoEnv
+ 
+         return LiberoEnv
+diff --git a/rlinf/envs/sim/libero/venv.py b/rlinf/envs/sim/libero/venv.py
+index 3d17d51..ffe3a30 100644
+--- a/rlinf/envs/sim/libero/venv.py
++++ b/rlinf/envs/sim/libero/venv.py
+@@ -171,7 +171,9 @@ def _worker(
+             elif cmd == "reconfigure":
+                 env.close()
+                 seed = data.pop("seed")
+-                env = OffScreenRenderEnv(**data)
++                # IMAGO: allow a custom env class (generic domain randomization).
++                env_cls = data.pop("_env_cls", None) or OffScreenRenderEnv
++                env = env_cls(**data)
+                 env.seed(seed)
+                 p.send(None)
+             elif cmd == "get_camera_meta":
 diff --git a/rlinf/models/__init__.py b/rlinf/models/__init__.py
 index 8787741..9841c2b 100644
 --- a/rlinf/models/__init__.py

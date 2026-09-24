@@ -6,17 +6,24 @@ advantage trains *both* FastWAM branches:
     L = w_video * NFT(video imagination) + w_action * NFT(action)
         + beta_real * ||v_video - v_video_pretrained||^2
 
-Differences from the parent worker, all driven by the model being a 6.5B WAM
-that is trained through LoRA / tail blocks only:
+Differences from the parent worker (full-parameter FastWAM, FSDP2):
 
-* The EMA "rollout" reference and the pretrained reference are kept for the
-  *trainable* parameters only, and are evaluated by swapping those tensors into
-  the live model under ``no_grad`` -- the parent instead rebuilds a full model
-  from disk for every update.
+* The EMA "rollout" reference and the pretrained reference (only kept when
+  ``imago_beta_real > 0``) are copies of the *trainable* parameters with the
+  same sharding (DTensor shards under FSDP2), about 1/N of the model per GPU.
+  They are evaluated by copying them into the live parameters under
+  ``no_grad`` and restoring afterwards; the parent instead rebuilds a full
+  model from disk on every update.
 * NFT noise levels are sampled on each branch's own shifted FastWAM grid.
 
-Requires FSDP1 with ``sharding_strategy: no_shard`` and ``use_orig_params: True``
-(a 13 GB bf16 replica per GPU; only LoRA / tails carry optimizer state).
+Use RLinf ``fsdp_config.strategy: fsdp2`` with root-only wrapping
+(``wrap_policy.no_split_names: ["__none__"]``), as in RLinf's FastWAM SFT
+recipe: MoT reaches into expert blocks directly. ``imago_swap_buffer: cpu``
+keeps the restore buffer on CPU (default ``auto``: CPU on 2 GPUs).
+
+C3 baseline: ``algorithm.imago_realism_weight > 0`` adds a dense
+-LPIPS(imagined, next real frame) reward before advantages
+(``imago/baselines/realism.py``).
 """
 
 from __future__ import annotations
@@ -51,37 +58,41 @@ def _clean(name: str) -> str:
 class EmbodiedJointNFTFSDPPolicy(EmbodiedNFTFSDPPolicy):
     # ------------------------------------------------------------ references
     def init_rollout_model(self) -> None:
-        fsdp = self.cfg.actor.fsdp_config
-        if str(fsdp.get("sharding_strategy", "")) != "no_shard" or not fsdp.get(
-            "use_orig_params", False
-        ):
-            raise ValueError(
-                "embodied_joint_nft needs fsdp_config.sharding_strategy=no_shard and "
-                "use_orig_params=True (trainable-param swapping for references)."
-            )
         self._trainable = {
             _clean(n): p for n, p in self.model.named_parameters() if p.requires_grad
         }
         if not self._trainable:
             raise RuntimeError("No trainable parameters (check model.imago_trainable).")
-        # Pretrained reference (realism anchor) and EMA rollout reference.
-        self._init_params = {n: p.detach().clone() for n, p in self._trainable.items()}
-        self._ema_params = {n: p.detach().clone() for n, p in self._trainable.items()}
+        with torch.no_grad():
+            # EMA rollout reference (needed whenever nft_tau < 1 at some point).
+            self._ema_params = {n: p.detach().clone() for n, p in self._trainable.items()}
+            # Pretrained reference for the realism anchor, only if it is used.
+            self._init_params = (
+                {n: p.detach().clone() for n, p in self._trainable.items()}
+                if float(self.cfg.algorithm.get("imago_beta_real", 0.0)) > 0
+                else None
+            )
+        buf = str(self.cfg.algorithm.get("imago_swap_buffer", "auto"))
+        world = torch.distributed.get_world_size() if torch.distributed.is_initialized() else 1
+        self._swap_to_cpu = buf == "cpu" or (buf == "auto" and world <= 2)
         self.rollout_model_state_dict = {}  # parent API: unused
 
     @contextmanager
     def _swapped(self, source: dict[str, torch.Tensor]):
+        """Temporarily load ``source`` into the trainable params (in place, shard-wise)."""
         saved = {}
         with torch.no_grad():
             for name, param in self._trainable.items():
-                saved[name] = param.data.clone()
+                saved[name] = param.data.to("cpu", non_blocking=True) if self._swap_to_cpu else param.data.clone()
                 param.data.copy_(source[name])
         try:
             yield
         finally:
             with torch.no_grad():
                 for name, param in self._trainable.items():
-                    param.data.copy_(saved[name])
+                    param.data.copy_(saved[name].to(param.device, non_blocking=True))
+            if self._swap_to_cpu:
+                torch.cuda.synchronize()
 
     def get_rollout_state_dict(self) -> dict:
         state = self.get_model_state_dict(cpu_offload=False, full_state_dict=False)
@@ -103,6 +114,25 @@ class EmbodiedJointNFTFSDPPolicy(EmbodiedNFTFSDPPolicy):
                     ema.copy_(param.data)
                 else:
                     ema.lerp_(param.data.to(ema.dtype), tau)
+
+    # ---------------------------------------------------------- C3 reward
+    def compute_advantages_and_returns(self):
+        """Optionally add the C3 realism reward (``algorithm.imago_realism_weight``)."""
+        fi = self.rollout_batch.get("forward_inputs", {}) or {}
+        extra = {}
+        weight = float(self.cfg.algorithm.get("imago_realism_weight", 0.0))
+        if weight > 0:
+            if "imago_imag_u8" not in fi:
+                raise RuntimeError("imago_realism_weight > 0 needs actor.model.imago.realism_frames: true")
+            from imago.baselines.realism import add_realism_reward
+
+            extra = add_realism_reward(self.rollout_batch, weight, self.device)
+        for key in ("imago_imag_u8", "imago_real_u8"):  # not needed for training
+            fi.pop(key, None)
+        metrics = super().compute_advantages_and_returns()
+        if metrics is not None:
+            metrics.update(extra)
+        return metrics
 
     # --------------------------------------------------------------- config
     def _branch_cfg(self) -> dict:

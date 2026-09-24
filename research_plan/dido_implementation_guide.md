@@ -103,9 +103,10 @@ Interaction supervision is already on during teacher preparation. LIBERO trains 
 
 ## 8. Implementation status in this repo
 
-Details and deviations are in `AGENTS.md`, section "DIDO one-step imagination".
+Details, deviations and run order are in `AGENTS.md`, section "DIDO one-step imagination". Everything is **full-parameter** (FSDP2, `imago/fsdp.py`), as in the paper.
 
-- **Stage I:** `imago/dido/distill.py`. DMD2 as specified: grid timesteps, fake score every iteration and generator every 5th, normalised gradient, x0-regression fake loss, no GAN. The teacher is FastWAM's own video expert, run with guidance 1.0, and the student and fake score are LoRA adapters.
-- **Stage II:** `imago/dido/adapt.py`. Loss is λ_video·L_video + λ_act·L_act; the action expert conditions on the one-step imagination, plus 20% teacher forcing on the ground-truth future.
+- **Stage I:** `imago/dido/distill.py`. Three separate video experts (frozen teacher, generator with interaction tokens, fake score). DMD2 as specified: fake score every iteration and generator every 5th, normalised gradient, x0-regression fake loss, no GAN, Table 4 hyperparameters, plus `L_inter + λ_align·L_align` on the generator's one-step pass. The teacher is FastWAM's own video expert, with guidance 1.0 and continuous timesteps by default (`teacher_timesteps: grid` gives the paper's grid).
+- **Stage II:** `imago/dido/adapt.py`. Eq. 10 (`0.5·L_video + L_act + L_inter + 0.02·L_align`) over the whole MoT, tokens and proprio encoder. The action expert reads the cache of the detached one-step imagination plus the interaction tokens, after token refinement; gradients reach the video expert through the cache. Ground-truth teacher forcing (`p_gt_video`) is an ablation, default 0.
+- **Interaction tokens and losses:** `imago/dido/interaction.py` (Sections 2–3 of this guide); data in `imago/dido/data.py`.
+- **Annotation pipeline:** `scripts/annotate_libero.py` (Section 4) and `scripts/audit_annotations.py`.
 - **Token refinement:** `imago/dido/token_refine.py`, adapted to FastWAM's 7×14 grid; the output length is fixed so batches stay rectangular.
-- **Not implemented:** interaction tokens, the box and DINOv3 losses, and the annotation pipeline (Sections 2 and 4 of this guide).

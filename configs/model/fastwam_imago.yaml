@@ -1,12 +1,14 @@
 # RLinf model group for IMAGO (outcome-driven RL on FastWAM imagination).
 model_type: "fastwam_imago"
 precision: bf16
-is_lora: false            # IMAGO injects its own LoRA (imago/lora.py)
+is_lora: false            # full-parameter by default (LoRA = ablation, imago_trainable.*.mode)
 
 # Released FastWAM checkpoint that can imagine-then-act (HF: yuanty/fastwam).
+# The zero-shot main config (configs/libero_rl_zeroshot.yaml) overrides this
+# with the DIDO Stage II export.
 model_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224.pt
 dataset_stats_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224_dataset_stats.json
-imago_ckpt_path: null     # resume LoRA / tail weights
+imago_ckpt_path: null     # LoRA ablation only: resume adapter weights
 
 action_dim: 7
 num_action_chunks: 8      # executed actions per step (= 2 imagined video frames)
@@ -22,26 +24,43 @@ fastwam:
 imago:
   imagination_mode: idm   # idm = imagine then act; first_frame = Fast-WAM (C5)
   train_video_steps: 4
-  train_action_steps: 4
+  train_action_steps: 10    # accuracy-first: match evaluation (action expert is cheap)
   eval_video_steps: 10
   eval_action_steps: 10
   video_sigma_shift: null
   action_sigma_shift: null
   nft_action_executed_only: true
-  action_grad_through_video: false
+  action_grad_through_video: true   # joint MoT: action NFT also shapes the video expert via the cache
   prompt_bank_path: ${oc.env:IMAGO_CKPT_DIR}/prompt_bank_liberoplus.pt
   record_dir: null
   group_size: ${algorithm.group_size}   # contiguous env groups (iso-temporal NFT)
   rollout_precision: bf16               # bf16 | nvfp4 (Sol-RL; needs transformer-engine)
+  token_refine:           # DIDO dynamics-based token refinement (only used with one-step imagination)
+    enabled: false
+    keep_ratio: 0.15
+    region: 2
+    future_frame: -1
+    ref_layer: -1
+  interaction:            # DIDO interaction tokens; must match the checkpoint (Stage I/II export)
+    enabled: false
+    horizon: 32
+    align_layers: [10, 20, 29]
+    dino_dim: 1024
 
+# Full-parameter everywhere (accuracy-first; see research_plan/imago_design_plan.md).
+# lr_mult scales actor.optim.lr per branch (RLinf model.lr_multipliers):
+# action 5e-6, video 1e-6 with the default actor lr.
 imago_trainable:
   video:
-    mode: lora            # lora | full_tail | frozen
-    num_tail_blocks: 12
-    rank: 32
+    mode: full            # full | full_tail | lora (ablation) | frozen
+    lr_mult: 0.2
+    num_tail_blocks: 0
+    rank: 32              # lora ablation only
     alpha: 64
   action:
-    mode: lora
-    num_tail_blocks: 0    # 0 = all 30 action blocks
+    mode: full
+    lr_mult: 1.0
+    num_tail_blocks: 0
     rank: 32
     alpha: 64
+  proprio: true

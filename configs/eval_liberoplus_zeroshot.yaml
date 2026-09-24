@@ -1,0 +1,31 @@
+# Zero-shot LIBERO-Plus evaluation of an IMAGO / DIDO checkpoint (no training).
+# Launch with scripts/eval_liberoplus.sh, which sets LIBERO_TYPE=plus and runs
+# one suite per process (RLinf reads LIBERO_TYPE once per process).
+#   runner.ckpt_path=<RLinf actor checkpoint>   (omit to evaluate model_path, e.g. the Stage II "SFT" row)
+defaults:
+  - libero_rl_zeroshot
+  - _self_
+runner:
+  logger:
+    experiment_name: "eval_liberoplus_zeroshot"
+  only_eval: True
+env:
+  train:                              # built but unused in only_eval mode; keep it valid under LIBERO_TYPE=plus
+    task_suite_name: ${env.eval.task_suite_name}
+    libero_variant: plus
+    task_id_filter: null
+    imago_randomization:
+      enabled: False
+  eval:
+    task_suite_name: libero_spatial   # overridden per suite by the script
+    libero_variant: plus
+    task_id_filter: null
+    total_num_envs: 48
+    max_episode_steps: 520            # >= every suite's standard horizon (LIBERO-10: 520)
+    max_steps_per_rollout_epoch: 520
+    imago_randomization:
+      enabled: False                  # never randomize at evaluation
+actor:
+  model:
+    imago:
+      prompt_bank_path: ${oc.env:IMAGO_CKPT_DIR}/prompt_bank_liberoplus.pt

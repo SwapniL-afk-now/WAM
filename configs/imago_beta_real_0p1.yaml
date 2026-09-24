@@ -1,8 +1,9 @@
+# Realism-anchor sweep point (main run uses imago_beta_real 0.0).
 defaults:
-  - liberoplus_imago_fastwam
+  - libero_rl_zeroshot
   - _self_
 runner:
   logger:
-    experiment_name: "liberoplus_imago_beta_real_0p1"
+    experiment_name: "imago_beta_real_0p1"
 algorithm:
   imago_beta_real: 0.1

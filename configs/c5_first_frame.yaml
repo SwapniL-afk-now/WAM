@@ -1,16 +1,17 @@
 # C5: Fast-WAM mode (no test-time imagination), action-only NFT.
 defaults:
-  - liberoplus_imago_fastwam
+  - libero_rl_zeroshot
   - _self_
 runner:
   logger:
-    experiment_name: "liberoplus_c5_first_frame"
+    experiment_name: "c5_first_frame"
 algorithm:
   imago_video_weight: 0.0
 actor:
   model:
     imago:
       imagination_mode: first_frame
+      action_grad_through_video: false
     imago_trainable:
       video:
         mode: frozen

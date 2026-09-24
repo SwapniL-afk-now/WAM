@@ -1,17 +1,16 @@
-# IMAGO with all ported efficiency techniques:
-#   NVFP4 rollouts (Sol-RL), iso-temporal groups (Flash-GRPO),
-#   noise-aware weighting (TempFlow-GRPO), sliding noise window (MixGRPO).
-# Compare against liberoplus_imago_fastwam at equal wall-clock and rollouts.
+# Efficiency ablation (NOT the default; enable an option in the main run only
+# after a <= 0.5-point parity check on LIBERO-Plus zero-shot):
+#   NVFP4 rollouts (Sol-RL) and noise-aware weighting (TempFlow-GRPO).
+# The MixGRPO window only acts on the 10-step action branch here (video is one step).
 defaults:
-  - liberoplus_imago_fastwam
+  - libero_rl_zeroshot
   - _self_
 runner:
   logger:
-    experiment_name: "liberoplus_imago_fast"
+    experiment_name: "imago_fast"
 algorithm:
-  imago_iso_temporal: True
   imago_time_weight: tempflow
-  imago_noise_window: 2         # train on 2 of the 4 rollout steps at a time
+  imago_noise_window: 5         # 5 of the 10 action steps at a time
   imago_window_interval: 10
 actor:
   model:

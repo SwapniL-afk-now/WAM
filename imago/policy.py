@@ -38,6 +38,7 @@ from rlinf.models.embodiment.fastwam.fastwam_policy import (
 )
 
 from imago.dido.token_refine import TokenRefineConfig, refine_cache
+from imago.dido.video_fn import video_cache_inputs, video_forward
 
 
 @dataclass
@@ -72,6 +73,11 @@ class ImagoPolicyConfig:
     rollout_precision: str = "bf16"
     # DIDO dynamics-based token refinement of the imagined-video cache.
     token_refine: TokenRefineConfig = field(default_factory=TokenRefineConfig)
+    # C2 baseline (imago/baselines/flow_grpo.py): Flow-SDE noise level.
+    flow_sde_noise_level: float = 0.5
+    # C3 baseline: store imagined / real frames for the realism reward.
+    realism_frames: bool = False
+    realism_frame_scale: float = 0.5
 
 
 class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
@@ -79,6 +85,10 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
 
     # Pure helpers reused from RLinf's FastWAM wrapper (they only touch the
     # processor / VAE-agnostic tensors, not the FastWAM denoising API).
+    # RLinf FSDP2 (``wrap_policy.no_split_names: ["__none__"]``): one root unit.
+    # MoT calls blocks directly and reads some weights outside ``forward``, so
+    # no per-block or per-embedding units.
+    _fsdp_wrap_embeddings = False
     _center_crop_resize_batch = staticmethod(FastWAMPolicy._center_crop_resize_batch)
     _build_input_images = FastWAMPolicy._build_input_images
     _normalize_proprio = FastWAMPolicy._normalize_proprio
@@ -163,16 +173,24 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
         context: torch.Tensor,
         context_mask: torch.Tensor,
     ) -> torch.Tensor:
-        """Video-expert velocity ``v(x_t, t)``; frame 0 is clamped to the observation."""
-        x_t = x_t.clone()
-        x_t[:, :, 0:1] = first_latents.to(x_t.dtype)
-        timestep = (t.reshape(-1) * self.infer_video_scheduler.num_train_timesteps).to(x_t.dtype)
-        return self._denoise_video(
-            latents_video=x_t,
-            timestep_video=timestep,
-            context=context,
-            context_mask=context_mask,
-            video_self_attn_mask=self._video_self_attn_mask(x_t),
+        """Video-expert velocity ``v(x_t, t)``; frame 0 is clamped to the observation.
+
+        Includes the DIDO interaction tokens when the expert has them.
+        """
+        v, _tok, _hidden = self.video_forward_full(x_t, t, first_latents, context, context_mask)
+        return v
+
+    def video_forward_full(self, x_t, t, first_latents, context, context_mask, collect_layers=()):
+        """``(velocity, interaction-token states, {layer: token states})``."""
+        return video_forward(
+            self.video_expert,
+            x_t,
+            t,
+            first_latents,
+            context,
+            context_mask,
+            num_train_timesteps=self.infer_video_scheduler.num_train_timesteps,
+            collect_layers=tuple(collect_layers),
             fuse_vae_embedding_in_latents=self._fuse_flag(),
         )
 
@@ -185,29 +203,15 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
     ):
         """Clean (t=0) video conditioning -> per-layer K/V cache + action mask.
 
-        In ``first_frame`` mode only the first latent frame is cached, which is
-        exactly FastWAM's first-frame action mask.
+        The cache holds the video tokens plus, when present, the 64 DIDO
+        interaction tokens (the action expert reads the whole world-model
+        stream, as in DIDO). In ``first_frame`` mode only the first latent
+        frame is cached (FastWAM's first-frame action mask).
         """
         if self.policy_cfg.imagination_mode == "first_frame":
             video_latents = video_latents[:, :, 0:1]
-        batch = video_latents.shape[0]
-        timestep = torch.zeros((batch,), dtype=video_latents.dtype, device=video_latents.device)
-        (tokens, _t, t_mod, v_context, v_context_mask, freqs, grid_f, grid_h, grid_w, tpf) = (
-            self.video_expert.prepare(
-                x=video_latents,
-                timestep=timestep,
-                context=context,
-                context_mask=context_mask,
-                action=None,
-                fuse_vae_embedding_in_latents=self._fuse_flag(),
-            )
-        )
-        seq_len = int(tokens.shape[1])
-        mask = self._build_mot_attention_mask(
-            video_seq_len=seq_len,
-            action_seq_len=action_seq_len,
-            video_tokens_per_frame=tpf,
-            device=tokens.device,
+        (tokens, t_mod, v_context, v_context_mask, freqs, self_mask, grid, video_len) = (
+            video_cache_inputs(self.video_expert, video_latents, context, context_mask, self._fuse_flag())
         )
         cache_k, cache_v = self.mot.prefill_video_cache_tensor(
             video_tokens=tokens,
@@ -215,20 +219,22 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
             video_t_mod=t_mod,
             video_context=v_context,
             video_context_mask=v_context_mask,
-            video_attention_mask=mask[:seq_len, :seq_len],
+            video_attention_mask=self_mask,
         )
-        action_mask = mask[seq_len:, :]
         refine = self.policy_cfg.token_refine
-        if refine.enabled and int(grid_f) > 1:
-            # DIDO dynamics-based token refinement: compress near-static regions
-            # of the imagined future before the action expert reads the cache.
-            cache_k, cache_v = refine_cache(
-                cache_k, cache_v, (int(grid_f), int(grid_h), int(grid_w)), refine
-            )
-            new_len = int(cache_k[0].shape[1])
-            action_mask = torch.ones(
-                (action_seq_len, new_len + action_seq_len), dtype=torch.bool, device=tokens.device
-            )  # action -> all (refined) video tokens and all action tokens
+        if refine.enabled and grid[0] > 1:
+            # DIDO dynamics-based token refinement on the future-video part only;
+            # frame 0 and the interaction tokens are kept unchanged.
+            vid_k = [k[:, :video_len] for k in cache_k]
+            vid_v = [v[:, :video_len] for v in cache_v]
+            vid_k, vid_v = refine_cache(vid_k, vid_v, grid, refine)
+            cache_k = [torch.cat([rk, k[:, video_len:]], dim=1) for rk, k in zip(vid_k, cache_k)]
+            cache_v = [torch.cat([rv, v[:, video_len:]], dim=1) for rv, v in zip(vid_v, cache_v)]
+        cache_len = int(cache_k[0].shape[1])
+        # Action tokens attend to every cached world-model token and to each other.
+        action_mask = torch.ones(
+            (action_seq_len, cache_len + action_seq_len), dtype=torch.bool, device=tokens.device
+        )
         return cache_k, cache_v, action_mask
 
     def action_velocity(
@@ -388,6 +394,8 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
             "nft_x0_action": nft_action.detach(),
             "nft_x0_action_full": x_action.detach(),
         }
+        if cfg.realism_frames:
+            forward_inputs.update(self._realism_frames(images, x_video))
         zeros = torch.zeros(
             (batch, cfg.num_action_chunks, actions.shape[-1]),
             device=self.device,
@@ -398,6 +406,31 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
             "prev_values": torch.zeros((batch, 1), device=self.device, dtype=torch.float32),
             "forward_inputs": forward_inputs,
         }
+
+    @torch.no_grad()
+    def _realism_frames(self, images: torch.Tensor, x_video: torch.Tensor) -> dict:
+        """C3 (realism reward): the current real frame and the imagined frame at
+        the end of the executed chunk, as downscaled uint8 images.
+
+        The reward -LPIPS(imagined_t, real_{t+1}) is computed by the actor worker
+        (``imago/baselines/realism.py``), where step t+1's real frame is available.
+        """
+        cfg = self.policy_cfg
+        frame = cfg.num_action_chunks // max(1, cfg.action_video_freq_ratio)
+        n_lat = (frame + self.vae.temporal_downsample_factor - 1) // self.vae.temporal_downsample_factor + 1
+        n_lat = min(n_lat, x_video.shape[2])
+        video = self.vae.decode(x_video[:, :, :n_lat], device=self.device, tiled=False)  # [B,3,T,H,W]
+        imagined = video[:, :, min(frame, video.shape[2] - 1)]
+
+        def to_u8(x):
+            x = x.float()
+            if cfg.realism_frame_scale != 1.0:
+                x = torch.nn.functional.interpolate(
+                    x, scale_factor=cfg.realism_frame_scale, mode="bilinear", align_corners=False
+                )
+            return ((x.clamp(-1, 1) + 1) * 127.5).round().to(torch.uint8)
+
+        return {"imago_real_u8": to_u8(images.to(self.device)), "imago_imag_u8": to_u8(imagined)}
 
     # ------------------------------------------------------------ NFT forward
     def forward(self, forward_type=ForwardType.DEFAULT, **kwargs):

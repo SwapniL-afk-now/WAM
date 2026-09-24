@@ -1,0 +1,16 @@
+# C3: realism reward (VAMPO / WAM-RL style). Identical to the main run except
+# the reward: success + w * (-LPIPS(imagined end-of-chunk frame, next real frame)).
+# Needs `pip install lpips` on the server.
+defaults:
+  - libero_rl_zeroshot
+  - _self_
+runner:
+  logger:
+    experiment_name: "c3_realism_reward"
+algorithm:
+  imago_realism_weight: 0.1     # per-chunk; success reward is 1 per episode
+actor:
+  model:
+    imago:
+      realism_frames: true
+      realism_frame_scale: 0.5

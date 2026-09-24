@@ -1,5 +1,7 @@
 # IMAGO: Outcome-Driven RL on a World Action Model's Imagination — Implementation Plan
 
+> **Superseded defaults (current code):** training is full-parameter everywhere (FSDP2), starts from our DIDO Stage II export, and follows the zero-shot protocol (RL on standard LIBERO with generic randomization, LIBERO-Plus evaluation only). The main config is `configs/libero_rl_zeroshot.yaml`. The LoRA settings and `liberoplus_imago_fastwam` config mentioned below are historical; see `AGENTS.md`.
+
 ## Context
 
 **Thesis.** Today every WAM trains its imagined future to *match reality*: supervised video loss, VAMPO's expert-dynamics reward, WAM-RL's reconstruction reward. Two recent findings suggest that objective doesn't serve action well:

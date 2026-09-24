@@ -1,4 +1,4 @@
-# DIDO Stage II (adapt the action expert to one-step imagination) on LIBERO.
+# DIDO Stage II, full parameters (joint policy learning on one-step imagination), LIBERO 4 suites.
 # torchrun --nproc_per_node 3 -m imago.dido.adapt configs/dido/stage2_libero.yaml
 seed: 0
 model_path: ${oc.env:IMAGO_CKPT_DIR}/dido_stage1/fastwam_optional_idm_onestep_video.pt
@@ -8,37 +8,48 @@ fastwam:
   config_name: ${oc.env:IMAGO_ROOT}/configs/fastwam/sim_libero_optional_idm.yaml
   overrides:
     - model.redirect_common_files=true
-    # FastWAM-preprocessed LIBERO (HF yuanty/LIBERO-fastwam), all 4 suites as in DIDO:
     - data.train.dataset_dirs=[${oc.env:LIBERO_DATA_ROOT}/libero_spatial_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_object_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_goal_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_10_no_noops_lerobot]
     - data.train.text_embedding_cache_dir=${oc.env:IMAGO_CKPT_DIR}/text_embeds_cache/libero
+    - data.train._target_=imago.dido.data.InteractionAnnotatedDataset
+    - data.train.annotation_root=${oc.env:IMAGO_CKPT_DIR}/annotations/libero
+    - data.train.horizon=32
+    - data.train.dino_offset=32
 
-token_refine:               # DIDO dynamics-based token refinement (Sec. 3.3)
+interaction:                # Table 4, Stage II weights
+  enabled: true
+  horizon: 32
+  align_layers: [10, 20, 29]
+  dino_dim: 1024
+  lambda_obj: 0.03
+  lambda_grip: 0.03
+  lambda_giou: 1.0
+  lambda_align: 0.02
+
+token_refine:               # DIDO Sec. 3.3 (+0.7 LIBERO-Plus in the paper's ablation)
   enabled: true
   keep_ratio: 0.15          # top-3 of 20 in DIDO
   region: 2
   future_frame: -1
   ref_layer: -1
 
-video_lora:                 # video expert trains via LoRA (merged at export)
-  rank: 32
-  alpha: 64
-  num_tail_blocks: 0
+fsdp:
+  offload_when_2gpu: false  # ~65 GB/GPU on 2 GPUs without offload (estimate printed at start)
 gradient_checkpointing: false
 
 loss:
-  lambda_video: 0.5         # DIDO Table 4
+  lambda_video: 0.5         # Table 4
   lambda_act: 1.0
-  p_gt_video: 0.2           # fraction of samples conditioned on GT future (teacher forcing)
+  p_gt_video: 0.0           # ablation: fraction of samples conditioned on the GT future
 
-optim:
-  lr: 1.0e-4                # DIDO Stage II
+optim:                      # Table 4, Stage II
+  lr: 1.0e-4
   betas: [0.9, 0.95]
   weight_decay: 0.01
-  warmup_frac: 0.05         # 5% warm-up, cosine
+  warmup_frac: 0.05
   clip_grad: 1.0
 
 train:
-  steps: 14480              # DIDO LIBERO: 14,480 steps at batch 384; scale to your budget
+  steps: 14480              # LIBERO: 14,480 at batch 384
   global_batch_size: 384
   micro_batch_size: 16
   log_every: 20

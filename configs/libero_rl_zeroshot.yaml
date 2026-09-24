@@ -1,0 +1,202 @@
+# IMAGO main run (zero-shot protocol, accuracy-first, full-parameter).
+#
+# Protocol, matching DIDO / Faster-WAM on LIBERO-Plus:
+#   * RL only on the standard LIBERO four suites (Spatial, Object, Goal, 10),
+#     with *generic* domain randomization (imago/envs/libero_randomized.py).
+#   * LIBERO-Plus is never seen during training. It is evaluated afterwards in
+#     separate runs (scripts/eval_liberoplus.sh), because RLinf reads
+#     LIBERO_TYPE once per process.
+#   * Start point: our DIDO Stage II export (one-step imagination, interaction
+#     tokens, token refinement). Report it without RL as the "SFT" row.
+#
+# Hardware: 3 x 96 GB by default. For 2 GPUs add
+#   actor.fsdp_config.cpu_offload=True actor.fsdp_config.offload_pin_memory=True
+# or use configs/libero_rl_zeroshot_2gpu.yaml.
+#
+# Batch arithmetic (must hold): samples per epoch
+#   = (max_episode_steps / num_action_chunks) * total_num_envs * rollout_epoch
+#   = (512 / 8) * 48 * 1 = 3072;
+# global_batch_size 768 divides it and is divisible by micro_batch_size * GPUs
+# for 2 GPUs (16) and 3 GPUs (24). total_num_envs 48 splits into 8-env groups
+# on 2 or 3 env workers.
+defaults:
+  - env/libero_130@env.train
+  - env/libero_130@env.eval
+  - model/fastwam_imago@actor.model
+  - hybrid_engines/fsdp@actor.fsdp_config
+  - weight_syncer/patch_syncer@weight_syncer
+  - override hydra/job_logging: stdout
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  searchpath:
+    - file://${oc.env:EMBODIED_PATH}/config/
+
+cluster:
+  num_nodes: 1
+  component_placement:
+    actor,env,rollout: all
+
+runner:
+  task_type: embodied
+  logger:
+    log_path: "../results"
+    project_name: imago
+    experiment_name: "libero_rl_zeroshot"
+    logger_backends: ["tensorboard"]
+  max_epochs: 300
+  max_steps: -1
+  only_eval: False
+  val_check_interval: 10        # standard-LIBERO sanity eval only (no LIBERO-Plus here)
+  save_interval: 10
+  resume_dir: null
+  ckpt_path: null
+
+algorithm:
+  group_size: 8
+  reward_coef: 1.0
+  reward_type: chunk_level
+  logprob_type: chunk_level
+  update_epoch: 1
+  adv_type: grpo
+  loss_type: embodied_joint_nft
+  filter_rewards: True          # drop all-success / all-failure groups
+  rewards_lower_bound: 0.1
+  rewards_upper_bound: 0.9
+
+  # --- NFT (both branches). Trust region + EMA reference keep full-param RL stable.
+  nft_loss_form: mse
+  nft_beta: 1.0
+  adv_clip_max: 1.0
+  nft_weight_mode: adaptive
+  nft_weight_scale: [1.0, 1.0]
+  nft_clip_ratio: 0.1
+  nft_tau: [1.0, 0.01, 0, 70]   # on-policy -> slow EMA reference
+
+  # --- IMAGO
+  imago_video_weight: 1.0       # 0 => C1 (action-only NFT, imagination frozen)
+  imago_action_weight: 1.0
+  imago_beta_real: 0.0          # realism anchor; sweep {0.0, 0.1} (configs/imago_beta_real_0p1.yaml)
+  imago_video_nft_shift: 5.0
+  imago_action_nft_shift: 1.0
+  imago_swap_buffer: auto       # EMA/init reference swap buffer: cpu when <= 2 GPUs
+
+  # --- efficiency options; only those without accuracy cost are on
+  imago_iso_temporal: True      # Flash-GRPO iso-temporal groups (variance reduction)
+  imago_time_weight: none       # ablation: rectify | tempflow
+  imago_noise_window: 0         # ablation: MixGRPO sliding window
+  imago_window_interval: 10
+
+env:
+  group_name: "EnvGroup"
+  train:
+    rollout_epoch: 1
+    # Standard LIBERO four suites inside libero_130. Verify on the server with
+    # scripts/make_libero4_split.py (it prints the ids; expected as below).
+    task_id_filter: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                     20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]
+    libero_variant: standard
+    total_num_envs: 48
+    group_size: ${algorithm.group_size}
+    max_episode_steps: 512
+    max_steps_per_rollout_epoch: 512
+    use_fixed_reset_state_ids: False
+    imago_randomization:        # generic domain randomization; no LIBERO-Plus assets
+      enabled: True
+      camera: agentview
+      joint_noise_std: 0.05
+      camera_pos_jitter: 0.02
+      camera_rot_jitter_deg: 3.0
+      light_scale: [0.6, 1.4]
+    video_cfg:
+      save_video: False
+      video_base_dir: ${runner.logger.log_path}/video/train
+  eval:
+    rollout_epoch: 1
+    task_id_filter: ${env.train.task_id_filter}
+    libero_variant: standard
+    total_num_envs: 48
+    auto_reset: True
+    ignore_terminations: True
+    max_episode_steps: 512
+    max_steps_per_rollout_epoch: 512
+    group_size: 1
+    use_fixed_reset_state_ids: True
+    is_eval: True
+    video_cfg:
+      save_video: False
+      video_base_dir: ${runner.logger.log_path}/video/eval
+
+rollout:
+  group_name: "RolloutGroup"
+  generation_backend: "huggingface"
+  recompute_logprobs: False
+  enable_offload: True
+  pipeline_stage_num: 1
+  model:
+    model_path: ${actor.model.model_path}
+    precision: ${actor.model.precision}
+
+actor:
+  group_name: "ActorGroup"
+  training_backend: "fsdp"
+  micro_batch_size: 8
+  global_batch_size: 768
+  seed: 42
+  enable_offload: True
+
+  model:
+    # DIDO Stage II export (full-parameter; see imago/dido/adapt.py).
+    model_path: ${oc.env:IMAGO_CKPT_DIR}/dido_stage2/fastwam_optional_idm_dido.pt
+    dataset_stats_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224_dataset_stats.json
+    imago:
+      train_video_steps: 1      # DIDO one-step imagination
+      eval_video_steps: 1
+      train_action_steps: 10
+      eval_action_steps: 10
+      prompt_bank_path: ${oc.env:IMAGO_CKPT_DIR}/prompt_bank_libero.pt
+      rollout_precision: bf16   # nvfp4 = ablation only (parity check first)
+      token_refine:
+        enabled: true
+        keep_ratio: 0.15
+        region: 2
+        future_frame: -1
+        ref_layer: -1
+      interaction:
+        enabled: true           # the Stage II checkpoint carries the tokens
+        horizon: 32
+        align_layers: [10, 20, 29]
+        dino_dim: 1024
+
+  optim:
+    lr: 5.0e-6                  # action expert; video expert x0.2 (imago_trainable.video.lr_mult)
+    value_lr: 5.0e-6
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    adam_eps: 1.0e-08
+    weight_decay: 0.0
+    clip_grad: 1.0
+    critic_warmup_steps: 0
+
+  fsdp_config:
+    strategy: "fsdp2"
+    sharding_strategy: "full_shard"
+    use_orig_params: True
+    gradient_checkpointing: True
+    cpu_offload: False          # True on 2 GPUs
+    offload_pin_memory: False
+    reshard_after_forward: True
+    wrap_policy:
+      no_split_names: ["__none__"]   # one root unit: MoT calls expert blocks directly
+    mixed_precision:
+      param_dtype: bf16
+      reduce_dtype: fp32
+      buffer_dtype: bf16
+
+reward:
+  use_reward_model: False
+
+critic:
+  use_critic_model: False

@@ -1,0 +1,19 @@
+# Ablation "is DIDO needed?": IMAGO on the released multi-step FastWAM
+# Optional-IDM checkpoint (no one-step distillation, no interaction tokens, no
+# token refinement), 4 video denoising steps per rollout chunk.
+defaults:
+  - libero_rl_zeroshot
+  - _self_
+runner:
+  logger:
+    experiment_name: "imago_fastwam_multistep"
+actor:
+  model:
+    model_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224.pt
+    imago:
+      train_video_steps: 4
+      eval_video_steps: 10
+      token_refine:
+        enabled: false
+      interaction:
+        enabled: false

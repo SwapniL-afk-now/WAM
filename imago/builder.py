@@ -18,6 +18,8 @@ from rlinf.models.embodiment.fastwam import (
 )
 from rlinf.utils.logging import get_logger
 
+from imago.dido import interaction as inter
+from imago.ckpt import load_checkpoint_checked
 from imago.dido.token_refine import TokenRefineConfig
 from imago.lora import inject_lora, tail_blocks
 from imago.policy import FastWAMImaginePolicy, ImagoPolicyConfig
@@ -61,7 +63,7 @@ def _compose(config_dir: str, config_name: str, overrides) -> DictConfig:
     return cfg
 
 
-def _instantiate(model_cfg: DictConfig, torch_dtype, device) -> FastWAMImaginePolicy:
+def _instantiate(model_cfg: DictConfig, torch_dtype, device, cls=FastWAMImaginePolicy) -> FastWAMImaginePolicy:
     values = OmegaConf.to_container(model_cfg, resolve=True)
     target = values.pop("_target_", "")
     if target != "fastwam.runtime.create_fastwam_optional_idm":
@@ -77,7 +79,7 @@ def _instantiate(model_cfg: DictConfig, torch_dtype, device) -> FastWAMImaginePo
     action_scheduler = values.pop("action_scheduler")
     loss = values.pop("loss", {}) or {}
     values.pop("compile_training_denoise", None)
-    return FastWAMImaginePolicy.from_wan22_pretrained(
+    return cls.from_wan22_pretrained(
         **values,
         device=device,
         torch_dtype=torch_dtype,
@@ -93,37 +95,61 @@ def _instantiate(model_cfg: DictConfig, torch_dtype, device) -> FastWAMImaginePo
 
 
 def _apply_trainable(model: FastWAMImaginePolicy, cfg: DictConfig) -> dict:
-    """Freeze everything, then open LoRA (or tail blocks) per branch."""
+    """Freeze everything, then open each branch per ``imago_trainable.<branch>.mode``.
+
+    ``full`` (default, accuracy-first): the whole expert, including the DIDO
+    interaction tokens and heads for the video expert. ``full_tail``: the last
+    N blocks. ``lora``: ablation only. ``frozen``.
+    Separate learning rates use RLinf's ``model.lr_multipliers``
+    (pattern -> multiplier on ``actor.optim.lr``).
+    """
     lcfg = cfg.get("imago_trainable", {}) or {}
     model.requires_grad_(False)
     stats = {}
+    multipliers = {}
     for branch, expert in (("video", model.video_expert), ("action", model.action_expert)):
         bcfg = lcfg.get(branch, {}) or {}
-        mode = str(bcfg.get("mode", "lora"))  # lora | full_tail | frozen
-        num_tail = int(bcfg.get("num_tail_blocks", 12 if branch == "video" else 0))
+        mode = str(bcfg.get("mode", "full"))
+        num_tail = int(bcfg.get("num_tail_blocks", 0))
         blocks = tail_blocks(expert.blocks, num_tail)
+        if "lr_mult" in bcfg:
+            multipliers[f"{branch}_expert."] = float(bcfg.lr_mult)
         if mode == "frozen":
             stats[branch] = "frozen"
-            continue
-        if mode == "full_tail":
+        elif mode == "full":
+            expert.requires_grad_(True)
+            stats[branch] = "full"
+        elif mode == "full_tail":
             for block in blocks:
                 block.requires_grad_(True)
             stats[branch] = f"full_tail({len(blocks)} blocks)"
-            continue
-        if mode != "lora":
+        elif mode == "lora":
+            wrapped = inject_lora(blocks, rank=int(bcfg.get("rank", 32)), alpha=float(bcfg.get("alpha", 64)))
+            for name, param in expert.named_parameters():
+                if "lora_A" in name or "lora_B" in name:
+                    param.requires_grad_(True)
+            stats[branch] = f"lora(r={bcfg.get('rank', 32)}, {len(blocks)} blocks, {wrapped} linears)"
+        else:
             raise ValueError(f"Unknown imago_trainable.{branch}.mode: {mode}")
-        wrapped = inject_lora(
-            blocks,
-            rank=int(bcfg.get("rank", 32)),
-            alpha=float(bcfg.get("alpha", 64)),
-        )
-        for name, param in expert.named_parameters():
-            if "lora_A" in name or "lora_B" in name:
-                param.requires_grad_(True)
-        stats[branch] = f"lora(r={bcfg.get('rank', 32)}, {len(blocks)} blocks, {wrapped} linears)"
-    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    stats["trainable_params"] = trainable
+    if bool(lcfg.get("proprio", True)) and getattr(model, "proprio_encoder", None) is not None:
+        model.proprio_encoder.requires_grad_(True)
+    if multipliers:
+        model.lr_multipliers = multipliers  # read by RLinf's FSDP build_optimizer
+    stats["trainable_params"] = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    stats["lr_multipliers"] = multipliers
     return stats
+
+
+def _policy_class(cfg: DictConfig):
+    """``imago.policy``: ``imago`` (default) or ``flow_grpo`` (C2 baseline)."""
+    name = str((cfg.get("imago", {}) or {}).get("policy", "imago"))
+    if name == "imago":
+        return FastWAMImaginePolicy
+    if name == "flow_grpo":
+        from imago.baselines.flow_grpo import FlowGRPOPolicy
+
+        return FlowGRPOPolicy
+    raise ValueError(f"Unknown imago.policy: {name!r}")
 
 
 def get_model(cfg: DictConfig, torch_dtype=None):
@@ -138,14 +164,18 @@ def get_model(cfg: DictConfig, torch_dtype=None):
 
     torch_dtype = torch_dtype or torch.bfloat16
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = _instantiate(fcfg.model, torch_dtype, device)
+    model = _instantiate(fcfg.model, torch_dtype, device, cls=_policy_class(cfg))
 
     ckpt_path = cfg.get("model_path", None)
     if not ckpt_path:
         raise ValueError("IMAGO requires model.model_path (FastWAM Optional-IDM checkpoint).")
     ckpt_path = os.path.expanduser(os.path.expandvars(str(ckpt_path)))
     logger.info("Loading FastWAM Optional-IDM checkpoint: %s", ckpt_path)
-    model.load_checkpoint(ckpt_path)
+    icfg_inter = (cfg.get("imago", {}) or {}).get("interaction", None)
+    if icfg_inter is not None and bool(icfg_inter.get("enabled", False)):
+        # DIDO interaction tokens must exist before loading a DIDO checkpoint.
+        inter.attach(model.video_expert, inter.InteractionConfig(**dict(icfg_inter)))
+    load_checkpoint_checked(model, ckpt_path)
 
     stats = _apply_trainable(model, cfg)
     # RLinf actor checkpoints of IMAGO runs (LoRA / tails) are loaded on top.
@@ -188,5 +218,8 @@ def get_model(cfg: DictConfig, torch_dtype=None):
         group_size=int(icfg.get("group_size", 8)),
         rollout_precision=str(icfg.get("rollout_precision", "bf16")),
         token_refine=TokenRefineConfig(**dict(icfg.get("token_refine", {}) or {})),
+        flow_sde_noise_level=float(icfg.get("flow_sde_noise_level", 0.5)),
+        realism_frames=bool(icfg.get("realism_frames", False)),
+        realism_frame_scale=float(icfg.get("realism_frame_scale", 0.5)),
     )
     return model.configure_imago(processor=processor, policy_cfg=policy_cfg)
