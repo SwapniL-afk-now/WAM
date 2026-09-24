@@ -170,6 +170,7 @@ What the neighbouring papers used: WoVR and πRL used RLinf. WAM-OPD, VAMPO and 
 | A9 | Handling of all-fail / all-success groups: drop vs. FSD signal | H3 |
 | A10 | + attention distillation (`L_attn`, §12.1) | Does copying *where the teacher looks* add to copying *what it does*? |
 | A11 | + advantage-weighted attention term (RAL-style, §12.1) | Does rewarding attention help beyond rewarding actions? |
+| A12 | Full-teacher target vs. scaled delta target, η ∈ {0.25, 0.5, 1} (§12.3) | Does a partial delta step avoid over-imitating the privileged teacher? |
 
 ### 4.6 Analyses (the figures people will reuse)
 
@@ -189,6 +190,8 @@ Run on 3–4 RoboTwin tasks with the released FastWAM/PFD checkpoint. No trainin
 - **P2 (H2):** rescue rate with transplanted success futures, sweeping δ.
 
 **Go** if the teacher beats the student by **≥ 10 success points** on the model's own states in P1 or P2.
+
+Supporting evidence for this gate: "A Predictive Law for On-Policy Self-Distillation From World Feedback" (2605.30070, LLMs) reports that the *initial* student–self-teacher gap predicts the final gain linearly. Measure the gap for every candidate privileged context (own future, transplant, demo, goal frame) and keep only those with a large gap before any training.
 **No-go:** switch the thesis to the goal-frame variant (A6), or to a pure systematic study of RL for WAMs (the fallback paper type below). Decide this by **October 8**.
 
 ---
@@ -312,6 +315,27 @@ It is less flashy, but it is heavily cited and would target ICML 2027.
 
 **Follow-up paper (ICML / CoRL 2027):** a "Looped-Flow WAM", in which the imagined video branch is replaced by a looped latent trained with looped-flow objectives. It can then be post-trained with FSD, where the privileged-future teacher supervises the looped latent's foresight. It reuses all of this project's infrastructure.
 
+### 12.3 On-Policy Delta Distillation (OPD², 2607.15161): **adopt as the FSD target variant**
+
+**What it does (NAVER AI, LLMs):**
+- The per-token reward is `log π_teacher − log π_teacher_base`, the "delta" that post-training added to the teacher. Plain OPD instead uses the teacher's full distribution.
+- Centred and gated by the ordinary (teacher − student) OPD signal.
+- Used as a dense advantage inside a GRPO-style clipped loss.
+- Beats plain OPD on maths, science and code across Qwen3 sizes and Gemma 4.
+- Code: `github.com/naver-ai/opd2`.
+
+**No WAM or VLA paper uses delta distillation (checked 2026-09-24).** ΔVLA (2603.08361) is unrelated despite its name: it uses world-knowledge variation as a prior, not distillation.
+
+**Why it maps naturally onto FSD:** PFD's "privileged foresight residual" *is* a delta, the teacher's velocity with the real future minus with the current frame only. In FSD the on-policy delta is
+`Δ = u_θ̄(a_τ,τ | o,ℓ,F) − u_θ̄(a_τ,τ | o,ℓ,v̂)`,
+so the self-teacher is compared with *itself without the privileged future*, just as OPD² compares the teacher with its base model. That motivates a scaled-delta target (ablation A12):
+`target = sg[ u_θ(a_τ,τ | o,ℓ,v̂) + η·Δ ]`, where `η` works like a guidance scale.
+- **η = 1** recovers the full-teacher target of §3.2.
+- **η < 1** takes a partial step. This should limit the known OPSD failure where the student over-imitates a teacher that "cheats" with privileged information.
+- Following OPD², **gate Δ** by agreement with the direction of the transplanted-success signal.
+
+Novelty framing: "on-policy delta self-distillation for WAMs". It combines PFD's residual (offline) with OPD²'s delta (LLMs, external teacher), on-policy and self-taught. Neither combination has been published.
+
 ## Sources
 
 - PFD: https://arxiv.org/abs/2604.25859 and https://github.com/PengchengFang-cs/PFD
@@ -339,3 +363,7 @@ It is less flashy, but it is heavily cited and would target ICML 2027.
 - VAMPO code: https://github.com/OpenHelix-Team/VAMPO
 - FastWAM code: https://github.com/yuantianyuan01/FastWAM
 - SimpleVLA-RL: https://github.com/PRIME-RL/SimpleVLA-RL
+- On-Policy Delta Distillation (OPD²): https://arxiv.org/abs/2607.15161 and https://github.com/naver-ai/opd2
+- A Predictive Law for OPSD From World Feedback: https://arxiv.org/abs/2605.30070
+- Think Like a World Model, Act Like a VLA: https://arxiv.org/abs/2609.24682
+- ΔVLA: https://arxiv.org/abs/2603.08361
