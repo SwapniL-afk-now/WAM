@@ -1,0 +1,1308 @@
+# 2026 LLM Reinforcement-Learning Papers (full list)
+
+1235 unique arXiv papers with 2026 IDs (2601.xxxxx to 2609.xxxxx), merged from community-maintained lists (Awesome-LLM-RLVR, two on-policy-distillation lists, reasoning-models, AI-agent-papers, RL-for-LRMs and others; see `gap_analysis.md`).
+
+Grouped by primary technique (keyword classification on titles; secondary tags in brackets). Titles are as written in the source lists; a few entries are descriptive labels rather than exact titles.
+
+| Category | Papers |
+|---|---|
+| [Policy-optimization objectives & stability](#algo) | 158 |
+| [Rollout, data & sample efficiency](#rollout) | 63 |
+| [Off-policy reuse, async & RL systems](#async) | 43 |
+| [Credit assignment, token/step-level & process rewards](#credit) | 50 |
+| [Entropy, exploration & diversity](#entropy) | 62 |
+| [Rewards, verifiers & label-free RL](#reward) | 157 |
+| [On-policy distillation & self-distillation](#opd) | 439 |
+| [SFT–RL interplay & hybrid training](#sftrl) | 16 |
+| [Efficient reasoning & length control](#length) | 23 |
+| [Analysis, theory, scaling & capacity](#analysis) | 54 |
+| [Agentic, multi-turn & tool-use RL](#agent) | 53 |
+| [Multimodal / VLM / diffusion RL](#mm) | 32 |
+| [Domain applications & other](#other) | 85 |
+
+<a id="algo"></a>
+## Policy-optimization objectives & stability (158)
+
+- [2601.02749](https://arxiv.org/abs/2601.02749) The Path Ahead for Agentic AI: Challenges and Opportunities [agent]
+- [2601.03723](https://arxiv.org/abs/2601.03723) ETR: Outcome-Guided Elastic Trust Regions for Policy Optimization [agent]
+- [2601.05242](https://arxiv.org/abs/2601.05242) GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization
+- [2601.05451](https://arxiv.org/abs/2601.05451) RingSQL: Schema-Independent Synthetic Data Generation for Text-to-SQL Reinforcement Learning
+- [2601.05465](https://arxiv.org/abs/2601.05465) PRISMA: Reinforcement Learning Guided Two-Stage Policy Optimization in Multi-Agent Architecture for Open-Domain Multi-Hop QA [agent]
+- [2601.05870](https://arxiv.org/abs/2601.05870) IIB-LPO: Latent Policy Optimization via Iterative Information Bottleneck
+- [2601.06801](https://arxiv.org/abs/2601.06801) Thinking with Deltas: Incentivizing Reinforcement Learning via Differential Visual Reasoning Policy [mm]
+- [2601.07376](https://arxiv.org/abs/2601.07376) OpenTinker: Separating Concerns in Agentic Reinforcement Learning [agent]
+- [2601.08521](https://arxiv.org/abs/2601.08521) Your Group-Relative Advantage Is Biased
+- [2601.09113](https://arxiv.org/abs/2601.09113) The AI Hippocampus: How Far are We From Human Memory?
+- [2601.11864](https://arxiv.org/abs/2601.11864) AGGC: Adaptive Group Gradient Clipping for Stabilizing Large Language Model Training
+- [2601.12465](https://arxiv.org/abs/2601.12465) Incentivizing In-depth Reasoning over Long Contexts with Process Advantage Shaping
+- [2601.12995](https://arxiv.org/abs/2601.12995) Graph Reasoning Paradigm: Structured and Symbolic Reasoning with Topology-Aware Reinforcement Learning for Large Language Models
+- [2601.13284](https://arxiv.org/abs/2601.13284) Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning
+- [2601.15330](https://arxiv.org/abs/2601.15330) ICPO: Illocution-Calibrated Policy Optimization for Multi-Turn Conversation [agent]
+- [2601.18510](https://arxiv.org/abs/2601.18510) JitRL: Just-In-Time Reinforcement Learning for Continual Learning in LLM Agents Without Gradient Updates [agent]
+- [2601.20585](https://arxiv.org/abs/2601.20585) Ranking-aware Reinforcement Learning for Ordinal Ranking
+- [2601.21208](https://arxiv.org/abs/2601.21208) When should I search more: Adaptive Complex Query Optimization with Reinforcement Learning [agent]
+- [2601.21244](https://arxiv.org/abs/2601.21244) Less Noise, More Voice: Reinforcement Learning for Reasoning via Instruction Purification
+- [2601.21558](https://arxiv.org/abs/2601.21558) ASTRA: Automated Synthesis of agentic Trajectories and Reinforcement Arenas [agent]
+- [2601.22297](https://arxiv.org/abs/2601.22297) Prepare Reasoning Language Models for Multi-Agent Debate with Self-Debate Reinforcement Learning [agent]
+- [2601.22491](https://arxiv.org/abs/2601.22491) SSL: Sweet Spot Learning for Differentiated Guidance in Agentic Optimization [agent]
+- [2601.22662](https://arxiv.org/abs/2601.22662) Task-Aware LLM Council with Adaptive Decision Pathways for Decision Support
+- [2601.22900](https://arxiv.org/abs/2601.22900) MulFeRL: Enhancing Reinforcement Learning with Verbal Feedback in a Multi-turn Loop [agent]
+- [2602.00400](https://arxiv.org/abs/2602.00400) KEPO: Knowledge-Enhanced Preference Optimization for Multimodal Reasoning with Applications to Medical VQA [mm]
+- [2602.00759](https://arxiv.org/abs/2602.00759) Adaptive Ability Decomposing for Unlocking Large Reasoning Model Effective Reinforcement Learning
+- [2602.00983](https://arxiv.org/abs/2602.00983) DISPO: Enhancing Training Efficiency and Stability in Reinforcement Learning for Large Language Model Mathematical Reasoning
+- [2602.01103](https://arxiv.org/abs/2602.01103) Probing RLVR training instability through the lens of objective-level hacking [analysis]
+- [2602.01869](https://arxiv.org/abs/2602.01869) ProcMEM: Learning Reusable Procedural Memory from Experience via Non-Parametric PPO for LLM Agents [agent]
+- [2602.01885](https://arxiv.org/abs/2602.01885) ES-MemEval: Benchmarking Conversational Agents on Personalized Long-Term Emotional Support [agent]
+- [2602.02482](https://arxiv.org/abs/2602.02482) Expanding the Capabilities of Reinforcement Learning via Text Feedback
+- [2602.03143](https://arxiv.org/abs/2602.03143) Self-Hinting Language Models Enhance Reinforcement Learning
+- [2602.03876](https://arxiv.org/abs/2602.03876) GOPO: Policy Optimization using Ranked Rewards
+- [2602.04879](https://arxiv.org/abs/2602.04879) Rethinking the Trust Region in LLM Reinforcement Learning [analysis]
+- [2602.04884](https://arxiv.org/abs/2602.04884) Reinforced Attention Learning
+- [2602.05165](https://arxiv.org/abs/2602.05165) EBPO: Empirical Bayes Shrinkage for Stabilizing Group-Relative Policy Optimization [analysis]
+- [2602.05746](https://arxiv.org/abs/2602.05746) Learning to Inject: Automated Prompt Injection via Reinforcement Learning
+- [2602.05940](https://arxiv.org/abs/2602.05940) R3S: Refining and Recovering Reinforcement Signals for Multilingual Understanding and Reasoning [analysis]
+- [2602.05946](https://arxiv.org/abs/2602.05946) $f$-GRPO and Beyond: Divergence-Based Reinforcement Learning Algorithms for General LLM Alignment
+- [2602.06717](https://arxiv.org/abs/2602.06717) F-GRPO: Don't Let Your Policy Learn the Obvious and Forget the Rare [analysis]
+- [2602.07729](https://arxiv.org/abs/2602.07729) Do We Need Adam? Surprisingly Strong and Sparse Reinforcement Learning with SGD in LLMs [analysis]
+- [2602.09173](https://arxiv.org/abs/2602.09173) $n$-Musketeers: Reinforcement Learning Shapes Collaboration Among Language Models
+- [2602.10224](https://arxiv.org/abs/2602.10224) Internalizing Meta-Experience into Memory for Guided Reinforcement Learning in Large Language Models [agent]
+- [2602.11661](https://arxiv.org/abs/2602.11661) Quark Medical Alignment: A Holistic Multi-Dimensional Alignment and Collaborative Optimization Paradigm
+- [2602.12268](https://arxiv.org/abs/2602.12268) CM2: Reinforcement Learning with Checklist Rewards for Multi-Turn and Multi-Step Agentic Tool Use [agent]
+- [2602.12566](https://arxiv.org/abs/2602.12566) To Mix or To Merge: Toward Multi-Domain Reinforcement Learning for Large Language Models
+- [2602.12617](https://arxiv.org/abs/2602.12617) GeoAgent: Learning to Geolocate Everywhere with Reinforced Geographic Characteristics [agent]
+- [2602.14534](https://arxiv.org/abs/2602.14534) MoRL: Reinforced Reasoning for Unified Motion Understanding and Generation [analysis]
+- [2603.01563](https://arxiv.org/abs/2603.01563) LFPO: Likelihood-Free Policy Optimization for Masked Diffusion Models [mm]
+- [2603.02604](https://arxiv.org/abs/2603.02604) Heterogeneous Agent Collaborative Reinforcement Learning [agent]
+- [2603.04976](https://arxiv.org/abs/2603.04976) 3D-RFT: Reinforcement Fine-Tuning for Video-based 3D Scene Understanding [analysis, mm]
+- [2603.05900](https://arxiv.org/abs/2603.05900) Reference-guided Policy Optimization for Molecular Optimization via LLM Reasoning [agent]
+- [2603.06859](https://arxiv.org/abs/2603.06859) PPO / MAPPO / MAGRPO
+- [2603.07197](https://arxiv.org/abs/2603.07197) $\textbf{Re}^{2}$: Unlocking LLM Reasoning via Reinforcement Learning with Re-solving
+- [2603.10101](https://arxiv.org/abs/2603.10101) CLIPO: Contrastive Learning in Policy Optimization Generalizes RLVR [analysis]
+- [2603.10395](https://arxiv.org/abs/2603.10395) Graph-GRPO: Training Graph Flow Models with Reinforcement Learning
+- [2603.10624](https://arxiv.org/abs/2603.10624) Reinforcement Learning with Conditional Expectation Reward
+- [2603.11321](https://arxiv.org/abs/2603.11321) Hindsight-Anchored Policy Optimization: Turning Failure into Feedback in Sparse Reward Settings [analysis]
+- [2603.14389](https://arxiv.org/abs/2603.14389) From $\boldsymbol{\logπ}$ to $\boldsymbolπ$: Taming Divergence in Soft Clipping via Bilateral Decoupled Decay of Probability Gradient Weight
+- [2603.15611](https://arxiv.org/abs/2603.15611) Code-A1: Adversarial Evolving of Code LLM and Test LLM via Reinforcement Learning
+- [2603.16876](https://arxiv.org/abs/2603.16876) Multi-Modal Multi-Agent Reinforcement Learning for Radiology Report Generation [agent]
+- [2603.16929](https://arxiv.org/abs/2603.16929) MHPO: Modulated Hazard-aware Policy Optimization for Stable Reinforcement Learning
+- [2603.18953](https://arxiv.org/abs/2603.18953) Context Bootstrapped Reinforcement Learning
+- [2603.19835](https://arxiv.org/abs/2603.19835) FIPO: Eliciting Deep Reasoning with Future-KL Influenced Policy Optimization
+- [2603.21065](https://arxiv.org/abs/2603.21065) LongCat-Flash-Prover: Advancing Native Formal Reasoning via Agentic Tool-Integrated Reinforcement Learning [agent]
+- [2603.21877](https://arxiv.org/abs/2603.21877) P^2O: Joint Policy and Prompt Optimization
+- [2603.21972](https://arxiv.org/abs/2603.21972) Demystifying Reinforcement Learning for Long-Horizon Tool-Using Agents: A Comprehensive Recipe [agent]
+- [2603.26126](https://arxiv.org/abs/2603.26126) Beyond Where to Look: Trajectory-Guided Reinforcement Learning for Multimodal RLVR [agent, mm]
+- [2603.28730](https://arxiv.org/abs/2603.28730) SOLE-R1: Video-Language Reasoning as the Sole Reward for On-Robot Reinforcement Learning [mm]
+- [2603.29723](https://arxiv.org/abs/2603.29723) Reinforced Reasoning for End-to-End Retrosynthetic Planning
+- [2604.00698](https://arxiv.org/abs/2604.00698) Learning to Hint for Reinforcement Learning
+- [2604.00790](https://arxiv.org/abs/2604.00790) RefineRL: Advancing Competitive Programming with Self-Refinement Reinforcement Learning
+- [2604.00860](https://arxiv.org/abs/2604.00860) Policy Improvement Reinforcement Learning
+- [2604.01840](https://arxiv.org/abs/2604.01840) Not All Tokens See Equally: Perception-Grounded Policy Optimization for Large Vision-Language Models [mm]
+- [2604.02507](https://arxiv.org/abs/2604.02507) Reinforcement Learning from Human Feedback: A Statistical Perspective [analysis]
+- [2604.06159](https://arxiv.org/abs/2604.06159) Target Policy Optimization
+- [2604.07791](https://arxiv.org/abs/2604.07791) SEARL: Joint Optimization of Policy and Tool Graph Memory for Self-Evolving Agents [agent]
+- [2604.08476](https://arxiv.org/abs/2604.08476) Faithful GRPO: Improving Visual Spatial Reasoning in Multimodal Language Models via Constrained Policy Optimization [mm]
+- [2604.08477](https://arxiv.org/abs/2604.08477) SUPERNOVA: Eliciting General Reasoning in LLMs with Reinforcement Learning on Natural Instructions
+- [2604.08690](https://arxiv.org/abs/2604.08690) Skip-Connected Policy Optimization for Implicit Advantage
+- [2604.09349](https://arxiv.org/abs/2604.09349) Visually-Guided Policy Optimization for Multimodal Reasoning [agent, mm]
+- [2604.11805](https://arxiv.org/abs/2604.11805) Solving Olympiad via Reinforcement Learning on Simulators
+- [2604.16972](https://arxiv.org/abs/2604.16972) MCPO: Mastery-Consolidated Policy Optimization for Large Reasoning Models
+- [2604.18401](https://arxiv.org/abs/2604.18401) StepPO: Step-Aligned Policy Optimization for Agentic Reinforcement Learning [agent]
+- [2604.19857](https://arxiv.org/abs/2604.19857) Rethinking Reinforcement Fine-Tuning in LVLM: Convergence, Reward Decomposition, and Generalization [analysis]
+- [2604.20733](https://arxiv.org/abs/2604.20733) NPO: Near-Future Policy Optimization
+- [2604.23380](https://arxiv.org/abs/2604.23380) V-GRPO: Online Reinforcement Learning for Denoising Generative Models Is Easier than You Think
+- [2604.25872](https://arxiv.org/abs/2604.25872) When Errors Can Be Beneficial: A Categorization of Imperfect Rewards for Policy Gradient
+- [2605.00380](https://arxiv.org/abs/2605.00380) ResRL: Boosting LLM Reasoning via Negative Sample Projection Residual Reinforcement Learning
+- [2605.01520](https://arxiv.org/abs/2605.01520) MIRL: Mutual Information-Guided Reinforcement Learning for Vision-Language Models [agent, mm]
+- [2605.02375](https://arxiv.org/abs/2605.02375) Binary Rewards and Reinforcement Learning: Fundamental Challenges
+- [2605.04066](https://arxiv.org/abs/2605.04066) Adapt to Thrive! Adaptive Power-Mean Policy Optimization for Improved LLM Reasoning
+- [2605.06111](https://arxiv.org/abs/2605.06111) Schedule-and-Calibrate: Utility-Guided Multi-Task Reinforcement Learning for Code LLMs [agent]
+- [2605.06139](https://arxiv.org/abs/2605.06139) Listwise Policy Optimization: Group-based RLVR as Target-Projection on the LLM Response Simplex
+- [2605.07153](https://arxiv.org/abs/2605.07153) Beyond Reasoning: Reinforcement Learning Unlocks Parametric Knowledge in LLMs
+- [2605.07177](https://arxiv.org/abs/2605.07177) HyperEyes: Dual-Grained Efficiency-Aware Reinforcement Learning for Parallel Multimodal Search Agents [agent, mm]
+- [2605.07274](https://arxiv.org/abs/2605.07274) Structured Role-Aware Policy Optimization for Multimodal Reasoning [mm]
+- [2605.07331](https://arxiv.org/abs/2605.07331) Rethinking Importance Sampling in LLM Policy Optimization: A Cumulative Token Perspective [analysis]
+- [2605.07579](https://arxiv.org/abs/2605.07579) Your Language Model is Its Own Critic: Reinforcement Learning with Value Estimation from Actor's Internal States
+- [2605.07689](https://arxiv.org/abs/2605.07689) Gradient Starvation in Binary-Reward GRPO: Why Group-Mean Centering Fails and Why the Simplest Fix Works [analysis]
+- [2605.11461](https://arxiv.org/abs/2605.11461) Breaking $\textit{Winner-Takes-All}$: Cooperative Policy Optimization Improves Diverse LLM Reasoning
+- [2605.17648](https://arxiv.org/abs/2605.17648) SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
+- [2605.18721](https://arxiv.org/abs/2605.18721) General Preference Reinforcement Learning
+- [2605.19577](https://arxiv.org/abs/2605.19577) GoLongRL: Capability-Oriented Long Context Reinforcement Learning with Multitask Alignment
+- [2605.21235](https://arxiv.org/abs/2605.21235) LamPO: A Lambda Style Policy Optimization for Reasoning Language Models
+- [2605.21967](https://arxiv.org/abs/2605.21967) Reinforced Preference Optimization for Reasoning-Augmented Recommendations
+- [2605.22156](https://arxiv.org/abs/2605.22156) One-Way Policy Optimization for Self-Evolving LLMs
+- [2605.22703](https://arxiv.org/abs/2605.22703) Clipping Bottleneck: Stabilizing RLVR via Stochastic Recovery of Near-Boundary Signals
+- [2605.27934](https://arxiv.org/abs/2605.27934) GeneralThinker: Domain-General Reasoning through Likelihood-Guided Answer-Conditioned Optimization [agent]
+- [2605.28829](https://arxiv.org/abs/2605.28829) Aryabhata 2: Scaling Reinforcement Learning for Advanced STEM Reasoning [analysis]
+- [2606.00172](https://arxiv.org/abs/2606.00172) CAST: Non-Privileged Clipped Asymmetric Self-Teaching with Advantage Flipping for GRPO
+- [2606.02373](https://arxiv.org/abs/2606.02373) Harness-1: Reinforcement Learning for Search Agents with State-Externalizing Harnesses [agent]
+- [2606.03021](https://arxiv.org/abs/2606.03021) Hint-Guided Diversified Policy Optimization for LLM Reasoning [agent]
+- [2606.03577](https://arxiv.org/abs/2606.03577) Eliciting Complex Spatial Reasoning in MLLMs through Wide-Baseline Matching [mm]
+- [2606.05152](https://arxiv.org/abs/2606.05152) Reinforcement Learning from Rich Feedback with Distributional DAgger
+- [2606.06058](https://arxiv.org/abs/2606.06058) MDP-GRPO: Stabilized Group Relative Policy Optimization for Multi-Constraint Instruction Following
+- [2606.06080](https://arxiv.org/abs/2606.06080) On Advantage Estimates for Max@K Policy Gradients
+- [2606.12384](https://arxiv.org/abs/2606.12384) APPO: Agentic Procedural Policy Optimization [agent]
+- [2606.13106](https://arxiv.org/abs/2606.13106) Demystifying Hidden-State Recurrence: Switchable Latent Reasoning with On-Policy Reinforcement Learning
+- [2606.13316](https://arxiv.org/abs/2606.13316) ReSum: Synergizing LLM Reasoning and Summarization with Reinforcement Learning
+- [2606.16154](https://arxiv.org/abs/2606.16154) A Gradient Perspective on RLVR Stability and Winner Advantage Policy Optimization [analysis]
+- [2606.16316](https://arxiv.org/abs/2606.16316) RL-Index: Reinforcement Learning for Retrieval Index Reasoning
+- [2606.18954](https://arxiv.org/abs/2606.18954) GraphPO: Graph-based Policy Optimization for Reasoning Models
+- [2606.20008](https://arxiv.org/abs/2606.20008) VIMPO: Value-Implicit Policy Optimization for LLMs
+- [2606.24064](https://arxiv.org/abs/2606.24064) SGPO: Strategy-Guided Policy Optimization for LLM Reasoning [agent]
+- [2606.26578](https://arxiv.org/abs/2606.26578) EvoOptiGraph: Weakness-Driven Coevolution via Graph-Based Structural Generation for Optimization Modeling
+- [2606.27369](https://arxiv.org/abs/2606.27369) Reinforcement Learning without Ground-Truth Solutions can Improve LLMs
+- [2606.29526](https://arxiv.org/abs/2606.29526) The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning
+- [2606.30420](https://arxiv.org/abs/2606.30420) Experience Augmented Policy Optimization for LLM Reasoning
+- [2607.00924](https://arxiv.org/abs/2607.00924) Graph-Native Reinforcement Learning Enables Traceable Scientific Hypothesis Generation through Conceptual Recombination
+- [2607.02983](https://arxiv.org/abs/2607.02983) Reinforcement Learning for Evidence-Seeking Diagnostic Reasoning with Large Language Models
+- [2607.12640](https://arxiv.org/abs/2607.12640) A Learning-Rate-Gated Failure of GRPO in a Small Language and Vision-Language Model Web Agent: A Controlled Null and Its Mechanism [analysis, agent, mm]
+- [2607.13931](https://arxiv.org/abs/2607.13931) SIVA-RL: Sensitivity-Invariance Visual Alignment for Multimodal Reinforcement Learning [mm]
+- [2607.15918](https://arxiv.org/abs/2607.15918) Atomic Design Transformer: Scaffold-Conditioned 3D Molecule Generation via xTB-Reward Reinforcement Learning
+- [2607.19226](https://arxiv.org/abs/2607.19226) The Price of Reasoning: Cost-Quality Tradeoffs in Reinforcement Learning for Neural Machine Translation
+- [2607.19313](https://arxiv.org/abs/2607.19313) Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information
+- [2607.19331](https://arxiv.org/abs/2607.19331) ISO: An RLVR-Native Optimization Stack
+- [2607.21419](https://arxiv.org/abs/2607.21419) PATS: Policy-Aware Training Scaffolding for Agentic Reinforcement Learning [agent]
+- [2607.21971](https://arxiv.org/abs/2607.21971) Teaching LLMs to Self-Evolve: Cultivating Core Meta-Skills with Reinforcement Learning
+- [2607.24833](https://arxiv.org/abs/2607.24833) AdaKP: Online Adaptive Knowledge-Point Selection for Reasoning-Oriented Reinforcement Learning
+- [2607.25970](https://arxiv.org/abs/2607.25970) Reinforcement Learning for Code Optimization
+- [2607.27787](https://arxiv.org/abs/2607.27787) LoRA Scaffolded Policy Optimization (LSPO): A Sampling-Time Low-Rank Scaffold for Recovering Reinforcement-Learning Gradient on Zero-Reward Cliff Prompts [analysis]
+- [2607.27968](https://arxiv.org/abs/2607.27968) Beyond Binary Rewards: A Comparative Study of Reward Design for Reinforcement Unlearning [analysis]
+- [2608.02181](https://arxiv.org/abs/2608.02181) Start Classifying: Categorical Critics for LLM Reinforcement Learning
+- [2608.04317](https://arxiv.org/abs/2608.04317) Trident : How to Break Deep Reinforcement Learning Cyber Defenses (Agentic) [agent]
+- [2608.06735](https://arxiv.org/abs/2608.06735) IB-RL: Isolated Bilateral Reinforcement Learning for Strategic Dialogue Agents [agent]
+- [2608.06778](https://arxiv.org/abs/2608.06778) Retrieval-Constrained Policy Optimization for Attack Technique Extraction from Cyber Threat Intelligence
+- [2608.07147](https://arxiv.org/abs/2608.07147) DiDPO: Diff-in-Diff Policy Optimization for Coding Agent Training [agent]
+- [2608.09271](https://arxiv.org/abs/2608.09271) SoftmaxGRPO: Learning to Reason using Softmax Advantage Group Estimation
+- [2608.13698](https://arxiv.org/abs/2608.13698) GRPO Beyond English: A Large-Scale Study of GRPO in Non-English and Multilingual Settings [analysis]
+- [2608.21727](https://arxiv.org/abs/2608.21727) Reinforcement Learning on Benign Facts Amplifies Leakage of Memorized Private Data
+- [2608.24275](https://arxiv.org/abs/2608.24275) RePolicy: Reinforcement Learning for Safety-Policy Invocation in Agent Safeguards [agent]
+- [2608.24300](https://arxiv.org/abs/2608.24300) Contrastive Branch Policy Optimization
+- [2608.24949](https://arxiv.org/abs/2608.24949) Demystifying Reinforcement Learning Post-Training of Language Models
+- [2608.27351](https://arxiv.org/abs/2608.27351) Understanding Evolution Strategies for LLM Reasoning: Broader Reasoning Coverage than GRPO [analysis]
+- [2609.00444](https://arxiv.org/abs/2609.00444) Group Adaptive Clipping Policy Optimization
+- [2609.03342](https://arxiv.org/abs/2609.03342) Gradients Know What Outcomes Don't: Unlocking Reinforcement Learning for LLM Reasoning with Gradient-Aligned Rewards [analysis]
+- [2609.04063](https://arxiv.org/abs/2609.04063) Spurious Advantage Hidden in GRPO
+
+<a id="rollout"></a>
+## Rollout, data & sample efficiency (63)
+
+- [2601.04537](https://arxiv.org/abs/2601.04537) Not All Steps are Informative: On the Linearity of LLMs' RLVR Training
+- [2601.06767](https://arxiv.org/abs/2601.06767) GanitLLM: Difficulty-Aware Bengali Mathematical Reasoning through Curriculum-GRPO [algo]
+- [2601.20614](https://arxiv.org/abs/2601.20614) Harder Is Better: Boosting Mathematical Reasoning via Difficulty-Aware GRPO and Multi-Aspect Question Reformulation [algo]
+- [2601.22448](https://arxiv.org/abs/2601.22448) HeaPA: Difficulty-Aware Heap Sampling and On-Policy Query Augmentation for LLM Reinforcement Learning [algo]
+- [2602.00815](https://arxiv.org/abs/2602.00815) Resource-Efficient Reinforcement for Reasoning Large Language Models via Dynamic One-Shot Policy Refinement [length, algo]
+- [2602.01601](https://arxiv.org/abs/2602.01601) Adaptive Rollout Allocation for Online Reinforcement Learning with Verifiable Rewards [reward, algo]
+- [2602.03048](https://arxiv.org/abs/2602.03048) CoBA-RL: Capability-Oriented Budget Allocation for Reinforcement Learning in LLMs [algo]
+- [2602.05548](https://arxiv.org/abs/2602.05548) Unveiling Implicit Advantage Symmetry: Why GRPO Struggles with Exploration and Difficulty Adaptation [entropy, algo, analysis]
+- [2602.08499](https://arxiv.org/abs/2602.08499) Contextual Rollout Bandits for Reinforcement Learning with Verifiable Rewards [reward, algo]
+- [2602.08503](https://arxiv.org/abs/2602.08503) Learning Self-Correction in Vision-Language Models via Rollout Augmentation [mm]
+- [2602.12642](https://arxiv.org/abs/2602.12642) Beyond Normalization: Rethinking the Partition Function as a Difficulty Scheduler for RLVR [algo, analysis]
+- [2602.14338](https://arxiv.org/abs/2602.14338) Train Less, Learn More: Adaptive Efficient Rollout Optimization for Group-Based Reinforcement Learning [length, algo]
+- [2602.14872](https://arxiv.org/abs/2602.14872) The Implicit Curriculum: Learning Dynamics in RL with Verifiable Rewards [reward, analysis]
+- [2602.17550](https://arxiv.org/abs/2602.17550) MASPO: Unifying Gradient Utilization, Probability Mass, and Signal Reliability for Robust and Sample-Efficient LLM Reasoning [length, algo]
+- [2602.19208](https://arxiv.org/abs/2602.19208) How to Allocate, How to Learn? Dynamic Rollout Allocation and Advantage Modulation for Policy Optimization [algo]
+- [2602.21628](https://arxiv.org/abs/2602.21628) RuCL: Stratified Rubric-Based Curriculum Learning for Multimodal Large Language Model Reasoning [reward, mm]
+- [2602.21743](https://arxiv.org/abs/2602.21743) Enhancing Multi-Modal LLMs Reasoning via Difficulty-Aware Group Normalization [algo]
+- [2603.01907](https://arxiv.org/abs/2603.01907) Efficient RLVR Training via Weighted Mutual Information Data Selection [length]
+- [2603.10848](https://arxiv.org/abs/2603.10848) $V_{0.5}$: Generalist Value Model as a Prior for Sparse RL Rollouts [analysis]
+- [2603.11193](https://arxiv.org/abs/2603.11193) DeReason: A Difficulty-Aware Curriculum Improves Decoupled SFT-then-RL Training for General Reasoning [sftrl]
+- [2603.18444](https://arxiv.org/abs/2603.18444) Discounted Beta--Bernoulli Reward Estimation for Sample-Efficient Reinforcement Learning with Verifiable Rewards [reward, length, algo]
+- [2603.24840](https://arxiv.org/abs/2603.24840) Prune as You Generate: Online Rollout Pruning for Faster and Better RLVR
+- [2604.17928](https://arxiv.org/abs/2604.17928) HEALing Entropy Collapse: Enhancing Exploration in Few-Shot RLVR via Hybrid-Domain Entropy Dynamics Alignment [entropy, sftrl, analysis]
+- [2604.18892](https://arxiv.org/abs/2604.18892) Prioritizing the Best: Incentivizing Reliable Multimodal Reasoning by Rewarding Beyond Answer Correctness [agent, mm]
+- [2605.01823](https://arxiv.org/abs/2605.01823) Selector-Guided Autonomous Curriculum for One-Shot Reinforcement Learning from Verifiable Rewards [reward, algo, agent]
+- [2605.02469](https://arxiv.org/abs/2605.02469) Reference-Sampled Boltzmann Projection for KL-Regularized RLVR: Target-Matched Weighted SFT, Finite One-Shot Gaps, and Policy Mirror Descent [sftrl, algo]
+- [2605.06650](https://arxiv.org/abs/2605.06650) Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients [algo]
+- [2605.07114](https://arxiv.org/abs/2605.07114) Where to Spend Rollouts: Hit-Utility Optimal Rollout Allocation for Group-Based RLVR
+- [2605.11611](https://arxiv.org/abs/2605.11611) CuSearch: Curriculum Rollout Sampling via Search Depth for Agentic RAG [agent]
+- [2605.17333](https://arxiv.org/abs/2605.17333) Leveraging Error Diversity in Group Rollouts for Reinforcement Learning [entropy, algo]
+- [2605.19425](https://arxiv.org/abs/2605.19425) When to Stop Reusing: Dynamic Gradient Gating for Sample-Efficient RLVR [length, algo]
+- [2605.21266](https://arxiv.org/abs/2605.21266) How Much Online RL is Enough? Informative Rollouts for Offline Preference Optimization in RLVR [algo]
+- [2605.22074](https://arxiv.org/abs/2605.22074) From Reasoning Chains to Verifiable Subproblems: Curriculum Reinforcement Learning Enables Credit Assignment for LLM Reasoning [credit, reward, algo]
+- [2605.26934](https://arxiv.org/abs/2605.26934) Reasoning Depth and Environment Complexity: A Controlled Study of RLVR Data Allocation across Logical Reasoning Tasks [analysis, agent]
+- [2605.27293](https://arxiv.org/abs/2605.27293) BASIS: Batchwise Advantage Estimation from Single-Rollout Information Sharing for LLM Reasoning [algo]
+- [2605.28247](https://arxiv.org/abs/2605.28247) IRDS: Interpretable RLVR Data Selection via Verifier-Coupled Sparse Autoencoder Coverage [reward, analysis]
+- [2605.28295](https://arxiv.org/abs/2605.28295) Where Rollouts Begin: Low-Load, High-Leverage First-Token Diversification for RLVR
+- [2605.28388](https://arxiv.org/abs/2605.28388) Mechanistically Interpreting the Role of Sample Difficulty in RLVR for LLMs [analysis]
+- [2605.28631](https://arxiv.org/abs/2605.28631) Single-Rollout Hidden-State Dynamics for Training-Free RLVR Data Selection [analysis]
+- [2605.30154](https://arxiv.org/abs/2605.30154) RL2ML: Finite-Rollout Surrogate Objectives from Reinforcement Learning to Maximum Likelihood [algo]
+- [2605.31228](https://arxiv.org/abs/2605.31228) EchoRL: Reinforcement Learning via Rollout Echoing [algo]
+- [2606.01830](https://arxiv.org/abs/2606.01830) CAPF: Guiding Search-Agent Rollouts with Credit-Attenuated Privileged Feedback [credit, agent]
+- [2606.04516](https://arxiv.org/abs/2606.04516) GeoMin: Data-Efficient Semi-Supervised RLVR via Geometric Distribution Modeling [length, sftrl]
+- [2606.05800](https://arxiv.org/abs/2606.05800) SALT: When More Rollouts Don't Help in Group-Based Policy Optimization and How to Make Them Matter [algo]
+- [2606.08446](https://arxiv.org/abs/2606.08446) Sparrow: Sparse Rollout for Stable and Efficient Long-context RL of Large Language Models [length, analysis]
+- [2606.22189](https://arxiv.org/abs/2606.22189) L20-Edu-135M: An Auditable Single-GPU Study of Data-Efficient Small Language Modeling [length, analysis]
+- [2606.22317](https://arxiv.org/abs/2606.22317) Curriculum Reinforcement Learning Can Incentivize Reasoning Capacity in LLMs Beyond the Base Model [algo, analysis]
+- [2606.25178](https://arxiv.org/abs/2606.25178) Transferability for General Reasoning: An Automated Curriculum for Multi-Domain RLVR
+- [2606.26917](https://arxiv.org/abs/2606.26917) GEOALIGN: Geometric Rollout Curation for Robust LLM Reinforcement Learning [algo]
+- [2606.26997](https://arxiv.org/abs/2606.26997) RolloutPipe: Overlapping Pipelined Rollout and Training in Disaggregated On-Policy LLM Reinforcement Learning [algo]
+- [2606.27721](https://arxiv.org/abs/2606.27721) Learning to Reason with Curriculum II: Compositional Generalization [analysis]
+- [2607.02757](https://arxiv.org/abs/2607.02757) Reinforcement Learning for Data-Efficient Code-Switched ASR [length, algo]
+- [2607.07748](https://arxiv.org/abs/2607.07748) Selective Left-Shift: Turning Test-Time Compute and Difficulty-based Curation into Training Data for Low-Resource Code Generation [reward]
+- [2607.21051](https://arxiv.org/abs/2607.21051) Sample-Efficient Learning from Agent Experience [length, agent]
+- [2607.22002](https://arxiv.org/abs/2607.22002) Learning as Reasoning Unfolds: Progressive Rollout Allocation for Efficient Reinforcement Learning [length, algo]
+- [2607.26253](https://arxiv.org/abs/2607.26253) Early Verdicts, Better Budgets: Sequential Adaptive Rollout Allocation for Compute-Efficient RLVR [length]
+- [2607.27888](https://arxiv.org/abs/2607.27888) Not All Tokens Deserve Equal Credit: Counterfactual Sensitivity Credit Reallocation for Long-CoT Reasoning [credit]
+- [2608.01717](https://arxiv.org/abs/2608.01717) Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models [entropy, algo, analysis, mm]
+- [2608.11368](https://arxiv.org/abs/2608.11368) PAIR: Pairwise-Aware Inclusion Reweighting for Adaptive Rollout Allocation in RLVR
+- [2608.17941](https://arxiv.org/abs/2608.17941) Efficient RLVR Scheduling via Graph-Structured Online Difficulty Estimation [length]
+- [2608.21595](https://arxiv.org/abs/2608.21595) Perturb the Thought, Not the Pixels: Latent-Space Rollout Diversification for Reinforcement Learning of Vision-Language Models [algo, mm]
+- [2608.21871](https://arxiv.org/abs/2608.21871) The Chase Is the Curriculum, the Capture Anchors the Credit: Pursuit-Evasion Self-Play for Zero-Data LLM Reasoning [credit, reward]
+- [2609.01274](https://arxiv.org/abs/2609.01274) From Base Rollouts to RL Reasoning: A Budgeted Search Perspective [analysis, agent]
+
+<a id="async"></a>
+## Off-policy reuse, async & RL systems (43)
+
+- [2601.04954](https://arxiv.org/abs/2601.04954) Precision over Diversity: High-Precision Reward Generalizes to Robust Instruction Following [entropy, analysis]
+- [2601.05787](https://arxiv.org/abs/2601.05787) From Off-Policy to On-Policy: Enhancing GUI Agents via Bi-level Expert-to-Policy Assimilation [agent]
+- [2601.06152](https://arxiv.org/abs/2601.06152) HiMeS: Hippocampus-inspired Memory System for Personalized AI Assistants [algo]
+- [2601.09822](https://arxiv.org/abs/2601.09822) LLM-Based Agentic Systems for Software Engineering: Challenges and Opportunities [algo, agent]
+- [2601.13060](https://arxiv.org/abs/2601.13060) MagicGUI-RMS: A Multi-Agent Reward Model System for Self-Evolving GUI Agents via Automated Feedback Reflux [reward, agent]
+- [2601.16489](https://arxiv.org/abs/2601.16489) EvoConfig: Self-Evolving Multi-Agent Systems for Efficient Autonomous Environment Configuration [length, agent]
+- [2601.18795](https://arxiv.org/abs/2601.18795) Reuse your FLOPs: Scaling RL on Hard Problems by Conditioning on Very Off-Policy Prefixes [analysis]
+- [2601.18902](https://arxiv.org/abs/2601.18902) SFDD: Flatter Tokens are More Valuable for Speculative Draft Model Training
+- [2601.23228](https://arxiv.org/abs/2601.23228) Scaling Multiagent Systems with Process Rewards [credit, analysis, agent]
+- [2602.01062](https://arxiv.org/abs/2602.01062) SetPO: Set-Level Policy Optimization for Diversity-Preserving LLM Reasoning [entropy, algo]
+- [2602.02192](https://arxiv.org/abs/2602.02192) ECHO-2: A Large-Scale Distributed Rollout Framework for Cost-Efficient Reinforcement Learning [rollout, length, algo]
+- [2602.05494](https://arxiv.org/abs/2602.05494) A Unified Framework for Rethinking Policy Divergence Measures in GRPO [algo, analysis]
+- [2602.06932](https://arxiv.org/abs/2602.06932) Aurora: When RL Meets Adaptive Speculative Training
+- [2602.09782](https://arxiv.org/abs/2602.09782) Flexible Entropy Control in RLVR with a Gradient-Preserving Perspective [entropy, algo, analysis]
+- [2602.11964](https://arxiv.org/abs/2602.11964) Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments [agent]
+- [2602.13953](https://arxiv.org/abs/2602.13953) QuRL: Efficient Reinforcement Learning with Quantized Rollout [rollout, length, algo]
+- [2602.20722](https://arxiv.org/abs/2602.20722) Buffer Matters: Unleashing the Power of Off-Policy Reinforcement Learning in Large Language Model Reasoning [algo]
+- [2602.23008](https://arxiv.org/abs/2602.23008) EMPO²: Exploratory Memory-Augmented LLM Agent via Hybrid On- and Off-Policy Optimization [entropy, sftrl, algo, analysis, agent]
+- [2602.23881](https://arxiv.org/abs/2602.23881) LK Losses: Direct Acceptance Rate Optimization for Speculative Decoding [algo]
+- [2602.24110](https://arxiv.org/abs/2602.24110) Recycling Failures: Salvaging Exploration in RLVR via Fine-Grained Off-Policy Guidance [credit, entropy, sftrl, analysis, agent]
+- [2603.15432](https://arxiv.org/abs/2603.15432) Gym-V: A Unified Vision Environment System for Agentic Vision Research [agent, mm]
+- [2603.16157](https://arxiv.org/abs/2603.16157) DyJR: Preserving Diversity in Reinforcement Learning with Verifiable Rewards via Dynamic Jensen-Shannon Replay [entropy, reward, algo]
+- [2603.18567](https://arxiv.org/abs/2603.18567) Speculative draft training with EAGLE-3 support and hybrid parallelism [sftrl, algo]
+- [2603.21177](https://arxiv.org/abs/2603.21177) Prompt replay: speeding up grpo with on-policy reuse of high-signal prompts [algo]
+- [2603.22435](https://arxiv.org/abs/2603.22435) CaP-X, CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation [agent]
+- [2604.07941](https://arxiv.org/abs/2604.07941) Large Language Model Post-Training: A Unified View of Off-Policy and On-Policy Learning
+- [2604.08986](https://arxiv.org/abs/2604.08986) PerMix-RLVR: Preserving Persona Expressivity under Verifiable-Reward Alignment [reward]
+- [2604.21138](https://arxiv.org/abs/2604.21138) Navigating the Clutter: Waypoint-Based Bi-Level Planning for Multi-Robot Systems
+- [2604.26779](https://arxiv.org/abs/2604.26779) Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding [rollout]
+- [2605.07243](https://arxiv.org/abs/2605.07243) SpecBlock: Block-Iterative Speculative Decoding with Dynamic Tree Drafting [credit]
+- [2605.28069](https://arxiv.org/abs/2605.28069) ZipRL: Adaptive Multi-Turn Context Compression with Hindsight Response Replay [length, agent]
+- [2606.01281](https://arxiv.org/abs/2606.01281) RLVR without Ineffective Samples: Group Prioritized Off-Policy Optimization for LLM Reasoning [rollout, algo]
+- [2606.04560](https://arxiv.org/abs/2606.04560) Rollout-Level Advantage-Prioritized Experience Replay for GRPO [rollout, algo]
+- [2606.08728](https://arxiv.org/abs/2606.08728) Artificial Intelligence for Mathematical Reasoning: An Integrated Survey of Language Models, Neuro-symbolic Systems, and Verified Discovery [reward]
+- [2606.11119](https://arxiv.org/abs/2606.11119) TRACE: A Unified Rollout Budget Allocation Framework for Efficient Agentic Reinforcement Learning [rollout, length, algo, agent]
+- [2606.18394](https://arxiv.org/abs/2606.18394) JetSpec: Breaking the Scaling Ceiling of Speculative Decoding with Parallel Tree Drafting [credit, analysis]
+- [2606.31813](https://arxiv.org/abs/2606.31813) Geometry-Preserving Orthonormal Initialization for Low-Rank Adaptation in RLVR
+- [2607.07508](https://arxiv.org/abs/2607.07508) Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning [rollout, algo, agent]
+- [2607.11131](https://arxiv.org/abs/2607.11131) TIGER: Text-Conditioned Visual Gated Routing with Acceptance Alignment for Multimodal Speculative Decoding [mm]
+- [2608.04962](https://arxiv.org/abs/2608.04962) Exact speculative rollout serving adapts lightweight proposers at two timescales without changing the target policy distribution [rollout]
+- [2608.08623](https://arxiv.org/abs/2608.08623) MedCalc-R1: Knowledge-Guided Reward Framework for Medical Mathematical Reasoning [agent]
+- [2608.24479](https://arxiv.org/abs/2608.24479) WarpSAC: Towards the Pinnacle of Scalable Off-policy RL by Rethinking Exploration and Exploitation [entropy, analysis]
+- [2609.03324](https://arxiv.org/abs/2609.03324) DE-Venus: A Data-Efficient RLVR Framework for Large Language Models [rollout, length]
+
+<a id="credit"></a>
+## Credit assignment, token/step-level & process rewards (50)
+
+- [2601.03525](https://arxiv.org/abs/2601.03525) Beyond Binary: Turning Partial Success into Dense Verifiable Rewards for Reinforcement Learning in Code Generation [reward, algo]
+- [2601.04767](https://arxiv.org/abs/2601.04767) AT²PO: Agentic Turn-based Policy Optimization via Tree Search [algo, agent]
+- [2601.06993](https://arxiv.org/abs/2601.06993) Can Textual Reasoning Improve the Performance of MLLMs on Fine-grained Visual Classification? [mm]
+- [2601.07320](https://arxiv.org/abs/2601.07320) Segmental Advantage Estimation: Enhancing PPO for Long-Context LLM Training [algo]
+- [2601.10201](https://arxiv.org/abs/2601.10201) PRL: Process Reward Learning Improves LLMs' Reasoning Ability and Broadens the Reasoning Boundary
+- [2601.17223](https://arxiv.org/abs/2601.17223) Beyond Outcome Verification: Verifiable Process Reward Models for Structured Reasoning [reward]
+- [2602.01791](https://arxiv.org/abs/2602.01791) Grad2Reward: From Sparse Judgment to Dense Rewards for Improving Open-Ended LLM Reasoning [analysis]
+- [2602.02099](https://arxiv.org/abs/2602.02099) Think Dense, Not Long: Dynamic Decoupled Conditional Advantage for Efficient Reasoning [length, algo]
+- [2602.03320](https://arxiv.org/abs/2602.03320) MedSAM-Agent: Empowering Interactive Medical Image Segmentation with Multi-turn Agentic Reinforcement Learning [algo, agent, mm]
+- [2602.03507](https://arxiv.org/abs/2602.03507) FaithRL: Learning to Reason Faithfully through Step-Level Faithfulness Maximization
+- [2602.11455](https://arxiv.org/abs/2602.11455) Credit Where It is Due: Cross-Modality Connectivity Drives Precise Reinforcement Learning for MLLM Reasoning [algo, mm]
+- [2602.12846](https://arxiv.org/abs/2602.12846) Amortized Reasoning Tree Search: Decoupling Proposal and Decision in Large Language Models [agent]
+- [2603.02479](https://arxiv.org/abs/2603.02479) PRISM: Pushing the Frontier of Deep Think via Process Reward Model-Guided Inference [reward, agent]
+- [2603.16158](https://arxiv.org/abs/2603.16158) Execution-Grounded Credit Assignment for GRPO in Code Generation [algo]
+- [2603.22228](https://arxiv.org/abs/2603.22228) SpatialReward: Verifiable Spatial Reward Modeling for Fine-Grained Spatial Consistency in Text-to-Image Generation [reward, mm]
+- [2603.22352](https://arxiv.org/abs/2603.22352) WIST: Web-Grounded Iterative Self-Play Tree for Domain-Targeted Reasoning Improvement [reward, agent]
+- [2603.22446](https://arxiv.org/abs/2603.22446) Sparse but Critical: A Token-Level Analysis of Distributional Shifts in RLVR Fine-Tuning of LLMs [analysis]
+- [2603.22847](https://arxiv.org/abs/2603.22847) Rethinking Token-Level Policy Optimization for Multimodal Chain-of-Thought [algo, analysis, mm]
+- [2603.28204](https://arxiv.org/abs/2603.28204) ERPO: Token-Level Entropy-Regulated Policy Optimization for Large Reasoning Models [entropy, algo]
+- [2604.09482](https://arxiv.org/abs/2604.09482) Process Reward Agents for Steering Knowledge-Intensive Reasoning [agent]
+- [2604.23318](https://arxiv.org/abs/2604.23318) Hidden States Know Where Reasoning Diverges: Credit Assignment via Span-Level Wasserstein Distance
+- [2604.24583](https://arxiv.org/abs/2604.24583) Improving Vision-language Models with Perception-centric Process Reward Models [reward, mm]
+- [2605.05965](https://arxiv.org/abs/2605.05965) Beyond Uniform Credit Assignment: Selective Eligibility Traces for RLVR
+- [2605.10325](https://arxiv.org/abs/2605.10325) Verifiable Process Rewards for Agentic Reasoning [reward, agent]
+- [2605.20061](https://arxiv.org/abs/2605.20061) Rewarding Beliefs, Not Actions: Consistency-Guided Credit Assignment for Long-Horizon Agents [reward, agent]
+- [2605.21467](https://arxiv.org/abs/2605.21467) DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards [reward, algo]
+- [2605.21851](https://arxiv.org/abs/2605.21851) OPPO: Bayesian Value Recursion for Token-Level Credit Assignment in LLM Reasoning [algo]
+- [2605.25507](https://arxiv.org/abs/2605.25507) Credit Assignment with Resets in Language Model Reasoning
+- [2605.31378](https://arxiv.org/abs/2605.31378) Unlocking Fine-Grained Translation Quality Estimation in LRMs through Synergistically Evolving Implicit and Explicit Reasoning
+- [2606.03937](https://arxiv.org/abs/2606.03937) Entropy Is Not Enough: Unlocking Effective Reinforcement Learning for Visual Reasoning via Vision-Anchored Token Selection [entropy, algo, mm]
+- [2606.05263](https://arxiv.org/abs/2606.05263) Policy-Conditioned Counterfactual Credit for Verifiable Reinforcement Learning of Long-Horizon Language Agents [reward, algo, agent]
+- [2606.05434](https://arxiv.org/abs/2606.05434) Selective-Advantage Entropy-Adaptive Horizon GRPO: Asymmetric Token-Level Discounting for Efficient Reinforcement Learning of Language Models [entropy, length, algo]
+- [2606.08346](https://arxiv.org/abs/2606.08346) CATPO: Critique-Augmented Tree Policy Optimization [algo]
+- [2606.08708](https://arxiv.org/abs/2606.08708) PRPO: Perception-Reinforced Policy Optimization via Token-Level Dynamic Advantage Reshaping [algo]
+- [2606.08815](https://arxiv.org/abs/2606.08815) Momentum for Reasoning: Dense Intrinsic Signals in Policy Optimization [reward, algo]
+- [2606.09393](https://arxiv.org/abs/2606.09393) CapRL++: Unified Reinforcement Learning with Verifiable Rewards for Dense Image and Video Captioning [reward, algo, mm]
+- [2606.10968](https://arxiv.org/abs/2606.10968) Beyond Uniform Token-Level Trust Region in LLM Reinforcement Learning [algo]
+- [2606.18810](https://arxiv.org/abs/2606.18810) Learning from Own Solutions: Self-Conditioned Credit Assignment for Reinforcement Learning with Verifiable Rewards [reward, algo]
+- [2606.19236](https://arxiv.org/abs/2606.19236) STARE: Surprisal-Guided Token-Level Advantage Reweighting for Policy Entropy Stability [entropy, algo, agent]
+- [2606.19771](https://arxiv.org/abs/2606.19771) Beyond Entropy: Learning from Token-Level Distributional Deviations for LLM Reasoning [entropy]
+- [2606.31575](https://arxiv.org/abs/2606.31575) Which Tokens Matter? Adaptive Token Selection for RLVR with the Relative Surprisal Index
+- [2607.08964](https://arxiv.org/abs/2607.08964) Long-Horizon-Terminal-Bench: Testing the Limits of Agents on Long-Horizon Terminal Tasks with Dense Reward-Based Grading [analysis, agent]
+- [2608.03467](https://arxiv.org/abs/2608.03467) When Correct Solutions Repeat: Rarity-Aware Credit Redistribution for GRPO [algo]
+- [2608.08326](https://arxiv.org/abs/2608.08326) StructReward: Efficient Structured Process Rewards for Self-Correcting Multimodal Reasoning [length, mm]
+- [2608.13179](https://arxiv.org/abs/2608.13179) Teach the Magnitude, Not the Direction: Verifier-Bounded Credit Assignment for Multi-Turn Multi-step LLM Agents [reward, agent]
+- [2608.24135](https://arxiv.org/abs/2608.24135) Robust Code RL via Faulty-Code-Driven Test case Synthesis and Dense Reward Shaping [reward]
+- [2608.24350](https://arxiv.org/abs/2608.24350) FARCA: Fact-Aligned Reliability-Aware Credit Assignment for Reinforcement Learning with Factual Supervision [algo, mm]
+- [2608.30632](https://arxiv.org/abs/2608.30632) GMTS: Gradient Magnitude-based Token Selection Improves RLVR Training for LLM Reasoning [algo]
+- [2609.02817](https://arxiv.org/abs/2609.02817) Cliff: Learning Process Rewards from the First Mistake
+- [2609.04094](https://arxiv.org/abs/2609.04094) DRACO: Fine-Grained Credit Assignment with Dynamic Rubrics for Long-Horizon Agent Training [reward, agent]
+
+<a id="entropy"></a>
+## Entropy, exploration & diversity (62)
+
+- [2601.05053](https://arxiv.org/abs/2601.05053) Reinforced Efficient Reasoning via Semantically Diverse Exploration [length, algo, analysis]
+- [2601.08310](https://arxiv.org/abs/2601.08310) ORBIT: On-policy Exploration-Exploitation for Controllable Multi-Budget Reasoning [analysis]
+- [2601.08763](https://arxiv.org/abs/2601.08763) Rewarding the Rare: Uniqueness-Aware RL for Creative Problem Solving in LLMs
+- [2601.09259](https://arxiv.org/abs/2601.09259) MAXS: Meta-Adaptive Exploration with LLM Agents [analysis, agent]
+- [2601.15609](https://arxiv.org/abs/2601.15609) When Sharpening Becomes Collapse: Sampling Bias and Semantic Coupling in RL with Verifiable Rewards [reward]
+- [2601.18779](https://arxiv.org/abs/2601.18779) POPE: Learning to Reason on Hard Problems via Privileged On-Policy Exploration [analysis]
+- [2601.20209](https://arxiv.org/abs/2601.20209) Spark: Strategic Policy-Aware Exploration via Dynamic Branching for Long-Horizon Agentic Learning [analysis, agent]
+- [2601.22154](https://arxiv.org/abs/2601.22154) Exploring Reasoning Reward Model for Agents [reward, agent]
+- [2601.22478](https://arxiv.org/abs/2601.22478) Transformation-Augmented GRPO for Enhancing Exploration in Reasoning of Large Language Models [algo, analysis]
+- [2602.02555](https://arxiv.org/abs/2602.02555) Learning to Explore with Parameter-Space Noise: A Deep Dive into Parameter-Space Noise for Reinforcement Learning with Verifiable Rewards [reward, algo, analysis]
+- [2602.05281](https://arxiv.org/abs/2602.05281) Back to Basics: Revisiting Exploration in Reinforcement Learning for LLM Reasoning via Generative Probabilities [algo, analysis]
+- [2602.05717](https://arxiv.org/abs/2602.05717) Anchored Policy Optimization: Mitigating Exploration Collapse Via Support-Constrained Rectification [algo, analysis]
+- [2602.08344](https://arxiv.org/abs/2602.08344) OPE: Overcoming Information Saturation in Parallel Thinking via Outline-Guided Path Exploration [analysis, agent]
+- [2602.13035](https://arxiv.org/abs/2602.13035) Look Inward to Explore Outward: Learning Temperature Policy from LLM Internal States via Hierarchical RL
+- [2602.19895](https://arxiv.org/abs/2602.19895) DSDR: Dual-Scale Diversity Regularization for Exploration in LLM Reasoning [analysis]
+- [2602.20197](https://arxiv.org/abs/2602.20197) Controllable Exploration in Hybrid-Policy RLVR for Multi-Modal Reasoning [sftrl, analysis]
+- [2602.22296](https://arxiv.org/abs/2602.22296) UpSkill: Mutual Information Skill Learning for Structured Response Diversity in LLMs
+- [2602.22751](https://arxiv.org/abs/2602.22751) Know What You Know: Metacognitive Entropy Calibration for Verifiable RL Reasoning [reward, analysis]
+- [2603.06317](https://arxiv.org/abs/2603.06317) From Entropy to Calibrated Uncertainty: Training Language Models to Reason About Uncertainty
+- [2603.07853](https://arxiv.org/abs/2603.07853) SynPlanResearch-R1: Encouraging Tool Exploration for Deep Research with Synthetic Plans [analysis, agent]
+- [2603.07927](https://arxiv.org/abs/2603.07927) SWE-Fuse: Empowering Software Agents via Issue-free Trajectory Learning and Entropy-aware RLVR Training [agent]
+- [2603.10588](https://arxiv.org/abs/2603.10588) Does LLM Alignment Really Need Diversity? An Empirical Study of Adapting RLVR Methods for Moral Reasoning [analysis]
+- [2603.12788](https://arxiv.org/abs/2603.12788) Think and Answer ME: Benchmarking and Exploring Multi-Entity Reasoning Grounding in Remote Sensing [agent]
+- [2603.16206](https://arxiv.org/abs/2603.16206) Offline Exploration-Aware Fine-Tuning for Long-Chain Mathematical Reasoning [analysis]
+- [2603.19152](https://arxiv.org/abs/2603.19152) VEPO: Variable Entropy Policy Optimization for Low-Resource Language Foundation Models [algo]
+- [2604.04767](https://arxiv.org/abs/2604.04767) Cog-DRIFT: Exploration on Adaptively Reformulated Instances Enables Learning from Hard Reasoning Problems [analysis]
+- [2604.04894](https://arxiv.org/abs/2604.04894) Rethinking Exploration in RLVR: From Entropy Regularization to Refinement via Bidirectional Entropy Modulation [analysis]
+- [2604.08468](https://arxiv.org/abs/2604.08468) TTVS: Boosting Self-Exploring Reinforcement Learning via Test-time Variational Synthesis [reward, algo]
+- [2604.18530](https://arxiv.org/abs/2604.18530) OGER: A Robust Offline-Guided Exploration Reward for Hybrid Reinforcement Learning [sftrl, algo, analysis, agent]
+- [2605.00365](https://arxiv.org/abs/2605.00365) Uniform-Correct Policy Optimization: Breaking RLVR's Indifference to Diversity [algo]
+- [2605.02909](https://arxiv.org/abs/2605.02909) Delay, Plateau, or Collapse: Evaluating the Impact of Systematic Verification Error on RLVR [reward]
+- [2605.04960](https://arxiv.org/abs/2605.04960) EP-GRPO: Entropy-Progress Aligned Group Relative Policy Optimization with Implicit Process Guidance [algo, agent]
+- [2605.05566](https://arxiv.org/abs/2605.05566) Nonsense Helps: Prompt Space Perturbation Broadens Reasoning Exploration [analysis]
+- [2605.07137](https://arxiv.org/abs/2605.07137) Adaptive Negative Reinforcement for LLM Reasoning:Dynamically Balancing Correction and Diversity in RLVR [algo]
+- [2605.15726](https://arxiv.org/abs/2605.15726) Nudging Beyond the Comfort Zone: Efficient Strategy-Guided Exploration for RLVR [length, analysis, agent]
+- [2605.18191](https://arxiv.org/abs/2605.18191) Pairwise Preference Reward and Group-Based Diversity Enhancement for Superior Open-Ended Generation
+- [2605.18261](https://arxiv.org/abs/2605.18261) Knowledge-to-Verification: Exploring RLVR for LLMs in Knowledge-Intensive Domains [reward]
+- [2605.21125](https://arxiv.org/abs/2605.21125) Advantage Collapse in Group Relative Policy Optimization: Diagnosis and Mitigation [algo]
+- [2605.22620](https://arxiv.org/abs/2605.22620) Two is better than one: A Collapse-free Multi-Reward RLIF Training Framework
+- [2605.26037](https://arxiv.org/abs/2605.26037) Peak-Then-Collapse and the Four Interface Channels of Knowledge-Graph Tool Use [agent]
+- [2605.27832](https://arxiv.org/abs/2605.27832) Playing with Words, Improving with Rewards: Training Language Models for Creative Association
+- [2605.27846](https://arxiv.org/abs/2605.27846) EAPO: Entropy-Driven Adaptive Positive-Negative Sample Weighting for Policy Optimization in Open-Ended QA [algo]
+- [2605.28022](https://arxiv.org/abs/2605.28022) Beyond pass@k: Redundancy-Aware RLVR for Multi-Sample Code Generation
+- [2605.29009](https://arxiv.org/abs/2605.29009) Label-Free Reinforcement Learning via Cross-Model Entropy [reward, algo]
+- [2605.29190](https://arxiv.org/abs/2605.29190) When RL Suppresses Its Own Vocabulary: Recovering Reasoning Diversity in Puzzle-to-Math Transfer
+- [2606.01811](https://arxiv.org/abs/2606.01811) "I've Seen How This Goes": Characterizing Diversity via Progressive Conditional Surprise
+- [2606.08543](https://arxiv.org/abs/2606.08543) PAEC: Position-Aware Entropy Calibration for LLM Reasoning in RLVR
+- [2606.12370](https://arxiv.org/abs/2606.12370) Breaking Entropy Bounds: Accelerating RL Training via MTP with Rejection Sampling
+- [2606.15455](https://arxiv.org/abs/2606.15455) Understanding Diversity Collapse in RLVR via the Lens of Overtraining [analysis]
+- [2606.18487](https://arxiv.org/abs/2606.18487) SFT Overtraining Predicts Rank Inversion via Entropy Collapse Under RLVR [sftrl]
+- [2606.20280](https://arxiv.org/abs/2606.20280) ELVA: Exploring Ranking-Driven Universal Multimodal Retrieval [mm]
+- [2606.24267](https://arxiv.org/abs/2606.24267) Pigeonholing: how bad prompts hurt models, causing collapse and mistakes
+- [2606.24994](https://arxiv.org/abs/2606.24994) ExTra: Exploratory Trajectory Optimization for Language Model Reinforcement Learning [algo, analysis]
+- [2606.29985](https://arxiv.org/abs/2606.29985) Are We Measuring Strategy or Phrasing? The Gap Between Surface- and Approach-Level Diversity in LLM Math Reasoning
+- [2607.03065](https://arxiv.org/abs/2607.03065) Spectral Rewiring for Exploration, Purification, and Model Merging [analysis]
+- [2607.14614](https://arxiv.org/abs/2607.14614) Beyond Entropy: Correctness-Aware Advantage Shaping via Contrastive Policy Optimization [algo]
+- [2607.20543](https://arxiv.org/abs/2607.20543) When RLVR Shrinks the Reasoning Boundary: Diagnosing Pass@k Inversion
+- [2607.28077](https://arxiv.org/abs/2607.28077) LEEPS: Latent-Guided Explore-Exploit Prompt Sampling for Efficient RLVR in Large Language Models [length, agent]
+- [2608.09805](https://arxiv.org/abs/2608.09805) Parameter Exploration for RLVR via Variational Learning [analysis]
+- [2608.27420](https://arxiv.org/abs/2608.27420) Boosting LLM Exploration via Weak-Model Guidance in RLVR [analysis, agent]
+- [2608.28771](https://arxiv.org/abs/2608.28771) ERR+: Sequential Entropy Resolution for Efficient and Decisive LLM Reasoning [length]
+- [2609.13058](https://arxiv.org/abs/2609.13058) Expert-Space Exploration in MoE Reinforcement Learning [algo, analysis]
+
+<a id="reward"></a>
+## Rewards, verifiers & label-free RL (157)
+
+- [2601.03823](https://arxiv.org/abs/2601.03823) Step Potential Advantage Estimation: Harnessing Intermediate Confidence and Correctness for Efficient Mathematical Reasoning [length, algo]
+- [2601.03948](https://arxiv.org/abs/2601.03948) Trade-R1: Bridging Verifiable Rewards to Stochastic Environments via Process-Level Reasoning Verification [agent]
+- [2601.04411](https://arxiv.org/abs/2601.04411) Rate or Fate? RLV$^\varepsilon$R: Reinforcement Learning with Verifiable Noisy Rewards [algo]
+- [2601.07349](https://arxiv.org/abs/2601.07349) Reward Modeling from Natural Language Human Feedback
+- [2601.08198](https://arxiv.org/abs/2601.08198) Triplets Better Than Pairs: Towards Stable and Effective Self-Play Fine-Tuning for LLMs
+- [2601.08430](https://arxiv.org/abs/2601.08430) RubricHub: A Comprehensive and Highly Discriminative Rubric Dataset via Automated Coarse-to-Fine Generation
+- [2601.08468](https://arxiv.org/abs/2601.08468) JudgeRLVR: Judge First, Generate Second for Efficient Reasoning [length]
+- [2601.09667](https://arxiv.org/abs/2601.09667) Collaborative Multi-Agent Test-Time Reinforcement Learning for Reasoning [algo, agent]
+- [2601.12186](https://arxiv.org/abs/2601.12186) Aletheia: What Makes RLVR For Code Verifiers Tick? [analysis]
+- [2601.14700](https://arxiv.org/abs/2601.14700) DARL: Encouraging Diverse Answers for General Reasoning without Verifiers [agent]
+- [2601.18533](https://arxiv.org/abs/2601.18533) From Verifiable Dot to Reward Chain: Harnessing Verifiable Reference-based Rewards for Reinforcement Learning of Open-ended Generation [algo]
+- [2601.22595](https://arxiv.org/abs/2601.22595) Learn More with Less: Uncertainty Consistency Guided Query Selection for RLVR [agent]
+- [2601.22607](https://arxiv.org/abs/2601.22607) From Self-Evolving Synthetic Data to Verifiable-Reward RL: Post-Training Multi-turn Interactive Tool-Using Agents [agent]
+- [2601.22975](https://arxiv.org/abs/2601.22975) Golden Goose: A Simple Trick to Synthesize Unlimited RLVR Tasks from Unverifiable Internet Text [analysis]
+- [2602.00513](https://arxiv.org/abs/2602.00513) Minerva: Reinforcement Learning with Verifiable Rewards for Cyber Threat Intelligence LLMs [algo]
+- [2602.00575](https://arxiv.org/abs/2602.00575) Agentic Reward Modeling: Verifying GUI Agent via Progressive Trajectory-Grounded Interaction [agent]
+- [2602.01523](https://arxiv.org/abs/2602.01523) A Relative-Budget Theory for Reinforcement Learning with Verifiable Rewards in Large Language Model Reasoning [algo, analysis]
+- [2602.02377](https://arxiv.org/abs/2602.02377) Proof-RM: A Scalable and Generalizable Reward Model for Math Proof [analysis]
+- [2602.03094](https://arxiv.org/abs/2602.03094) Test-time Recursive Thinking: Self-Improvement without External Feedback
+- [2602.03619](https://arxiv.org/abs/2602.03619) Learning Query-Specific Rubrics from Human Preferences for DeepResearch Report Generation [agent]
+- [2602.04265](https://arxiv.org/abs/2602.04265) Thickening-to-Thinning: Reward Shaping via Human-Inspired Learning Dynamics for LLM Reasoning [analysis]
+- [2602.06290](https://arxiv.org/abs/2602.06290) B-GRPO: Unsupervised Speech Emotion Recognition based on Batched-Group Relative Policy Optimization [sftrl, algo, mm]
+- [2602.06795](https://arxiv.org/abs/2602.06795) Generating Data-Driven Reasoning Rubrics for Domain-Adaptive Reward Modeling
+- [2602.07992](https://arxiv.org/abs/2602.07992) When Is Compositional Reasoning Learnable from Verifiable Rewards?
+- [2602.08819](https://arxiv.org/abs/2602.08819) Bayesian Preference Learning for Test-Time Steerable Reward Models
+- [2602.10885](https://arxiv.org/abs/2602.10885) Reinforcing Chain-of-Thought Reasoning with Self-Evolving Rubrics
+- [2602.11128](https://arxiv.org/abs/2602.11128) Asymmetric Prompt Weighting for Reinforcement Learning with Verifiable Rewards [algo]
+- [2602.11199](https://arxiv.org/abs/2602.11199) When and What to Ask: AskBench and Rubric-Guided RLVR for LLM Clarification [analysis, agent]
+- [2602.11549](https://arxiv.org/abs/2602.11549) Native Reasoning Models: Training Language Models to Reason on Unverifiable Data
+- [2602.11570](https://arxiv.org/abs/2602.11570) PRIME: A Process-Outcome Alignment Benchmark for Verifiable Reasoning in Mathematics and Engineering
+- [2602.12036](https://arxiv.org/abs/2602.12036) Composition-RL: Compose Your Verifiable Prompts for Reinforcement Learning of Large Language Models [algo]
+- [2602.12579](https://arxiv.org/abs/2602.12579) VI-CuRL: Stabilizing Verifier-Independent RL Reasoning via Confidence-Guided Variance Reduction [algo, agent]
+- [2602.16742](https://arxiv.org/abs/2602.16742) DeepVision-103K: A Visually Diverse, Broad-Coverage, and Verifiable Mathematical Dataset for Multimodal Reasoning [mm]
+- [2602.16802](https://arxiv.org/abs/2602.16802) References Improve LLM Alignment in Non-Verifiable Domains
+- [2602.18037](https://arxiv.org/abs/2602.18037) Gradient Regularization Mitigates Reward Hacking in Reinforcement Learning from Human Feedback and Verifiable Rewards [algo]
+- [2602.21420](https://arxiv.org/abs/2602.21420) Overconfident Errors Need Stronger Correction: Asymmetric Confidence Penalties for Reinforcement Learning [algo]
+- [2602.22190](https://arxiv.org/abs/2602.22190) GUI-Libra: Training Native GUI Agents to Reason and Act with Action-aware Supervision and Partially Verifiable RL [agent, mm]
+- [2603.01571](https://arxiv.org/abs/2603.01571) Beyond Length Scaling: Synergizing Breadth and Depth for Generative Reward Models [length, analysis]
+- [2603.02146](https://arxiv.org/abs/2603.02146) LongRLVR: Long-Context Reinforcement Learning Requires Verifiable Context Rewards [algo]
+- [2603.04124](https://arxiv.org/abs/2603.04124) BeamPERL: Parameter-Efficient RL with Verifiable Rewards Specializes Compact LLMs for Structured Beam Mechanics Reasoning [length, analysis]
+- [2603.05659](https://arxiv.org/abs/2603.05659) When Rubrics Fail: Error Enumeration as Reward in Reference-Free RL Post-Training for Virtual Try-On
+- [2603.06958](https://arxiv.org/abs/2603.06958) Chart-RL: Generalized Chart Comprehension via Reinforcement Learning with Verifiable Rewards [algo, analysis]
+- [2603.07084](https://arxiv.org/abs/2603.07084) Countdown-Code: A Testbed for Studying The Emergence and Generalization of Reward Hacking in RLVR [analysis]
+- [2603.08660](https://arxiv.org/abs/2603.08660) How Far Can Unsupervised RLVR Scale LLM Training? [sftrl]
+- [2603.09117](https://arxiv.org/abs/2603.09117) Decoupling Reasoning and Confidence: Resurrecting Calibration in Reinforcement Learning from Verifiable Rewards [algo]
+- [2603.12698](https://arxiv.org/abs/2603.12698) EvolveCoder: Evolving Test Cases via Adversarial Verification for Code Reinforcement Learning [algo]
+- [2603.12875](https://arxiv.org/abs/2603.12875) Test-time RL alignment exposes task familiarity artifacts in LLM benchmarks
+- [2603.14463](https://arxiv.org/abs/2603.14463) An Industrial-Scale Insurance LLM Achieving Verifiable Domain Mastery and Hallucination Control without Competence Trade-offs
+- [2603.15011](https://arxiv.org/abs/2603.15011) Molecular Identifier Visual Prompt and Verifiable Reinforcement Learning for Chemical Reaction Diagram Parsing [algo, mm]
+- [2603.15646](https://arxiv.org/abs/2603.15646) Alternating Reinforcement Learning with Contextual Rubric Rewards: Beyond the Scalarization Strategy [algo]
+- [2603.16060](https://arxiv.org/abs/2603.16060) ARISE: Agent Reasoning with Intrinsic Skill Evolution in Hierarchical Reinforcement Learning [algo, agent]
+- [2603.16140](https://arxiv.org/abs/2603.16140) Noisy Data is Destructive to Reinforcement Learning with Verifiable Rewards [algo]
+- [2603.16223](https://arxiv.org/abs/2603.16223) Dual Consensus: Escaping from Spurious Majority in Unsupervised RLVR via Two-Stage Vote Mechanism [sftrl, analysis]
+- [2603.17673](https://arxiv.org/abs/2603.17673) Towards Reliable Local Security Agents: Verifiable Post-Training for Linux Privilege Escalation [agent]
+- [2603.18886](https://arxiv.org/abs/2603.18886) Reasoning over mathematical objects: on-policy reward modeling and test time aggregation
+- [2603.20004](https://arxiv.org/abs/2603.20004) Human-Level Text-to-SQL via Reinforcement Learning on Verified Data, Without Pipeline Engineering [algo]
+- [2603.25108](https://arxiv.org/abs/2603.25108) MSRL: Scaling Generative Multimodal Reward Modeling via Multi-Stage Reinforcement Learning [algo, analysis, mm]
+- [2603.27375](https://arxiv.org/abs/2603.27375) Bridging Visual Representation and Reinforcement Learning from Verifiable Rewards in Large Vision-Language Models [algo, mm]
+- [2603.27866](https://arxiv.org/abs/2603.27866) Wan-R1: Verifiable-Reinforcement Learning for Video Reasoning [algo, mm]
+- [2603.27977](https://arxiv.org/abs/2603.27977) SARL: Label-Free Reinforcement Learning by Rewarding Reasoning Topology [algo]
+- [2604.00442](https://arxiv.org/abs/2604.00442) Execution-Verified Reinforcement Learning for Optimization Modeling [algo]
+- [2604.07666](https://arxiv.org/abs/2604.07666) An Imperfect Verifier is Good Enough: Learning with Noisy Rewards
+- [2604.13602](https://arxiv.org/abs/2604.13602) Reward Hacking in the Era of Large Models: Mechanisms, Emergent Misalignment, Challenges [analysis]
+- [2604.14922](https://arxiv.org/abs/2604.14922) LongAct: Harnessing Intrinsic Activation Patterns for Long-Context Reinforcement Learning [algo]
+- [2604.15149](https://arxiv.org/abs/2604.15149) LLMs Gaming Verifiers: RLVR can Lead to Reward Hacking
+- [2604.16242](https://arxiv.org/abs/2604.16242) Detecting and Suppressing Reward Hacking with Gradient Fingerprints [algo]
+- [2604.16881](https://arxiv.org/abs/2604.16881) Incentivizing Parametric Knowledge via Reinforcement Learning with Verifiable Rewards for Cross-Cultural Entity Translation [algo]
+- [2604.17073](https://arxiv.org/abs/2604.17073) Abstain-R1: Calibrated Abstention and Post-Refusal Clarification via Verifiable RL
+- [2604.18176](https://arxiv.org/abs/2604.18176) QuantumQA: Enhancing Scientific Reasoning via Physics-Consistent Dataset and Verification-Aware Reinforcement Learning [algo]
+- [2604.20209](https://arxiv.org/abs/2604.20209) SGS: Scaling Self-Play with Self-Guidance [analysis, agent]
+- [2604.20659](https://arxiv.org/abs/2604.20659) GRPO-VPS: Enhancing Group Relative Policy Optimization with Verifiable Process Supervision for Effective Reasoning [algo, mm]
+- [2604.20933](https://arxiv.org/abs/2604.20933) IRIS: Interpolative Rényi Iterative Self-play for Large Language Model Fine-Tuning
+- [2604.22074](https://arxiv.org/abs/2604.22074) Outcome Rewards Do Not Guarantee Verifiable or Causally Important Reasoning [analysis]
+- [2604.22840](https://arxiv.org/abs/2604.22840) AeSlides: Incentivizing Aesthetic Layout in LLM-Based Slide Generation via Verifiable Rewards
+- [2604.24198](https://arxiv.org/abs/2604.24198) Rewarding the Scientific Process: Process-Level Reward Modeling for Agentic Data Analysis [analysis, agent]
+- [2604.25419](https://arxiv.org/abs/2604.25419) JURY-RL: Votes Propose, Proofs Dispose for Label-Free RLVR
+- [2604.27467](https://arxiv.org/abs/2604.27467) ScaleBox: Enabling High-Fidelity and Scalable Code Verification for Large Language Models
+- [2605.00610](https://arxiv.org/abs/2605.00610) Decouple before Integration: Test-time Synthesis of SFT and RLVR Task Vectors [sftrl]
+- [2605.05546](https://arxiv.org/abs/2605.05546) SPARK: Self-Play with Asymmetric Reward from Knowledge Graphs
+- [2605.05826](https://arxiv.org/abs/2605.05826) AGPO: Asymmetric Group Policy Optimization for Verifiable Reasoning and Search Ads Relevance at JD [algo, agent]
+- [2605.07861](https://arxiv.org/abs/2605.07861) From Synthetic to Real: Toward Identity-Consistent Makeup Transfer with Synthetic and Real Data
+- [2605.09329](https://arxiv.org/abs/2605.09329) Test-Time Speculation
+- [2605.12519](https://arxiv.org/abs/2605.12519) Correct Answers from Sound Reasoning: Verifiable Process Supervision for Language Models [agent, mm]
+- [2605.12969](https://arxiv.org/abs/2605.12969) Revisiting Reinforcement Learning with Verifiable Rewards from a Contrastive Perspective [algo, analysis]
+- [2605.20006](https://arxiv.org/abs/2605.20006) GeoX: Mastering Geospatial Reasoning Through Self-Play and Verifiable Rewards
+- [2605.20164](https://arxiv.org/abs/2605.20164) Not Every Rubric Teaches Equally: Policy-Aware Rubric Rewards for RLVR
+- [2605.20865](https://arxiv.org/abs/2605.20865) Multi-Step Likelihood-Ratio Correction for Reinforcement Learning with Verifiable Rewards [algo]
+- [2605.21834](https://arxiv.org/abs/2605.21834) On-Policy Consistency Training Improves LLM Safety with Minimal Capability Degradation
+- [2605.23491](https://arxiv.org/abs/2605.23491) CoSPlay: Cooperative Self-Play at Test-Time with Self-Generated Code and Unit Test
+- [2605.25624](https://arxiv.org/abs/2605.25624) CUA-Gym: Scaling Verifiable Training Environments and Tasks for Computer-Use Agents [analysis, agent]
+- [2605.26952](https://arxiv.org/abs/2605.26952) Efficient Agentic Reinforcement Learning with On-Policy Intrinsic Knowledge Boundary Enhancement [length, algo, agent]
+- [2605.28561](https://arxiv.org/abs/2605.28561) Soft-SVeRL: Self-Verified Reinforcement Learning with Soft Rewards [algo]
+- [2605.29648](https://arxiv.org/abs/2605.29648) Verifiable Rewards Beyond Math and Code: Lightweight Corpus-Grounded Process Supervision for Factual Question Answering [agent, mm]
+- [2605.30244](https://arxiv.org/abs/2605.30244) Reinforcement Learning with Robust Rubric Rewards [algo]
+- [2605.30478](https://arxiv.org/abs/2605.30478) Improving Small Language Models for Code Generation with Reinforcement Learning from Verification Feedback [algo]
+- [2605.30914](https://arxiv.org/abs/2605.30914) Automating Formal Verification with Reinforcement Learning and Recursive Inference [algo]
+- [2605.31584](https://arxiv.org/abs/2605.31584) LongTraceRL: Learning Long-Context Reasoning from Search Agent Trajectories with Rubric Rewards [agent]
+- [2606.01066](https://arxiv.org/abs/2606.01066) Before the Model Learns the Bug:Fuzzing RLVR Verifiers
+- [2606.03234](https://arxiv.org/abs/2606.03234) Right Makes Might: Aligning Verified Hidden States Empowers RL Reasoning
+- [2606.03608](https://arxiv.org/abs/2606.03608) Exploiting Verification-Generation Gap: Test-Time Reinforcement Learning with Confidence-Conditioned Verification [algo]
+- [2606.03968](https://arxiv.org/abs/2606.03968) QUBRIC: Co-Designing Queries and Rubrics for RL Beyond Verifiable Rewards
+- [2606.04889](https://arxiv.org/abs/2606.04889) GRAIL: Gradient-Reweighted Advantages for Reinforcement Learning with Verifiable Rewards [algo]
+- [2606.04923](https://arxiv.org/abs/2606.04923) Reproducing, Analyzing, and Detecting Reward Hacking in Rubric-Based Reinforcement Learning [algo, analysis]
+- [2606.05122](https://arxiv.org/abs/2606.05122) Self-Evaluation Is Already There: Eliciting Latent Judge Calibration in Base LLMs with Minimal Data
+- [2606.05932](https://arxiv.org/abs/2606.05932) A Pre-Registered Causal Partition of Self-Consistency Elicitation and Reward Design in RLVR
+- [2606.08088](https://arxiv.org/abs/2606.08088) ConSteer-RL: Steering Reasoning Capabilities in Large Language Models via Confidence-Aware Reinforcement Learning [algo]
+- [2606.08545](https://arxiv.org/abs/2606.08545) Ishigaki-IDS: An Open-Weight Verifier-Aware Model for Information Delivery Specification Drafting in Building Information Modeling
+- [2606.09118](https://arxiv.org/abs/2606.09118) ComplexConstraints and Beyond: Expert Rubrics for RLVR
+- [2606.09380](https://arxiv.org/abs/2606.09380) Reasoning Arena: Trace Tournaments When Verifiable Rewards Fall Short
+- [2606.11918](https://arxiv.org/abs/2606.11918) The Art of Interrogation: Consistency Amplifies Factuality in Spatial Reasoning
+- [2606.13473](https://arxiv.org/abs/2606.13473) MaxProof: Scaling Mathematical Proof with Generative-Verifier RL and Population-Level Test-Time Scaling [analysis]
+- [2606.14691](https://arxiv.org/abs/2606.14691) CORA: Analyzing and bridging thinking-answer gap in Multimodal RLVR via Consistency-Oriented Reasoning Alignment [analysis, agent, mm]
+- [2606.15866](https://arxiv.org/abs/2606.15866) STRIDE: Strategic Trajectory Reasoning via Discriminative Estimation for Verifiable Reinforcement Learning [algo]
+- [2606.18557](https://arxiv.org/abs/2606.18557) DeFAb: A Verifiable Benchmark for Defeasible Abduction in Foundation Models
+- [2606.20068](https://arxiv.org/abs/2606.20068) Process-Verified Reinforcement Learning for Theorem Proving via Lean [algo, analysis]
+- [2606.20881](https://arxiv.org/abs/2606.20881) When Do Intrinsic Rewards Work for Code Reasoning? A Comprehensive Study [analysis]
+- [2606.21795](https://arxiv.org/abs/2606.21795) Discretizing Reward Models
+- [2606.21830](https://arxiv.org/abs/2606.21830) Mat-Pref: Verifiable-Reward Training Improves Compositional Reasoning in Inorganic Materials
+- [2606.23913](https://arxiv.org/abs/2606.23913) Closing the Loop: Formally Verified Law as a Reward Signal for Self-Improving Legal AI
+- [2606.25000](https://arxiv.org/abs/2606.25000) Geo-Strat-RL: Learning Geological Event Reasoning from Verifiable Tasks
+- [2606.25354](https://arxiv.org/abs/2606.25354) Efficient and Trainable Language Model Test-Time Scaling via Local Branch Routing [length, analysis]
+- [2606.27752](https://arxiv.org/abs/2606.27752) PerturbCellRL: Verifier-Guided Reinforcement Learning for Single-Cell Perturbation Prediction [algo, agent]
+- [2606.28166](https://arxiv.org/abs/2606.28166) Tandem Reinforcement Learning with Verifiable Rewards [algo]
+- [2606.28707](https://arxiv.org/abs/2606.28707) BV-Blend: Uncertainty-Weighted Historical Baselines for Stable Critic-Free RL with Verifiable Rewards [algo]
+- [2606.29812](https://arxiv.org/abs/2606.29812) Consistency as Inductive Bias: Learning Cross-View Invariance for Robust Multimodal Reasoning [algo, mm]
+- [2607.00164](https://arxiv.org/abs/2607.00164) Verifiable Rewards for Calibrated Probabilistic Forecasting
+- [2607.01181](https://arxiv.org/abs/2607.01181) Right in the Right Way: LM Training with Verifiable Rewards and Human Demonstrations [sftrl]
+- [2607.01830](https://arxiv.org/abs/2607.01830) Many Voices, One Reward: Multi-Role Rubric Generation for LLM Judging and Reward Modeling
+- [2607.05863](https://arxiv.org/abs/2607.05863) Strategic Bargaining in Multi-Buyer Markets: Reinforcement Learning from Verifiable Rewards for LLM Negotiations [algo]
+- [2607.10474](https://arxiv.org/abs/2607.10474) Reinforcement Learning with Verifiable Physics: Post-training LLMs with Continuous Rewards [algo]
+- [2607.11022](https://arxiv.org/abs/2607.11022) When the Reward Suite Is Leaky: A Preregistered Causal Contrast of Natural Verifier False Positives in RLVR
+- [2607.11185](https://arxiv.org/abs/2607.11185) SCALECUA: Scaling Computer Use Agents with Verifiable Task Synthesis and Efficient Online RL [length, analysis, agent]
+- [2607.12856](https://arxiv.org/abs/2607.12856) Verifier-Based Reinforcement Fine-Tuning of Reasoning Models for Thermal Energy Storage Control [algo]
+- [2607.14506](https://arxiv.org/abs/2607.14506) Non-vacuous Generalization Bounds for Reinforcement Learning with Verifiable Rewards [algo, analysis]
+- [2607.17243](https://arxiv.org/abs/2607.17243) LenGuard-GPC: Length Guarding with Guided-Prompt Consistency for Spatial Reasoning Reinforce Learning [length, algo, agent]
+- [2607.18110](https://arxiv.org/abs/2607.18110) LLM-as-a-Coach: Experiential Learning for Non-Verifiable Tasks
+- [2607.19044](https://arxiv.org/abs/2607.19044) Adopting Reinforcement Learning with Verifiable Rewards for Molecular Generation [algo]
+- [2607.22529](https://arxiv.org/abs/2607.22529) Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills
+- [2607.23802](https://arxiv.org/abs/2607.23802) From RLVR to RLSVR: Task Transformation Induces Self-Verifiable Rewards for Open-Ended LLM Self-Improvement
+- [2607.26115](https://arxiv.org/abs/2607.26115) GPT-Red: Automated Red Teaming via Self-Play at Scale
+- [2608.00220](https://arxiv.org/abs/2608.00220) Verifier-Induced Support Reshaping in On-Policy Optimization [algo]
+- [2608.01755](https://arxiv.org/abs/2608.01755) Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs [mm]
+- [2608.02831](https://arxiv.org/abs/2608.02831) Reinforcement Learning with Evolving Rubrics as Rewards for Audio Reasoning [algo, mm]
+- [2608.02948](https://arxiv.org/abs/2608.02948) Rubrics as Privileged Information for Open-Ended Generation
+- [2608.03119](https://arxiv.org/abs/2608.03119) Don't Peek at the Answer: Outcome-Masked Group Relative Policy Optimization for Label-Free RLVR [algo, agent, mm]
+- [2608.10996](https://arxiv.org/abs/2608.10996) ConRub-Med: Reinforcement Learning with Consensus Rubrics for Open-Ended Medical Question Answering [algo, agent]
+- [2608.17253](https://arxiv.org/abs/2608.17253) Co-RL: Unsupervised Reasoning Emerges from Diverse Cohort in Multi-agent RL [sftrl, analysis, agent]
+- [2608.17776](https://arxiv.org/abs/2608.17776) Debate Training Reduces Reward Hacking in RLAIF
+- [2608.19197](https://arxiv.org/abs/2608.19197) SPADE: Self-Play in Adaptive Synthetic Executable Environments [agent]
+- [2608.25637](https://arxiv.org/abs/2608.25637) AutoVerifier: Residual-Guided Non-Parametric Optimization for Reference-Based Answer Verification [algo, agent]
+- [2608.26105](https://arxiv.org/abs/2608.26105) VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning [mm]
+- [2608.27448](https://arxiv.org/abs/2608.27448) TTPO: Test-Time Policy Optimization [algo]
+- [2608.28421](https://arxiv.org/abs/2608.28421) Program Learning with Verifiable Rewards: Symbolic Backpropagation for Post-Training LLMs
+- [2609.00892](https://arxiv.org/abs/2609.00892) CARE: Contrastive Anchor-based Rubric Evolution for Large Language Model Post-Training
+- [2609.01325](https://arxiv.org/abs/2609.01325) VerTox: Verifiable Reward-Guided Corpus Poisoning Against Neural Ranking Models [agent]
+- [2609.01354](https://arxiv.org/abs/2609.01354) Where the Verifier Fails: A Category-Level Audit of Reward Signals in RLVR
+- [2609.05221](https://arxiv.org/abs/2609.05221) A Verifier-Guided Explainable Reasoning Framework with Gold-Anchored QLoRA, Task-Aware Mixture-of-Experts, and Group-Relative RLVR [analysis, agent]
+
+<a id="opd"></a>
+## On-policy distillation & self-distillation (439)
+
+- [2601.02780](https://arxiv.org/abs/2601.02780) Multi-Teacher OPD (MOPD) as post-training stage
+- [2601.03743](https://arxiv.org/abs/2601.03743) O-Researcher: An Open Ended Deep Research Model via Multi-Agent Distillation and Agentic RL [agent]
+- [2601.07155](https://arxiv.org/abs/2601.07155) Veto: Stable On-Policy Distillation through Adaptive Target Reformulation
+- [2601.09088](https://arxiv.org/abs/2601.09088) DASD: Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning
+- [2601.11865](https://arxiv.org/abs/2601.11865) CTPD: Cross Tokenizer Preference Distillation
+- [2601.16547](https://arxiv.org/abs/2601.16547) CORD: Bridging the Audio–Text Reasoning Gap via Weighted On-policy Cross-modal Distillation [mm]
+- [2601.18129](https://arxiv.org/abs/2601.18129) Minimal sovereign recipe: SFT + OPD + small-scale RFT [sftrl]
+- [2601.18734](https://arxiv.org/abs/2601.18734) Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models
+- [2601.19897](https://arxiv.org/abs/2601.19897) SDFT: Self-Distillation Enables Continual Learning
+- [2601.20802](https://arxiv.org/abs/2601.20802) SDPO: Reinforcement Learning via Self-Distillation [algo]
+- [2601.21968](https://arxiv.org/abs/2601.21968) OVD: On-policy Verbal Distillation
+- [2602.01395](https://arxiv.org/abs/2602.01395) Rethinking Selective Knowledge Distillation [analysis]
+- [2602.02994](https://arxiv.org/abs/2602.02994) Video-OPD: Efficient Post-Training of Multimodal Large Language Models for Temporal Video Grounding via On-Policy Distillation [length, mm]
+- [2602.04942](https://arxiv.org/abs/2602.04942) pi-Distill: Privileged Information Distillation for Language Models
+- [2602.06019](https://arxiv.org/abs/2602.06019) Multi-Token Prediction via Self-Distillation
+- [2602.12125](https://arxiv.org/abs/2602.12125) ExOPD: Learning beyond Teacher via Generalized On-Policy Distillation with Reward Extrapolation [analysis]
+- [2602.12262](https://arxiv.org/abs/2602.12262) T3D: Few-Step Diffusion Language Models via Trajectory Self-Distillation [mm]
+- [2602.12275](https://arxiv.org/abs/2602.12275) OPCD: On-Policy Context Distillation for Language Models
+- [2602.12674](https://arxiv.org/abs/2602.12674) 𝒳-KD: General Experiential Knowledge Distillation for Large Language Models
+- [2602.13680](https://arxiv.org/abs/2602.13680) AllMem *(2026)* — Offline on-policy distillation for long-context modeling
+- [2602.15260](https://arxiv.org/abs/2602.15260) Prefix OPD: Fast and Effective On-policy Distillation from Reasoning Prefixes
+- [2602.15763](https://arxiv.org/abs/2602.15763) On-policy cross-stage distillation to recover earlier skills
+- [2602.20574](https://arxiv.org/abs/2602.20574) GATES: Self-Distillation under Privileged Context with Consensus Gating
+- [2602.21669](https://arxiv.org/abs/2602.21669) DWA-KD: Dual-Space Weighting and Time-Warped Alignment for Cross-Tokenizer KD
+- [2602.22495](https://arxiv.org/abs/2602.22495) Reinforcement-aware Knowledge Distillation for LLM Reasoning [algo]
+- [2603.01683](https://arxiv.org/abs/2603.01683) Surgical Post-Training: Proximal On-Policy Distillation for Reasoning with Knowledge Retention
+- [2603.01875](https://arxiv.org/abs/2603.01875) Off-policy, on-policy, and cross-tokenizer distillation via decoupled backends [async]
+- [2603.05433](https://arxiv.org/abs/2603.05433) CRISP: Compressed Reasoning via Iterative Self-Policy Distillation [length]
+- [2603.07079](https://arxiv.org/abs/2603.07079) Entropy-Aware On-Policy Distillation of Language Models [entropy]
+- [2603.11137](https://arxiv.org/abs/2603.11137) REOPOLD: Scaling Reasoning Efficiently via Relaxed On-Policy Distillation [length, analysis]
+- [2603.11178](https://arxiv.org/abs/2603.11178) PACED: Distillation and On-Policy Self-Distillation at the Frontier of Student Competence
+- [2603.13260](https://arxiv.org/abs/2603.13260) Explain in Your Own Words: Improving Reasoning via Token-Selective Dual Knowledge Distillation
+- [2603.13274](https://arxiv.org/abs/2603.13274) Learning from Partial Chain-of-Thought via Truncated-Reasoning Self-Distillation
+- [2603.19220](https://arxiv.org/abs/2603.19220) Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation
+- [2603.19266](https://arxiv.org/abs/2603.19266) ExGRPO: Probing to Refine — Reinforcement Distillation of LLMs via Explanatory Inversion [algo]
+- [2603.20510](https://arxiv.org/abs/2603.20510) Grounded Chess Reasoning in Language Models via Master Distillation
+- [2603.22056](https://arxiv.org/abs/2603.22056) Dual-Space Knowledge Distillation with Key-Query Matching for Large Language Models with Vocabulary Mismatch [async]
+- [2603.23871](https://arxiv.org/abs/2603.23871) HDPO: Hybrid Distillation Policy Optimization via Privileged Self-Distillation [sftrl, algo]
+- [2603.24472](https://arxiv.org/abs/2603.24472) Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs? [analysis]
+- [2603.24596](https://arxiv.org/abs/2603.24596) X-OPD: Cross-Modal On-Policy Distillation for Capability Alignment in Speech LLMs [mm]
+- [2603.25158](https://arxiv.org/abs/2603.25158) Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills [agent]
+- [2603.25562](https://arxiv.org/abs/2603.25562) Revisiting On-Policy Distillation — Empirical Failure Modes and Simple Fixes [analysis]
+- [2603.26666](https://arxiv.org/abs/2603.26666) VLA-OPD: Bridging Offline SFT and Online RL for Vision-Language-Action Models via On-Policy Distillation [sftrl, mm]
+- [2603.27703](https://arxiv.org/abs/2603.27703) Specialize-then-Unify: 5 domain-expert agents → unified via OPD on student trajectories [agent]
+- [2604.00626](https://arxiv.org/abs/2604.00626) 2026.04.01: 📝 Initial release of the survey on arXiv with the first systematic taxonomy of OPD methods covering objective design, signal source, and training stabilization [algo]
+- [2604.01193](https://arxiv.org/abs/2604.01193) SSD: Embarrassingly Simple Self-Distillation Improves Code Generation
+- [2604.02288](https://arxiv.org/abs/2604.02288) SRPO: Unifying Group-Relative and Self-Distillation Policy Optimization via Sample Routing [algo]
+- [2604.02621](https://arxiv.org/abs/2604.02621) Reinforcement Learning-based Semi-supervised Knowledge Distillation with LLM-as-a-Judge [reward, sftrl, algo]
+- [2604.02819](https://arxiv.org/abs/2604.02819) Student-in-the-Loop Chain-of-Thought Distillation via Generation-Time Selection
+- [2604.03128](https://arxiv.org/abs/2604.03128) RLSD: Self-Distilled RLVR
+- [2604.03873](https://arxiv.org/abs/2604.03873) SODA: Semi On-Policy Black-Box Distillation for Large Language Models
+- [2604.04461](https://arxiv.org/abs/2604.04461) DP-OPD: Differentially Private On-Policy Distillation for Language Models
+- [2604.07430](https://arxiv.org/abs/2604.07430) 32B → 2B on-policy distillation; student rollouts, teacher token-level supervision [rollout, credit, mm]
+- [2604.07466](https://arxiv.org/abs/2604.07466) Cross-Tokenizer LLM Distillation through a Byte-Level Interface
+- [2604.07944](https://arxiv.org/abs/2604.07944) OPD-AVMP: On-Policy Distillation of Language Models for Autonomous Vehicle Motion Planning
+- [2604.08527](https://arxiv.org/abs/2604.08527) Demystifying OPD: Length Inflation and Stabilization Strategies for Large Language Models [length, algo]
+- [2604.10674](https://arxiv.org/abs/2604.10674) Skill-SD: Skill-Conditioned Self-Distillation for Multi-turn LLM Agents [agent]
+- [2604.10688](https://arxiv.org/abs/2604.10688) SCOPE: Signal-Calibrated On-Policy Distillation Enhancement with Dual-Path Adaptive Weighting
+- [2604.12002](https://arxiv.org/abs/2604.12002) Self-Distillation Zero: Self-Revision Turns Binary Rewards into Dense Supervision [credit, mm]
+- [2604.13010](https://arxiv.org/abs/2604.13010) Lightning OPD: Efficient Post-Training for Large Reasoning Models with Offline OPD [length]
+- [2604.13016](https://arxiv.org/abs/2604.13016) Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe [analysis]
+- [2604.14054](https://arxiv.org/abs/2604.14054) π-Play: Multi-Agent Self-Play via Privileged Self-Distillation without External Data [reward, agent]
+- [2604.14084](https://arxiv.org/abs/2604.14084) TIP: Token Importance in On-Policy Distillation [algo]
+- [2604.14572](https://arxiv.org/abs/2604.14572) Corpus2Skill: Don't Retrieve, Navigate — Distilling Enterprise Knowledge into Navigable Agent Skills for QA and RAG [agent]
+- [2604.15794](https://arxiv.org/abs/2604.15794) Self-Distillation as a Performance Recovery Mechanism for LLMs [analysis]
+- [2604.15804](https://arxiv.org/abs/2604.15804) Specialist distillation → privileged-input self-distillation aligning audio to text [mm]
+- [2604.16830](https://arxiv.org/abs/2604.16830) The Illusion of Certainty: Decoupling Capability and Calibration in On-Policy Distillation
+- [2604.17535](https://arxiv.org/abs/2604.17535) OPSDL: On-Policy Self-Distillation for Long-Context Language Models
+- [2604.18963](https://arxiv.org/abs/2604.18963) Distillation Traps and Guards: A Calibration Knob for LLM Distillability
+- [2604.20244](https://arxiv.org/abs/2604.20244) HPD: Hybrid Policy Distillation for LLMs [sftrl]
+- [2604.24005](https://arxiv.org/abs/2604.24005) TCOD: Exploring Temporal Curriculum in On-Policy Distillation for Multi-turn Autonomous Agents [rollout, entropy, agent]
+- [2604.24927](https://arxiv.org/abs/2604.24927) Large Language Models Explore by Latent Distilling [entropy]
+- [2604.26573](https://arxiv.org/abs/2604.26573) PAINT: Partial-Solution Adaptive Interpolated Training for Self-Distilled Reasoners
+- [2604.26951](https://arxiv.org/abs/2604.26951) Turning the TIDE: Cross-Architecture Distillation for Diffusion Large Language Models [mm]
+- [2604.27083](https://arxiv.org/abs/2604.27083) CoPD: Co-Evolving Policy Distillation
+- [2604.28123](https://arxiv.org/abs/2604.28123) PRISM: Pre-alignment via Black-box On-policy Distillation for Multimodal Reinforcement Learning [algo, mm]
+- [2605.00642](https://arxiv.org/abs/2605.00642) Learn where to Click from Yourself: On-Policy Self-Distillation for GUI Grounding [agent]
+- [2605.01347](https://arxiv.org/abs/2605.01347) MAD-OPD: Breaking the Ceiling in On-Policy Distillation via Multi-Agent Debate [agent]
+- [2605.02971](https://arxiv.org/abs/2605.02971) Multilingual Safety Alignment via Self-Distillation
+- [2605.03677](https://arxiv.org/abs/2605.03677) Uni-OPD: Unifying On-Policy Distillation with a Dual-Perspective Recipe [analysis]
+- [2605.04078](https://arxiv.org/abs/2605.04078) Validity-Calibrated Reasoning Distillation
+- [2605.05040](https://arxiv.org/abs/2605.05040) PBSD: Preference-Based Self-Distillation — Beyond KL Matching via Reward Regularization [algo]
+- [2605.05204](https://arxiv.org/abs/2605.05204) D-OPSD: On-Policy Self-Distillation for Continuously Tuning Step-Distilled Diffusion Models [mm]
+- [2605.05940](https://arxiv.org/abs/2605.05940) Near-Policy: Accelerating On-Policy Distillation via Asynchronous Generation and Selective Packing [async]
+- [2605.06094](https://arxiv.org/abs/2605.06094) VISD: Enhancing Video Reasoning via Structured Self-Distillation [mm]
+- [2605.06188](https://arxiv.org/abs/2605.06188) OPSD Compresses What RLVR Teaches: A Post-RL Compaction Stage for Reasoning Models [length, analysis]
+- [2605.06387](https://arxiv.org/abs/2605.06387) Asymmetric On-Policy Distillation: Bridging Exploitation and Imitation at the Token Level [credit, sftrl]
+- [2605.06597](https://arxiv.org/abs/2605.06597) UniSD: Towards a Unified Self-Distillation Framework for Large Language Models [async]
+- [2605.07396](https://arxiv.org/abs/2605.07396) "If you only have API access to the teacher"
+- [2605.07505](https://arxiv.org/abs/2605.07505) LiteGUI: Distilling Compact GUI Agents with Reinforcement Learning [algo, agent]
+- [2605.07711](https://arxiv.org/abs/2605.07711) SimCT: Recovering Lost Supervision for Cross-Tokenizer On-Policy Distillation [mm]
+- [2605.07725](https://arxiv.org/abs/2605.07725) Step-level divergence reweighting for tool-integrated reasoning agents. Attenuates teacher signal in high-divergence steps; surfaces step granularity as the missing unit between token and trajectory [credit, agent]
+- [2605.07804](https://arxiv.org/abs/2605.07804) Prune-OPD: Efficient and Reliable On-Policy Distillation for Long-Horizon Reasoning [length]
+- [2605.07865](https://arxiv.org/abs/2605.07865) KL for a KL: On-Policy Distillation with Control Variate Baseline [algo]
+- [2605.08063](https://arxiv.org/abs/2605.08063) Flow-OPD: On-Policy Distillation for Flow Matching Models
+- [2605.08737](https://arxiv.org/abs/2605.08737) The Extrapolation Cliff in On-Policy Distillation of Near-Deterministic Structured Outputs
+- [2605.08741](https://arxiv.org/abs/2605.08741) OPHSD: Training with Harnesses — On-Policy Harness Self-Distillation for Complex Reasoning
+- [2605.08776](https://arxiv.org/abs/2605.08776) Reasoning Compression with Mixed-Policy Distillation [length]
+- [2605.08873](https://arxiv.org/abs/2605.08873) CoDistill-GRPO: A Co-Distillation Recipe for Efficient Group Relative Policy Optimization [length, algo]
+- [2605.09253](https://arxiv.org/abs/2605.09253) Cornerstones or Stumbling Blocks? Deciphering the Rock Tokens in On-Policy Distillation
+- [2605.09536](https://arxiv.org/abs/2605.09536) TAD: Temporal-Aware Trajectory Self-Distillation for Fast and Accurate Diffusion LLM [mm]
+- [2605.09548](https://arxiv.org/abs/2605.09548) COPSD: Crosslingual On-Policy Self-Distillation for Multilingual Reasoning
+- [2605.09725](https://arxiv.org/abs/2605.09725) BRTS: On-Policy Distillation with Best-of-N Teacher Rollout Selection [rollout]
+- [2605.10194](https://arxiv.org/abs/2605.10194) TRACE: Distilling Where It Matters via Token-Routed Self On-Policy Alignment
+- [2605.10781](https://arxiv.org/abs/2605.10781) Rebellious Student: Reversing Teacher Signals for Reasoning Exploration with Self-Distilled RLVR [entropy, analysis]
+- [2605.10889](https://arxiv.org/abs/2605.10889) Unmasking On-Policy Distillation — Where It Helps, Where It Hurts, and Why [analysis]
+- [2605.11182](https://arxiv.org/abs/2605.11182) The Many Faces of On-Policy Distillation — Pitfalls, Mechanisms, and Fixes [analysis]
+- [2605.11458](https://arxiv.org/abs/2605.11458) ATESD: Adaptive Teacher Exposure for Self-Distillation in LLM Reasoning
+- [2605.11609](https://arxiv.org/abs/2605.11609) AntiSD: Anti-Self-Distillation for Reasoning RL via Pointwise Mutual Information
+- [2605.11613](https://arxiv.org/abs/2605.11613) CREDIT: From Generic Correlation to Input-Specific Credit in On-Policy Self Distillation [credit]
+- [2605.11739](https://arxiv.org/abs/2605.11739) Learning to Foresee: Unveiling the Unlocking Efficiency of On-Policy Distillation
+- [2605.11853](https://arxiv.org/abs/2605.11853) GEAR: Granularity-Adaptive Advantage Reweighting for LLM Agents via Self-Distillation [algo, agent]
+- [2605.11854](https://arxiv.org/abs/2605.11854) Self-Distilled Trajectory-Aware Boltzmann Modeling: Bridging the Training-Inference Discrepancy in Diffusion Language Models [mm]
+- [2605.12227](https://arxiv.org/abs/2605.12227) Combining On-Policy Optimization and Distillation for Long-Context Reasoning in Large Language Models [algo]
+- [2605.12400](https://arxiv.org/abs/2605.12400) OGLS-SD: On-Policy Self-Distillation with Outcome-Guided Logit Steering for LLM Reasoning [agent]
+- [2605.12483](https://arxiv.org/abs/2605.12483) Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training [credit, algo, analysis]
+- [2605.12652](https://arxiv.org/abs/2605.12652) MOPD: Multi-Rollout On-Policy Distillation via Peer Successes and Failures [rollout]
+- [2605.12741](https://arxiv.org/abs/2605.12741) RESD: Learning with Rare Success but Rich Feedback via Reflection-Enhanced Self-Distillation
+- [2605.13230](https://arxiv.org/abs/2605.13230) Teacher-Guided Policy Optimization for On-Policy Reasoning Distillation under Large Policy Divergence [algo, agent]
+- [2605.13255](https://arxiv.org/abs/2605.13255) EGRSD: Respecting Self-Uncertainty in On-Policy Self-Distillation for Efficient LLM Reasoning [length]
+- [2605.13501](https://arxiv.org/abs/2605.13501) Reward-Weighted On-Policy Distillation with an Open Property-Equivalence Verifier for NL-to-SVA Generation [reward]
+- [2605.13643](https://arxiv.org/abs/2605.13643) Prefix Teach, Suffix Fade: Local Teachability Collapse in Strong-to-Weak On-Policy Distillation [entropy]
+- [2605.13724](https://arxiv.org/abs/2605.13724) AnyFlow: Any-Step Video Diffusion Model with On-Policy Flow Map Distillation [mm]
+- [2605.15055](https://arxiv.org/abs/2605.15055) DiffusionOPD: A Unified Perspective of On-Policy Distillation in Diffusion Models [analysis, mm]
+- [2605.15113](https://arxiv.org/abs/2605.15113) VPD: Learning from Language Feedback via Variational Policy Distillation
+- [2605.15155](https://arxiv.org/abs/2605.15155) SDAR: Self-Distilled Agentic Reinforcement Learning [algo, agent]
+- [2605.15239](https://arxiv.org/abs/2605.15239) Reducing the Safety Tax in LLM Safety Alignment with On-Policy Self-Distillation
+- [2605.15532](https://arxiv.org/abs/2605.15532) DeltaPrompts: Escaping the Zero-Delta Trap in Multimodal Distillation [mm]
+- [2605.16826](https://arxiv.org/abs/2605.16826) Decoupling KL and Trajectories: A Unified Perspective for SFT, DAgger, Offline RL, and OPD in LLM Distillation [sftrl, algo, analysis]
+- [2605.16865](https://arxiv.org/abs/2605.16865) MixSD: Mixed Contextual Self-Distillation for Knowledge Injection
+- [2605.17497](https://arxiv.org/abs/2605.17497) Self-Supervised On-Policy Distillation for Reasoning Language Models [sftrl]
+- [2605.17862](https://arxiv.org/abs/2605.17862) f-OPD: Stabilizing Long-Horizon On-Policy Distillation with Freshness-Aware Control [algo]
+- [2605.17873](https://arxiv.org/abs/2605.17873) HINT-SD: Targeted Hindsight Self-Distillation for Long-Horizon Agents [agent]
+- [2605.18141](https://arxiv.org/abs/2605.18141) A Brief Overview: On-Policy Self-Distillation in Large Language Models
+- [2605.18299](https://arxiv.org/abs/2605.18299) SD-Search: On-Policy Hindsight Self-Distillation for Search-Augmented Reasoning [agent]
+- [2605.18529](https://arxiv.org/abs/2605.18529) AMR-SD: Asymmetric Meta-Reflective Self-Distillation for Token-Level Credit Assignment [credit]
+- [2605.18740](https://arxiv.org/abs/2605.18740) Vision-OPD: Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation [mm]
+- [2605.19433](https://arxiv.org/abs/2605.19433) Backtracking When It Strays: Mitigating Dual Exposure Biases in LLM Reasoning Distillation
+- [2605.19436](https://arxiv.org/abs/2605.19436) CEPO: RLVR Self-Distillation using Contrastive Evidence Policy Optimization [algo]
+- [2605.19447](https://arxiv.org/abs/2605.19447) What and When to Distill: Selective Hindsight Distillation for Multi-Turn Agents [analysis, agent]
+- [2605.20258](https://arxiv.org/abs/2605.20258) It Takes Two: Complementary Self-Distillation for Contextual Integrity in LLMs
+- [2605.20643](https://arxiv.org/abs/2605.20643) AVSD: Adaptive-View Self-Distillation by Balancing Consensus and Teacher-Specific Privileged Signals
+- [2605.21606](https://arxiv.org/abs/2605.21606) When Are Teacher Tokens Reliable? Position-Weighted On-Policy Self-Distillation for Reasoning
+- [2605.21699](https://arxiv.org/abs/2605.21699) X-Token: Projection-Guided Cross-Tokenizer Knowledge Distillation [agent]
+- [2605.21924](https://arxiv.org/abs/2605.21924) Visual-Advantage On-Policy Distillation for Vision-Language Models [algo, mm]
+- [2605.22263](https://arxiv.org/abs/2605.22263) Tailoring Teaching to Aptitude: Direction-Adaptive Self-Distillation for LLM Reasoning
+- [2605.22511](https://arxiv.org/abs/2605.22511) Search-E1: Self-Distillation Drives Self-Evolution in Search-Augmented Reasoning [agent]
+- [2605.22675](https://arxiv.org/abs/2605.22675) SPD: Self-Policy Distillation via Capability-Selective Subspace Projection
+- [2605.22731](https://arxiv.org/abs/2605.22731) Post-Training is About States, Not Tokens: A State Distribution View of SFT, RL, and On-Policy Distillation [sftrl]
+- [2605.23493](https://arxiv.org/abs/2605.23493) EDGE-OPD: Internalizing Privileged Context with Evidence Guided On-Policy Distillation [agent]
+- [2605.25378](https://arxiv.org/abs/2605.25378) CollectionLoRA: Collecting 50 Effects in 1 LoRA via Multi-Teacher On-Policy Distillation [analysis]
+- [2605.25582](https://arxiv.org/abs/2605.25582) Extreme Region Policy Distillation
+- [2605.26105](https://arxiv.org/abs/2605.26105) AFD: On-Policy Adversarial Flow Distillation for Autoregressive Video Generation [mm]
+- [2605.26132](https://arxiv.org/abs/2605.26132) Self-Verified Distillation: Your Language Model Is Secretly Its Own Synthetic Data Pipeline [reward]
+- [2605.26844](https://arxiv.org/abs/2605.26844) Not All Disagreement Is Learnable: Token Teachability in On-Policy Distillation
+- [2605.27028](https://arxiv.org/abs/2605.27028) Less is More: Early Stopping Rollout for On-Policy Distillation [rollout]
+- [2605.27095](https://arxiv.org/abs/2605.27095) Adversarial Dual On-Policy Distillation from Expressive Flow-based Teacher
+- [2605.27115](https://arxiv.org/abs/2605.27115) Counteraction-Aware Multi-Teacher On-Policy Distillation for General Capability Recovery with Domain Preservation
+- [2605.27140](https://arxiv.org/abs/2605.27140) StepOPSD: Step-Aware Online Preference Distillation for Agent Reinforcement Learning [algo, agent]
+- [2605.27186](https://arxiv.org/abs/2605.27186) MAIGO: Mitigating Lost-in-Conversation with History-Cleaned On-Policy Self-Distillation
+- [2605.27765](https://arxiv.org/abs/2605.27765) SC-SDPO: Restoring the Sweet Spot via Pass-Rate Weighted Self-Distillation [agent]
+- [2605.28014](https://arxiv.org/abs/2605.28014) ROSD: Reflective On-Policy Self-Distillation for Language Model Reasoning across Domains
+- [2605.28139](https://arxiv.org/abs/2605.28139) Data-Efficient On-Policy Distillation for Automatic Speech Recognition [rollout, length, mm]
+- [2605.28396](https://arxiv.org/abs/2605.28396) ADWIN: Adaptive Windows for Horizon-Aware On-Policy Distillation
+- [2605.28791](https://arxiv.org/abs/2605.28791) SGSD: Skill-Conditioned Gated Self-Distillation for LLM Reasoning
+- [2605.29089](https://arxiv.org/abs/2605.29089) OISD: On-Policy Internal Self-Distillation of Language Models
+- [2605.29343](https://arxiv.org/abs/2605.29343) Draft-OPD: On-Policy Distillation for Speculative Draft Models [async]
+- [2605.29398](https://arxiv.org/abs/2605.29398) GDSD: Reinforcement Learning as Guided Denoiser Self-Distillation for Diffusion Language Models [algo, agent, mm]
+- [2605.29584](https://arxiv.org/abs/2605.29584) GAPD: Gold-Action Policy Distillation for Agentic Reinforcement Learning in Knowledge Base Question Answering [algo, agent]
+- [2605.30070](https://arxiv.org/abs/2605.30070) A Predictive Law for On-Policy Self-Distillation From World Feedback
+- [2605.30251](https://arxiv.org/abs/2605.30251) Same Evidence, Different Answers: Canonical-Context On-Policy Distillation for Multi-Turn Language Models [agent]
+- [2605.30833](https://arxiv.org/abs/2605.30833) Your Teacher Can't Help You Here: Combating Supervision Fidelity Decay in On-Policy Distillation [mm]
+- [2605.30861](https://arxiv.org/abs/2605.30861) Distilling LLM Feedback for Lean Theorem Proving [analysis]
+- [2605.31159](https://arxiv.org/abs/2605.31159) Trust-Region Behavior Blending for On-Policy Distillation
+- [2605.31490](https://arxiv.org/abs/2605.31490) Are Full Rollouts Necessary for On-Policy Distillation? [rollout]
+- [2606.00147](https://arxiv.org/abs/2606.00147) RAFT: Data Refinement and Adaptive Distillation for Domain Fine-Tuning with Alleviated Forgetting [analysis]
+- [2606.00305](https://arxiv.org/abs/2606.00305) Bridging Reasoning Trajectories in On-Policy Distillation via Near-Future Guidance [agent]
+- [2606.00424](https://arxiv.org/abs/2606.00424) Weak Critics Make Strong Learners: On-Policy Critique Distillation for Scalable Oversight
+- [2606.00564](https://arxiv.org/abs/2606.00564) Decomposed On-Policy Distillation for Vision-Language Reasoning: Steering Gradients for Visual Grounding [algo, mm]
+- [2606.00755](https://arxiv.org/abs/2606.00755) Internalize the Temperature: On-Policy Self-Distillation as Policy Reheater for Reinforcement Learning [entropy, algo]
+- [2606.01039](https://arxiv.org/abs/2606.01039) OPD+: Rethinking the Advantage Design for On-Policy Distillation [algo, analysis]
+- [2606.01249](https://arxiv.org/abs/2606.01249) Trust Region On-Policy Distillation [algo]
+- [2606.01476](https://arxiv.org/abs/2606.01476) OmniOPD: Logit-Free On-Policy Distillation via Speculative Verification [async, reward]
+- [2606.02530](https://arxiv.org/abs/2606.02530) SafeSteer: Localized On-Policy Distillation for Efficient Safety Alignment [length]
+- [2606.02684](https://arxiv.org/abs/2606.02684) FiRe-OPD: Filter, Then Reweight — Rethinking Optimization Granularity in On-Policy Distillation [rollout, algo, analysis]
+- [2606.03089](https://arxiv.org/abs/2606.03089) Constitutional On-Policy Safe Distillation
+- [2606.03532](https://arxiv.org/abs/2606.03532) When Should the Teacher Move? Temporal Coupling and Stability in Self On-Policy Distillation [algo]
+- [2606.03620](https://arxiv.org/abs/2606.03620) Physics-Guided Policy Optimization with Self-Distillation [algo, agent]
+- [2606.04036](https://arxiv.org/abs/2606.04036) SDPG: Self-Distilled Policy Gradient [algo]
+- [2606.04694](https://arxiv.org/abs/2606.04694) DuDi: Dual-Signal Distillation with Cross-Lingual Verbalizer
+- [2606.05315](https://arxiv.org/abs/2606.05315) LoRi: Low-Rank Distillation for Implicit Reasoning
+- [2606.05718](https://arxiv.org/abs/2606.05718) ViCuR: Visual Cues as Recoverable Privilege for Multimodal On-Policy Distillation [mm]
+- [2606.06021](https://arxiv.org/abs/2606.06021) OPRD: On-Policy Representation Distillation
+- [2606.06076](https://arxiv.org/abs/2606.06076) Learning Visual Spatial Planning from Symbolic State via Modality-Gap-Aware Self-Distillation [mm]
+- [2606.06078](https://arxiv.org/abs/2606.06078) Knowledge Distillation for Visual Autoregressive Models [mm]
+- [2606.06712](https://arxiv.org/abs/2606.06712) OPDLM: Data-Efficient Autoregressive-to-Diffusion Language Models via On-Policy Distillation [rollout, length, mm]
+- [2606.07000](https://arxiv.org/abs/2606.07000) Teaching the Way, Not the Answer: Privileged Tutoring Distillation for Multimodal Policy Optimization [algo, agent, mm]
+- [2606.07082](https://arxiv.org/abs/2606.07082) On the Geometry of On-Policy Distillation
+- [2606.08432](https://arxiv.org/abs/2606.08432) Trajectory-Refined Distillation
+- [2606.08719](https://arxiv.org/abs/2606.08719) Thinking Without Images: Internalizing Visual Manipulation with On-Policy Self-Distillation [mm]
+- [2606.09091](https://arxiv.org/abs/2606.09091) GNDPO: Stabilizing On-Policy Distillation for MLLM Reasoning with Global Normalization [algo, mm]
+- [2606.09304](https://arxiv.org/abs/2606.09304) SG-OPD: Sign-Gated On-Policy Distillation via Sign-Consistency Gating and Phased Teacher Sampling [reward]
+- [2606.09348](https://arxiv.org/abs/2606.09348) PBSD: Privileged Bayesian Self-Distillation for Long-Horizon Credit Assignment [credit]
+- [2606.09456](https://arxiv.org/abs/2606.09456) Breaking the Tokenizer Barrier: On-Policy Distillation across Model Families
+- [2606.09471](https://arxiv.org/abs/2606.09471) Escaping the KL Agreement Trap in On-Policy Distillation [algo]
+- [2606.10064](https://arxiv.org/abs/2606.10064) Bittensor Agent Arenas as a Trajectory Primitive: Distilling a Shopping Agent from ShoppingBench Subnet Traces [agent]
+- [2606.10334](https://arxiv.org/abs/2606.10334) Self-Distillation Policy Optimization via Visual Feedback: Bridging Code and Visual Artifacts [algo, mm]
+- [2606.10369](https://arxiv.org/abs/2606.10369) PADD: Path-Aligned Decompression Distillation for Non-Router Teacher to Guide MoE Student Learning [length, agent]
+- [2606.10385](https://arxiv.org/abs/2606.10385) Beyond Absolute Imitation: Anchored Residual Guidance for Privileged On-Policy Distillation [sftrl, agent]
+- [2606.10651](https://arxiv.org/abs/2606.10651) Cross-modal multi-teacher OPD: dense token-level teacher feedback on student multimodal rollouts [rollout, credit, mm]
+- [2606.11173](https://arxiv.org/abs/2606.11173) The Role of Feedback Alignment in Self-Distillation
+- [2606.11559](https://arxiv.org/abs/2606.11559) HERA: Hindsight-Enhanced Reflection from Environment Observations for Agentic Self-Distillation [agent]
+- [2606.11627](https://arxiv.org/abs/2606.11627) When Context Returns: Toward Robust Internalization in On-Policy Distillation
+- [2606.11709](https://arxiv.org/abs/2606.11709) RLCSD: Reinforcement Learning with Contrastive On-Policy Self-Distillation [algo]
+- [2606.12072](https://arxiv.org/abs/2606.12072) World Model Self-Distillation: Training World Models to Solve General Tasks
+- [2606.12195](https://arxiv.org/abs/2606.12195) Final-stage reverse-KL distillation on student-sampled video rollouts from a stronger teacher [rollout, algo, mm]
+- [2606.12507](https://arxiv.org/abs/2606.12507) Rubric-Guided Self-Distillation: Post-Training Without Rubric Verifiers [reward, agent]
+- [2606.12634](https://arxiv.org/abs/2606.12634) Keep Policy Gradient in Charge: Sibling-Guided Credit Distillation for Long-Horizon Tool-Use Agents [credit, algo, agent]
+- [2606.13657](https://arxiv.org/abs/2606.13657) Dense Supervision, Sparse Updates: On the Sparsity and Geometry of On-Policy Distillation [credit, analysis, mm]
+- [2606.14368](https://arxiv.org/abs/2606.14368) OPCoD: Be My Tutor — On-Policy Co-Distillation for Mutual LLM Improvement via Peer Feedback
+- [2606.15576](https://arxiv.org/abs/2606.15576) Localizing Credit at the Divergence: Path-Conditioned Self-Distillation for LLM Reasoning [credit]
+- [2606.15912](https://arxiv.org/abs/2606.15912) Guided-OPD: On-Policy Distillation with Curriculum Turn-level Guidance for Multi-turn Agents [rollout, credit, agent]
+- [2606.15920](https://arxiv.org/abs/2606.15920) OmniOPSD: Rationale-Privileged On-Policy Self-Distillation for Affective Computing
+- [2606.17199](https://arxiv.org/abs/2606.17199) PowerOPD: Stabilizing On-Policy Distillation with Bounded Power Transformation [algo]
+- [2606.17628](https://arxiv.org/abs/2606.17628) OPD-Evolver: Cultivating a Holistic Agent Evolver via On-Policy Distillation [agent]
+- [2606.18101](https://arxiv.org/abs/2606.18101) Trust the Right Teacher: Quality-Aware Self-Distillation for GUI Grounding [agent]
+- [2606.18195](https://arxiv.org/abs/2606.18195) Learning from the Self-future: On-Policy Self-Distillation for dLLMs [mm]
+- [2606.18216](https://arxiv.org/abs/2606.18216) Zone of Proximal Policy Optimization: Teacher in Prompts, Not Gradients [algo]
+- [2606.18844](https://arxiv.org/abs/2606.18844) Learning from Your Own Mistakes: Constructing Learnable Micro-Reflective Trajectories for Self-Distillation
+- [2606.18974](https://arxiv.org/abs/2606.18974) Visual-OPSD: Cross-Modal On-Policy Self-Distillation for Efficient Unified Multimodal Reasoning [length, mm]
+- [2606.19120](https://arxiv.org/abs/2606.19120) Seeing Before Reasoning: Decoupling Perception and Reasoning for Shortcut-Resilient Multimodal On-Policy Self-Distillation [mm]
+- [2606.19327](https://arxiv.org/abs/2606.19327) Rethinking Reward Supervision: Rubric-Conditioned Self-Distillation [reward, analysis, mm]
+- [2606.19659](https://arxiv.org/abs/2606.19659) SAGE-OPD: Selective Agent-Guided Intervention for Multi-Turn On-Policy Distillation [agent]
+- [2606.21994](https://arxiv.org/abs/2606.21994) Prefix-Guided On-Policy Distillation: Mining Golden Trajectories from Rollouts [rollout, agent]
+- [2606.22600](https://arxiv.org/abs/2606.22600) On the Position Bias of On-Policy Distillation
+- [2606.22793](https://arxiv.org/abs/2606.22793) A Formula-Driven Survey and Research Agenda for On-Policy Distillation [agent]
+- [2606.22830](https://arxiv.org/abs/2606.22830) Finding the Evidence: Discovering Decision-Supporting Tokens for On-Policy Reasoning Distillation [algo]
+- [2606.23104](https://arxiv.org/abs/2606.23104) ReNIO: Reweighting Negative Trajectory Importance for LLM On-Policy Distillation [algo]
+- [2606.24084](https://arxiv.org/abs/2606.24084) Blockwise Policy-Drift Gating for On-Policy Distillation
+- [2606.24143](https://arxiv.org/abs/2606.24143) AsyncOPD: How Stale Can On-Policy Distillation Be? [async]
+- [2606.25319](https://arxiv.org/abs/2606.25319) V-Zero: Answer-Label-Free On-Policy Distillation with Contrastive Evidence Gating for Fine-Grained Visual Reasoning [credit, reward, agent, mm]
+- [2606.25473](https://arxiv.org/abs/2606.25473) Causal-rCM: Teacher-Forcing and Self-Forcing Distillation for Autoregressive Video Diffusion [mm]
+- [2606.25800](https://arxiv.org/abs/2606.25800) ROAD-VLA: Robust Online Adaptation via Self-Distillation for Vision-Language-Action Models [mm]
+- [2606.26091](https://arxiv.org/abs/2606.26091) On-Policy Self-Distillation Reduces Output Diversity [entropy]
+- [2606.26671](https://arxiv.org/abs/2606.26671) Single- and multi-teacher OPD (MOPD), finding teacher capability outweighs scale
+- [2606.26790](https://arxiv.org/abs/2606.26790) OPID: On-Policy Skill Distillation for Agentic Reinforcement Learning [algo, agent]
+- [2606.27377](https://arxiv.org/abs/2606.27377) DanceOPD: On-Policy Generative Field Distillation
+- [2606.27814](https://arxiv.org/abs/2606.27814) ATOD: Annealed Turn-aware On-policy Distillation for Multi-turn Autonomous Agents [agent]
+- [2606.27871](https://arxiv.org/abs/2606.27871) LocalNav: Distilling Frontier VLMs and Embodied RL for On-Device Object Goal Navigation [mm]
+- [2606.28562](https://arxiv.org/abs/2606.28562) SEAD: Competence-Aware On-Policy Distillation via Entropy-Guided Supervision [entropy, agent, mm]
+- [2606.29340](https://arxiv.org/abs/2606.29340) PHF: Privileged Hidden Flow for On-Policy Self-Distillation
+- [2606.29476](https://arxiv.org/abs/2606.29476) CRAFT: Counterfactual Credit Assignment from Free Sibling Rollouts for Self-Distilled Agentic RL [rollout, credit, agent]
+- [2606.29502](https://arxiv.org/abs/2606.29502) UCOB: Learning to Utilize and Evolve Agentic Skills via Credit-Aware On-Policy Bidirectional Self-Distillation [credit, agent]
+- [2606.29863](https://arxiv.org/abs/2606.29863) KbSD: Knowledge Boundary aware Self-Distillation for Behavioral Calibration in Agentic Search [agent]
+- [2606.30044](https://arxiv.org/abs/2606.30044) Building Multi-Task Agentic LLMs via Two-Phase Distillation [agent]
+- [2606.30345](https://arxiv.org/abs/2606.30345) DRIFT: Difficulty Routing Self-Distillation with Rhythm-Gated Exploration and Success Buffer Training [rollout, entropy, analysis]
+- [2606.30406](https://arxiv.org/abs/2606.30406) MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training
+- [2606.30414](https://arxiv.org/abs/2606.30414) RMMD: Rewarded Moment Matching Distillation for Diffusion Fine-tuning [mm]
+- [2606.30616](https://arxiv.org/abs/2606.30616) Final-stage multi-teacher OPD: routed teachers supervise student rollouts via salient vocabulary alignment [rollout]
+- [2606.30626](https://arxiv.org/abs/2606.30626) DOPD: Dual On-policy Distillation
+- [2606.30923](https://arxiv.org/abs/2606.30923) Behavior Cloning is Not All You Need: The Optimality of On-Policy Distillation for Noisy Expert Feedback
+- [2607.01480](https://arxiv.org/abs/2607.01480) PMD: Procedural Memory Distillation — Online Reflection for Self-Improving Language Models
+- [2607.01763](https://arxiv.org/abs/2607.01763) Denser ≠ Better: Limits of On-Policy Self-Distillation for Continual Post-Training [credit, analysis]
+- [2607.02234](https://arxiv.org/abs/2607.02234) Purified OPSD: On-Policy Self-Distillation Without Losing How to Think
+- [2607.02460](https://arxiv.org/abs/2607.02460) Neuron-OPSD: Neuron-Aware Data Selection for Annotation-Free LLM Self-Distillation [rollout]
+- [2607.02502](https://arxiv.org/abs/2607.02502) DemoPSD: Disagreement-Modulated Policy Self-Distillation
+- [2607.02592](https://arxiv.org/abs/2607.02592) H-OPD: Confidence-Aware Heterogeneous Multi-Teacher Multimodal On-policy Distillation [reward, mm]
+- [2607.04037](https://arxiv.org/abs/2607.04037) Reward-Gated On-Policy Distillation
+- [2607.04425](https://arxiv.org/abs/2607.04425) UI-MOPD: Multi-Platform On-Policy Distillation for Continual GUI Agent Learning [agent]
+- [2607.04428](https://arxiv.org/abs/2607.04428) dOPSD: On-Policy Self-Distillation for Diffusion Language Models [mm]
+- [2607.04751](https://arxiv.org/abs/2607.04751) Trust Region Policy Distillation [algo]
+- [2607.04763](https://arxiv.org/abs/2607.04763) Multi-Turn On-Policy Distillation with Prefix Replay [async, agent]
+- [2607.05184](https://arxiv.org/abs/2607.05184) Rethinking On-Policy Self-Distillation for Thinking Models [analysis]
+- [2607.05196](https://arxiv.org/abs/2607.05196) Cascade RL + multi-domain OPD (Nemotron-Cascade lineage), preserving text intelligence in unified audio-text model [async, mm]
+- [2607.05394](https://arxiv.org/abs/2607.05394) Weak-to-Strong Generalization via Direct On-Policy Distillation [analysis]
+- [2607.05471](https://arxiv.org/abs/2607.05471) Multi-Teacher OPD (MOPD): reverse-KL on student trajectories fuses 5 experts, stabilized by drift-aware truncation [algo]
+- [2607.05541](https://arxiv.org/abs/2607.05541) Self-Review Reinforcement Learning (SRRL) with Cross-Episode Memory and Policy Distillation [algo]
+- [2607.05804](https://arxiv.org/abs/2607.05804) TurnOPD: Making On-Policy Distillation Turn-Aware for Efficient Long-Horizon Agent Training [length, agent]
+- [2607.06855](https://arxiv.org/abs/2607.06855) Geometric Self-Distillation for Reasoning Generalization [analysis]
+- [2607.07050](https://arxiv.org/abs/2607.07050) Diagnosing and Calibrating Tool-Call Boundary Drift in Multi-Teacher On-Policy Distillation [agent]
+- [2607.07820](https://arxiv.org/abs/2607.07820) DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment [reward, agent]
+- [2607.08255](https://arxiv.org/abs/2607.08255) Compete Then Collaborate: Frontier AI Teachers Build a Verifiable Curriculum to Improve a Coding Student Beyond Imitation [rollout, reward, sftrl]
+- [2607.08766](https://arxiv.org/abs/2607.08766) OPSD-V: On-Policy Self-Distillation for Post-Training Few-Step Autoregressive Video Generators [mm]
+- [2607.09375](https://arxiv.org/abs/2607.09375) Multi-Teacher OPD (MOPD): routed reverse-KL on student rollouts fuses 10+ specialists, ending mixed-reward see-saw [rollout, algo]
+- [2607.09709](https://arxiv.org/abs/2607.09709) The Verifier is the Curriculum: Execution-Gated Self-Distillation for Cross-Family Game Generation [rollout, reward, agent]
+- [2607.10805](https://arxiv.org/abs/2607.10805) Diagnosing and Mitigating Thinking Collapse in On-Policy Self-Distillation [entropy]
+- [2607.11012](https://arxiv.org/abs/2607.11012) Unified verl-based OPD with method-local supervision hooks for cross-tokenizer, self-distillation, and step-wise settings [mm]
+- [2607.13124](https://arxiv.org/abs/2607.13124) ShortOPD: Recovering Pruned LLMs with Short-to-Long On-Policy Distillation
+- [2607.13399](https://arxiv.org/abs/2607.13399) Demystifying On-Policy Distillation: Roles, Pathologies, and Regulations
+- [2607.13639](https://arxiv.org/abs/2607.13639) 0.8B OCR student distilled from a 4B RL teacher via top-k reverse-KL on its own page-output rollouts [rollout, algo]
+- [2607.13643](https://arxiv.org/abs/2607.13643) CANON: Consensus as Privileged Context for Label-Free Self-Distillation [reward]
+- [2607.14777](https://arxiv.org/abs/2607.14777) SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning [algo, agent]
+- [2607.15161](https://arxiv.org/abs/2607.15161) On-Policy Delta Distillation
+- [2607.15736](https://arxiv.org/abs/2607.15736) Better Starts, Better Ends: Bootstrapped Iterative Self-Reasoning Distillation for Compressed Reasoning [length]
+- [2607.16303](https://arxiv.org/abs/2607.16303) Med-OPD: Improving Medical Vision-Language Models via Evidence-Aware On-Policy Distillation [mm]
+- [2607.16872](https://arxiv.org/abs/2607.16872) Trace-Based On-Policy Distillation for Masked Diffusion Language Models [mm]
+- [2607.16955](https://arxiv.org/abs/2607.16955) CADENCE: Closing the Reasoning Gap via Coverage-Adaptive On-Policy Distillation
+- [2607.17247](https://arxiv.org/abs/2607.17247) Distilled Reinforcement Learning for LLM Post-training [algo]
+- [2607.17558](https://arxiv.org/abs/2607.17558) Why Does Feedback-Augmented Self-Distillation Fail to Improve Retrieval-Interleaved Search Agents? [analysis, agent]
+- [2607.18082](https://arxiv.org/abs/2607.18082) Enhancing Rubric-based RL via Self-Distillation [reward]
+- [2607.18293](https://arxiv.org/abs/2607.18293) PromptSD: One Student, Many Teachers — Multi-Task On-Policy Distillation via Soft-Prompt Privileged Context
+- [2607.18955](https://arxiv.org/abs/2607.18955) H$^2$SD: Hybrid Hindsight Self-Distillation [sftrl]
+- [2607.19046](https://arxiv.org/abs/2607.19046) COPD: Contrastive On-Policy Distillation
+- [2607.20918](https://arxiv.org/abs/2607.20918) OPOD: On-Policy Omni Distillation
+- [2607.21550](https://arxiv.org/abs/2607.21550) X³-OPD: Distilling Reasoning into Large Audio-Language Models via On-Policy Alignment [mm]
+- [2607.21556](https://arxiv.org/abs/2607.21556) Visual Contrastive Self-Distillation [mm]
+- [2607.22334](https://arxiv.org/abs/2607.22334) Cross-Tokenizer On-Policy Distillation via Byte-Prefix Marginalization
+- [2607.22629](https://arxiv.org/abs/2607.22629) Masked Distillation: Internalizing the Chain-of-Thought in Language Models [mm]
+- [2607.23125](https://arxiv.org/abs/2607.23125) NOPD: Self-Boosting Vision-Language Models with Noisy Student On-Policy Self-Distillation [mm]
+- [2607.23731](https://arxiv.org/abs/2607.23731) Outcome-Confounded Local Supervision in On-Policy Distillation [mm]
+- [2607.23955](https://arxiv.org/abs/2607.23955) EviBack: Search-Agent Reinforcement Learning via Evidence-Constrained Teacher Backoff [algo, agent]
+- [2607.24280](https://arxiv.org/abs/2607.24280) MAPD: Bridging the Distribution Gap via Multi-Agent Protocol Distillation in Agentic Search [agent]
+- [2607.24447](https://arxiv.org/abs/2607.24447) RP-OPSD: Resolution-Privileged On-Policy Self-Distillation for Multimodal Large Language Models [mm]
+- [2607.24720](https://arxiv.org/abs/2607.24720) The Physics of Multi-Turn Long-Horizon Planning: From Pre-training to Post-training via Single- and Multi-Teacher On-Policy Agentic Distillation [agent]
+- [2607.24731](https://arxiv.org/abs/2607.24731) Rethinking Classifier-Free Guidance in On-Policy Diffusion Distillation [analysis, agent, mm]
+- [2607.24771](https://arxiv.org/abs/2607.24771) RoCo-ACE: Rollout-Conditioned Online Distillation for Retention-Aware Knowledge Injection [rollout]
+- [2607.25308](https://arxiv.org/abs/2607.25308) CAST: Game Solvers as Turn-Level Teachers for LLM Agents [credit, agent]
+- [2607.26057](https://arxiv.org/abs/2607.26057) Pass the Baton: Trajectory-Relayed On-Policy Distillation
+- [2607.26246](https://arxiv.org/abs/2607.26246) Weak-to-Strong On-Policy Distillation
+- [2607.26811](https://arxiv.org/abs/2607.26811) DistillAlign: Coordinating Mode Covering and Mode Seeking in Autoregressive Video Distillation [entropy, mm]
+- [2607.27113](https://arxiv.org/abs/2607.27113) Veritas++: Value-aware On-Policy Distillation for Perception-Enhanced AIGI Detection
+- [2607.27770](https://arxiv.org/abs/2607.27770) Beyond the Best Teacher: Expanding and Compressing the Reasoning Solution Manifold [length]
+- [2607.27937](https://arxiv.org/abs/2607.27937) OVCSD: Outcome-Verified Comparative Self-Distillation for LLM Agents [reward, agent]
+- [2607.28022](https://arxiv.org/abs/2607.28022) Flux-OPD: On-Policy Distillation with Evolving Contexts
+- [2607.28026](https://arxiv.org/abs/2607.28026) CRPO: Contrastive Reinforced Policy Optimization via Privileged Self-Distillation [algo]
+- [2607.28048](https://arxiv.org/abs/2607.28048) SKILL-KD: Contrastive Skill Distillation for LLM Agents [agent]
+- [2607.28076](https://arxiv.org/abs/2607.28076) GRSD: Group-Reflective Self-Distillation for Agentic Reinforcement Learning [algo, agent]
+- [2607.28154](https://arxiv.org/abs/2607.28154) OPLD: On-Policy Latent Distillation for Multimodal Reasoning [mm]
+- [2607.28336](https://arxiv.org/abs/2607.28336) Correcting What You Cannot See: Credit Assignment for Perception Distillation in Multimodal Reasoners [credit, analysis, mm]
+- [2607.28449](https://arxiv.org/abs/2607.28449) Lightning OPD 2.0: Mitigating Style Bias in Cross-Teacher On-Policy Distillation for Large Reasoning Models
+- [2607.28582](https://arxiv.org/abs/2607.28582) β-OPSD: Deriving with Policy Optimization, Training with Self-Distillation [algo]
+- [2607.28590](https://arxiv.org/abs/2607.28590) VAD: Attributing Visual Evidence for Target Reconstruction in Multimodal On-Policy Distillation [mm]
+- [2607.28826](https://arxiv.org/abs/2607.28826) Distilling Knowledge from Large Language Models into Lightweight Reinforcement Learning Agents for Autonomous Cyber Operations [algo, agent]
+- [2607.29010](https://arxiv.org/abs/2607.29010) EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation [agent]
+- [2607.29078](https://arxiv.org/abs/2607.29078) DASH-OPD: Discrepancy-Aware Switching with Hysteresis for On-Policy Distillation
+- [2607.29209](https://arxiv.org/abs/2607.29209) SAF-OPD: Stable Advantage Fusion for On-Policy Distillation [algo]
+- [2607.29320](https://arxiv.org/abs/2607.29320) MAGA: Multi-Platform Self-Fusion of GUI Agents via Structured Action Distillation [agent]
+- [2607.29494](https://arxiv.org/abs/2607.29494) Adaptive FastOPD: Progress-Aware Rollout Horizon Expansion for Efficient On-Policy Distillation [rollout, length]
+- [2608.00485](https://arxiv.org/abs/2608.00485) SERL-SQL: Selective Hindsight Distillation for Text-to-SQL Reinforcement Agentic Learning [algo, agent]
+- [2608.00782](https://arxiv.org/abs/2608.00782) Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance [agent]
+- [2608.01263](https://arxiv.org/abs/2608.01263) Distill What the Student Can See: Fisher-Projected On-Policy Distillation for Vision-Language Models [analysis, mm]
+- [2608.01303](https://arxiv.org/abs/2608.01303) AlphaG-OPD: Reliability-Gated Sibling Counterfactuals for On-Policy Distillation in Symbolic Alpha Factor Discovery
+- [2608.01359](https://arxiv.org/abs/2608.01359) EviSD: Evidence-Conditioned Self-Distillation for Search-Augmented Agents [agent]
+- [2608.01589](https://arxiv.org/abs/2608.01589) Is More Privileged Information Better? From Solution Traces to Problem-Solving Structure in Self-Distilled Reasoning
+- [2608.01735](https://arxiv.org/abs/2608.01735) DAPD: Dual-Anchored Policy Distillation
+- [2608.01837](https://arxiv.org/abs/2608.01837) PCSD: Persistent Consistency for Self-Distillation in Agentic Reinforcement Learning [reward, algo, agent]
+- [2608.01953](https://arxiv.org/abs/2608.01953) Look Ahead Before You Distill: Future Trajectory Validation of Teacher Guidance for Agentic On-Policy Distillation [agent]
+- [2608.02942](https://arxiv.org/abs/2608.02942) OPTD: On-Policy Transition Distillation with Consistency-Guided Adaptive Compression for Few-Step Diffusion Language Models [reward, length, agent, mm]
+- [2608.03092](https://arxiv.org/abs/2608.03092) SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation [algo]
+- [2608.03223](https://arxiv.org/abs/2608.03223) Agentic Reinforcement Learning with Self-Distilled Reward Shaping [reward, algo, agent]
+- [2608.03632](https://arxiv.org/abs/2608.03632) When Teachers Mislead: Spurious-Signal-Aware On-Policy Distillation
+- [2608.03673](https://arxiv.org/abs/2608.03673) CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning [mm]
+- [2608.04007](https://arxiv.org/abs/2608.04007) TurnSight: Turn-Level Hindsight Self-Distillation for Tool-Integrated Reasoning [credit, agent]
+- [2608.04349](https://arxiv.org/abs/2608.04349) Poly-OPD: Heterogeneous Multi-Teacher On-Policy Distillation for Capability-Selectable Flow Models
+- [2608.04408](https://arxiv.org/abs/2608.04408) Not Every Divergence Should Be Suppressed: Counterfactual Recoverability in On-Policy Distillation
+- [2608.04419](https://arxiv.org/abs/2608.04419) SPOT: Sparse Probing and Outcome Calibration for On-Policy Distillation [analysis]
+- [2608.04788](https://arxiv.org/abs/2608.04788) OCSD: Agentic Reinforcement Learning with Observation-Calibrated Self-Distillation [algo, agent]
+- [2608.04794](https://arxiv.org/abs/2608.04794) Privileged, but Biased: How PI-Conditioned Teachers Break Self-Distillation
+- [2608.04887](https://arxiv.org/abs/2608.04887) STEP-OPD: Rethinking Output Targets and Internal Dynamics in On-Policy Distillation for Diffusion Models [analysis, mm]
+- [2608.05131](https://arxiv.org/abs/2608.05131) OPD-V: Visual On-Policy Self-Distillation with Modality Balance [mm]
+- [2608.05168](https://arxiv.org/abs/2608.05168) Woodpecker Distillation: Weak Models Diagnose Reasoning Bugs in Strong Models
+- [2608.05219](https://arxiv.org/abs/2608.05219) When Privileged Guidance Misaligns: State-Matched Routing and Contextualized Self-Distillation for Multi-Turn Agents [agent]
+- [2608.05802](https://arxiv.org/abs/2608.05802) On-Policy Delta Distillation for Multilingual Math Reasoning
+- [2608.05987](https://arxiv.org/abs/2608.05987) AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning [algo, agent]
+- [2608.06065](https://arxiv.org/abs/2608.06065) The Next Screenshot Knows: Gated Hindsight Distillation for Mobile GUI Agents [agent]
+- [2608.06213](https://arxiv.org/abs/2608.06213) Generate-and-rank recommender replacing a cascade through teacher-ranked student candidate rollouts [rollout]
+- [2608.06243](https://arxiv.org/abs/2608.06243) DASH: Divergence-Adaptive Supervision Horizons for On-Policy Self-Distillation of Reasoning Models [mm]
+- [2608.06296](https://arxiv.org/abs/2608.06296) On-Policy Self-Distillation without Any Supervision [mm]
+- [2608.06347](https://arxiv.org/abs/2608.06347) RP-OPSD: Reasoning-Pivot-Guided On-Policy Self-Distillation for Multilingual Reasoning Transfer [agent]
+- [2608.06802](https://arxiv.org/abs/2608.06802) Simple-OPD: Demystifying Warm-up for On-policy Distillation
+- [2608.07068](https://arxiv.org/abs/2608.07068) MemOPD: On-Policy Distillation through Memory State Alignment for Long-Horizon Agents [agent]
+- [2608.07371](https://arxiv.org/abs/2608.07371) Trajectory-Relative Hindsight Distillation for Agentic Reinforcement Learning [algo, agent]
+- [2608.07620](https://arxiv.org/abs/2608.07620) FlowErase-OPD: Multi-Concept Erasure via Anchored On-Policy Distillation in Flow Matching Models
+- [2608.07935](https://arxiv.org/abs/2608.07935) Adaptive Supervised Anchoring for On-Policy Self-Distillation [sftrl]
+- [2608.07981](https://arxiv.org/abs/2608.07981) Distilling Physical Priors into Streaming World Models
+- [2608.08176](https://arxiv.org/abs/2608.08176) Matching Supervision to the Student's Learning Capacity: A Unified Framework for On-Policy Self-Distillation [async, analysis, mm]
+- [2608.08726](https://arxiv.org/abs/2608.08726) PAST: Privileged Adaptation from Complete Student Trajectories for On-Policy Self-Distillation
+- [2608.08764](https://arxiv.org/abs/2608.08764) Learning from Consensus and Disagreement: Unsupervised On-Policy Self-Distillation with Minority-Trajectory Contrast [reward, sftrl]
+- [2608.08768](https://arxiv.org/abs/2608.08768) BOUND: Brief-Guided Corrective Preference Distillation at Search-Control Boundaries [agent]
+- [2608.09228](https://arxiv.org/abs/2608.09228) Privileged Solutions or Context-Induced Teacher Behavior? Dissecting On-Policy Self-Distillation
+- [2608.09233](https://arxiv.org/abs/2608.09233) DreOPD: Degraded-Reference Extrapolative On-Policy Distillation for Flow-matching Models
+- [2608.09263](https://arxiv.org/abs/2608.09263) Privileged Likelihood Is Not Automatically Value: Three Checks for Token Credit in On-Policy Self-Distillation [credit]
+- [2608.09447](https://arxiv.org/abs/2608.09447) WDL-OPD: Weak-Driven On-Policy Distillation via Mixture-Constrained Co-Training
+- [2608.09555](https://arxiv.org/abs/2608.09555) Bidirectional Context Self-Distillation for Reinforcement Learning of Skill-Based LLM Agents [algo, agent]
+- [2608.09745](https://arxiv.org/abs/2608.09745) SR-OPSD: Self-Referenced On-Policy Self-Distillation
+- [2608.09826](https://arxiv.org/abs/2608.09826) Distill Skills into Weights, Not Prompts: Abstract Skills as Privileged Signals for On-Policy Self-Distillation
+- [2608.09836](https://arxiv.org/abs/2608.09836) Mismatch Matters: On-Policy Distillation Beyond Token Agreement [async]
+- [2608.10286](https://arxiv.org/abs/2608.10286) TRACE-GS: On-Policy Trajectory Distillation with Privileged Geometric Conditioning for Sparse-View 3DGS Restoration [analysis]
+- [2608.10775](https://arxiv.org/abs/2608.10775) SkillLens: Visual Skill Cards for Retrieval-Augmented GUI Action Prediction and On-Policy Distillation [analysis, agent, mm]
+- [2608.10905](https://arxiv.org/abs/2608.10905) ReOrder-OPD: Reliability-Aware Prompt Ordering for On-Policy Distillation
+- [2608.11152](https://arxiv.org/abs/2608.11152) Mix-aware session admission allocates cache by workload demand while preserving trainer-defined rollout mixtures across OPD plus reinforcement learning [async, rollout, algo]
+- [2608.11191](https://arxiv.org/abs/2608.11191) Test-Time Self-Evolving GUI Visual Grounding via Reflection-Guided On-Policy Self-Distillation [reward, agent, mm]
+- [2608.11698](https://arxiv.org/abs/2608.11698) REOPD: Reliability-Adaptive Reward Extrapolation for On-Policy Distillation
+- [2608.11829](https://arxiv.org/abs/2608.11829) Towards Understanding On-Policy Distillation through the Lens of Test-Time Scaling [reward, analysis]
+- [2608.11967](https://arxiv.org/abs/2608.11967) LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation [analysis, agent]
+- [2608.12764](https://arxiv.org/abs/2608.12764) Beyond Outcome Rewards: Step-Level Self-Distilled Policy Optimization for Deep Search Agents [credit, algo, agent]
+- [2608.12957](https://arxiv.org/abs/2608.12957) I-SDPO: Instance-Level Adaptive Self-Distillation Policy Optimization [algo]
+- [2608.13040](https://arxiv.org/abs/2608.13040) Latent On-Policy Self-Distillation
+- [2608.13205](https://arxiv.org/abs/2608.13205) HPSD: Hybrid-Policy Self-Distillation for Text-Image-to-Video Diffusion Models [sftrl, mm]
+- [2608.13387](https://arxiv.org/abs/2608.13387) CROP: Task Relevance via Counterfactuals for Selective On-Policy Distillation
+- [2608.13391](https://arxiv.org/abs/2608.13391) Context-Matched Distillation: Teacher Causality for Autoregressive Video Distillation [mm]
+- [2608.14144](https://arxiv.org/abs/2608.14144) Self-Supervised Visual On-Policy Distillation [sftrl, mm]
+- [2608.14277](https://arxiv.org/abs/2608.14277) SimpleOPD: Simple Tokenizer-Agnostic On-Policy Distillation for Long-Context Reasoning
+- [2608.14644](https://arxiv.org/abs/2608.14644) DUET: Dual-Teacher On-Policy Distillation via Same-Weight Disagreement for Prohibition Compliance
+- [2608.14647](https://arxiv.org/abs/2608.14647) SMOPD: Selective Token-Entropy Masking for Dirty-History Multi-Turn On-Policy Self-Distillation [entropy, agent]
+- [2608.14684](https://arxiv.org/abs/2608.14684) Mitigating Rubric Interference in LLM Judges via On-Policy Self-Distillation [reward]
+- [2608.14685](https://arxiv.org/abs/2608.14685) Rethinking Reverse KL as Adaptive Entropy Distillation [entropy, algo, analysis]
+- [2608.14728](https://arxiv.org/abs/2608.14728) Tail-Aware Top-k On-Policy Distillation
+- [2608.14945](https://arxiv.org/abs/2608.14945) Trust Is Not Enough: Influence Calibration for On-Policy Self-Distillation in Agentic RL [agent]
+- [2608.15787](https://arxiv.org/abs/2608.15787) Routing Divergence Is Not Evidence of Behavioral Influence in Same-Weight MoE Self-Distillation
+- [2608.16333](https://arxiv.org/abs/2608.16333) Step-Level On-Policy Distillation: Interpolating Between On-Policy Distillation and Supervised Fine-Tuning [credit, sftrl]
+- [2608.16647](https://arxiv.org/abs/2608.16647) Every Coin Has Two Sides: On the Dual Nature of Generalization in On-Policy Distillation of Large Language Models [analysis]
+- [2608.18183](https://arxiv.org/abs/2608.18183) Accelerating Visual On-Policy Distillation with Batched Speculative Jacobi Rollouts [async, rollout, mm]
+- [2608.18271](https://arxiv.org/abs/2608.18271) Rethinking Privileged Information in On-Policy Self-Distillation [analysis]
+- [2608.18524](https://arxiv.org/abs/2608.18524) DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents [agent]
+- [2608.19098](https://arxiv.org/abs/2608.19098) Open-MOPD: Diagnosing and Fixing Capability Imbalance in Multi-Teacher On-Policy Distillation
+- [2608.19181](https://arxiv.org/abs/2608.19181) Beyond Teacher Likelihood: Group-Calibrated On-Policy Distillation for Long-Context Reasoning
+- [2608.19408](https://arxiv.org/abs/2608.19408) Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress [rollout, sftrl]
+- [2608.20831](https://arxiv.org/abs/2608.20831) STAR-OPD: Structured Aspect-Cascade-Aware On-Policy Reward Distillation for ABSA Quadruple Extraction
+- [2608.21500](https://arxiv.org/abs/2608.21500) SecOPD: Mitigating Adaptive Prompt Injections by On-Policy Distillation
+- [2608.21946](https://arxiv.org/abs/2608.21946) EDGE: Experience-Distillation for Guided Exploration in Agentic Reinforcement Learning [entropy, algo, analysis, agent]
+- [2608.22364](https://arxiv.org/abs/2608.22364) WAM-OPD: On-Policy Distillation for World Action Models
+- [2608.22898](https://arxiv.org/abs/2608.22898) SelFusion: Self-distillation for Diffusion Language Models [mm]
+- [2608.24310](https://arxiv.org/abs/2608.24310) OPDSearch+: On-Policy Distillation with RL Refinement for Search-Augmented Reasoning [agent]
+- [2608.24646](https://arxiv.org/abs/2608.24646) On-Policy Self-Distillation in Diffusion Models [mm]
+- [2608.24696](https://arxiv.org/abs/2608.24696) On-policy Distillation with Verifiable Reward [reward]
+- [2608.24987](https://arxiv.org/abs/2608.24987) D 3 MOPD: Adaptive Dynamic Domain ScheDuling for Efficient Multi-Teacher Distillation [length]
+- [2608.25356](https://arxiv.org/abs/2608.25356) Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding [analysis, mm]
+- [2608.25643](https://arxiv.org/abs/2608.25643) A Token-Level Analysis of Sampled-Token Reverse-KL On-Policy Distillation [credit, algo, analysis]
+- [2608.25936](https://arxiv.org/abs/2608.25936) One Symptom, Three Levers: A Critical Review of On-Policy Self-Distillation
+- [2608.26019](https://arxiv.org/abs/2608.26019) DualOPSD: Adaptive Privileged Teachers for On-Policy Self-Distillation
+- [2608.26550](https://arxiv.org/abs/2608.26550) SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning [algo]
+- [2608.26684](https://arxiv.org/abs/2608.26684) Reason in the Words You Speak: Idiolectal Paraphrasing Off-Policy Traces for Reasoning Distillation in VideoLLMs [async, mm]
+- [2608.26872](https://arxiv.org/abs/2608.26872) Self-OPD: On-Policy Distillation for Flow Matching Models without Teacher
+- [2608.27065](https://arxiv.org/abs/2608.27065) Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models [mm]
+- [2608.31046](https://arxiv.org/abs/2608.31046) Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement [analysis]
+- [2609.04108](https://arxiv.org/abs/2609.04108) Sequential Beats Joint: On the Interplay between On-Policy Distillation and RLVR
+- [2609.05295](https://arxiv.org/abs/2609.05295) RISE: Recursive Improvement via Self-Extrapolating Policy Distillation
+- [2609.24974](https://arxiv.org/abs/2609.24974) Harness-Zero: Harness Distillation via Agent-as-Harness [agent]
+
+<a id="sftrl"></a>
+## SFT–RL interplay & hybrid training (16)
+
+- [2601.05607](https://arxiv.org/abs/2601.05607) Orchestrating Tokens and Sequences: Dynamic Hybrid Policy Optimization for RLVR [algo]
+- [2601.07224](https://arxiv.org/abs/2601.07224) PRISM: Disentangling SFT and RL Data via Gradient Concentration [algo]
+- [2601.21912](https://arxiv.org/abs/2601.21912) ProRAG: Process-Supervised Reinforcement Learning for Retrieval-Augmented Generation [algo]
+- [2602.01058](https://arxiv.org/abs/2602.01058) Good SFT Optimizes for SFT, Better SFT Prepares for Reinforcement Learning [algo]
+- [2602.12222](https://arxiv.org/abs/2602.12222) DDT: Towards On-Policy SFT via Distribution Discriminant Theory [analysis]
+- [2603.09803](https://arxiv.org/abs/2603.09803) Good Reasoning Makes Good Demonstrations: Implicit Reasoning Quality Supervision via In-Context Reinforcement Learning [algo, mm]
+- [2604.20705](https://arxiv.org/abs/2604.20705) SSL-R1: Self-Supervised Visual Reinforcement Post-Training for Multimodal Large Language Models [algo, mm]
+- [2604.20755](https://arxiv.org/abs/2604.20755) V-tableR1: Process-Supervised Multimodal Table Reasoning with Critic-Guided Policy Optimization [algo, agent, mm]
+- [2605.20555](https://arxiv.org/abs/2605.20555) Complementing reinforcement learning with SFT through logit averaging in the post training of LLMs [algo]
+- [2606.07995](https://arxiv.org/abs/2606.07995) Customer-Agent: Overcoming Context Limitations in Ultra-Long Shopping Trajectories via Tool-Augmented Agents and RLVR [analysis, agent]
+- [2607.00531](https://arxiv.org/abs/2607.00531) Active-GRPO: Adaptive Imitation and Self-Improving Reasoning for Molecular Optimization [algo]
+- [2607.25063](https://arxiv.org/abs/2607.25063) Similar Models Learn Differently: Final-Window Pretraining Shapes Post-Training Beyond SFT
+- [2608.11660](https://arxiv.org/abs/2608.11660) Hybrid-Policy Self-Editing for Composable Unstructured Knowledge Editing
+- [2608.17744](https://arxiv.org/abs/2608.17744) Thinking in a Low-Resource Language: What SFT Builds, What RL Fixes, What Accuracy Cannot See [analysis]
+- [2608.23256](https://arxiv.org/abs/2608.23256) Is Next-Chunk Reasoning RL Really Better than SFT? Revisiting Training Strategies under no-CoT Data [analysis]
+- [2609.05111](https://arxiv.org/abs/2609.05111) Unifying ICL, SFT, KL-Regularized RL Through a Bayesian Lens [algo, analysis]
+
+<a id="length"></a>
+## Efficient reasoning & length control (23)
+
+- [2601.03969](https://arxiv.org/abs/2601.03969) Anti-Length Shift: Dynamic Outlier Truncation for Training Efficient Reasoning Models
+- [2602.03452](https://arxiv.org/abs/2602.03452) Beyond Variance: Prompt-Efficient RLVR via Rare-Event Amplification and Bidirectional Pairing [algo]
+- [2602.05261](https://arxiv.org/abs/2602.05261) Length-Unbiased Sequence Policy Optimization: Revealing and Controlling Response Length Variation in RLVR [algo]
+- [2602.09953](https://arxiv.org/abs/2602.09953) ATTNPO: Attention-Guided Process Supervision for Efficient Reasoning [agent, mm]
+- [2603.10535](https://arxiv.org/abs/2603.10535) Tackling Length Inflation Without Trade-offs: Group Relative Reward Rescaling for Reinforcement Learning [algo, analysis]
+- [2604.02007](https://arxiv.org/abs/2604.02007) Apriel-1.5-OpenReasoner: RL Post-Training for General-Purpose and Efficient Reasoning
+- [2605.04356](https://arxiv.org/abs/2605.04356) Efficiently Aligning Language Models with Online Natural Language Feedback
+- [2605.07316](https://arxiv.org/abs/2605.07316) Implicit Compression Regularization: Concise Reasoning via Internal Shorter Distributions in RL Post-Training
+- [2605.10189](https://arxiv.org/abs/2605.10189) ProteinOPD: Towards Effective and Efficient Preference Alignment for Protein Design
+- [2605.11019](https://arxiv.org/abs/2605.11019) Efficient LLM Reasoning via Variational Posterior Guidance with Efficiency Awareness [agent]
+- [2605.27255](https://arxiv.org/abs/2605.27255) Pair-In, Pair-Out: Latent Multi-Token Prediction for Efficient LLMs
+- [2605.27878](https://arxiv.org/abs/2605.27878) Narrative Flattening: How Post-Training Compresses Thematic, Affective, and Stylistic Variation in LLM Fiction
+- [2605.28008](https://arxiv.org/abs/2605.28008) Zipping the Thought: When and How Compressed Reasoning Data Works in LLM Post-Training
+- [2605.28184](https://arxiv.org/abs/2605.28184) Joint Training of Multi-Token Prediction in Reinforcement Learning via Optimal Coefficient Calibration [algo]
+- [2605.30201](https://arxiv.org/abs/2605.30201) HPO: Hysteretic Policy Optimization for Stable and Efficient Training under Sparse-Reward Regime [algo, analysis]
+- [2606.04503](https://arxiv.org/abs/2606.04503) Smart Picks in the Dark: Towards Efficient RLVR for Reasoning via Tracing Metacognitive Pivots
+- [2606.15007](https://arxiv.org/abs/2606.15007) Nemotron 3 Ultra: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning [sftrl, agent]
+- [2606.22938](https://arxiv.org/abs/2606.22938) Provable Benefits of RLVR over SFT for Reasoning Models: Learning to Backtrack Efficiently [sftrl]
+- [2606.31648](https://arxiv.org/abs/2606.31648) Think in English, Answer in Korean: Efficient Adaptation of Multilingual Tool-Using Agents [agent]
+- [2607.21351](https://arxiv.org/abs/2607.21351) How Many Bits Can an Adapter Write? Measuring the Capacity and Memorization of Parameter-Efficient Fine-Tuning [analysis]
+- [2608.08960](https://arxiv.org/abs/2608.08960) Reading is not Reasoning: Bridging the Agentic Policy Gap in Vision–Text Compression [agent, mm]
+- [2608.10357](https://arxiv.org/abs/2608.10357) Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks [algo, agent]
+- [2608.21830](https://arxiv.org/abs/2608.21830) Beyond Success and Failure: Length-Aware Contrastive Learning for GUI Agents [agent]
+
+<a id="analysis"></a>
+## Analysis, theory, scaling & capacity (54)
+
+- [2601.06487](https://arxiv.org/abs/2601.06487) ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking [agent]
+- [2601.11061](https://arxiv.org/abs/2601.11061) Spurious Rewards Paradox: Mechanistically Understanding How RLVR Activates Memorization Shortcuts in LLMs
+- [2601.15737](https://arxiv.org/abs/2601.15737) PhysProver: Advancing Automatic Theorem Proving for Physics
+- [2601.16853](https://arxiv.org/abs/2601.16853) Reasoning Promotes Robustness in Theory of Mind Tasks
+- [2601.18217](https://arxiv.org/abs/2601.18217) Paying Less Generalization Tax: A Cross-Domain Generalization Study of RL Training for LLM Agents [agent]
+- [2601.21192](https://arxiv.org/abs/2601.21192) Do Reasoning Models Enhance Embedding Models?
+- [2602.00986](https://arxiv.org/abs/2602.00986) Sparse Reward Subsystem in Large Language Models
+- [2602.01599](https://arxiv.org/abs/2602.01599) The Multiple Ticket Hypothesis: Random Sparse Subnetworks Suffice for RLVR
+- [2602.05630](https://arxiv.org/abs/2602.05630) Rewards as Labels: Revisiting RLVR from a Classification Perspective
+- [2602.06965](https://arxiv.org/abs/2602.06965) MedMO: Grounding and Understanding Multimodal Large Language Model for Medical Images [mm]
+- [2602.08281](https://arxiv.org/abs/2602.08281) New Skills or Sharper Primitives? A Probabilistic Perspective on the Emergence of Reasoning in RLVR
+- [2602.12395](https://arxiv.org/abs/2602.12395) What does RL improve for Visual Reasoning? A Frankenstein-Style Analysis [mm]
+- [2602.13218](https://arxiv.org/abs/2602.13218) Scaling the Scaling Logic: Agentic Meta-Synthesis of Logic Reasoning [agent]
+- [2602.14225](https://arxiv.org/abs/2602.14225) Text Before Vision: Staged Knowledge Injection Matters for Agentic RLVR in Ultra-High-Resolution Remote Sensing Understanding [agent, mm]
+- [2602.15515](https://arxiv.org/abs/2602.15515) The Obfuscation Atlas: Mapping Where Honesty Emerges in RLVR with Deception Probes
+- [2602.20117](https://arxiv.org/abs/2602.20117) ReSyn: Autonomously Scaling Synthetic Environments for Reasoning Models [agent]
+- [2603.10793](https://arxiv.org/abs/2603.10793) Multilingual Reasoning Gym: Multilingual Scaling of Procedural Reasoning Environments [agent]
+- [2603.12826](https://arxiv.org/abs/2603.12826) Rethinking Multiple-Choice Questions for RLVR: Unlocking Potential via Distractor Design
+- [2603.17024](https://arxiv.org/abs/2603.17024) HopChain: Multi-Hop Data Synthesis for Generalizable Vision-Language Reasoning [mm]
+- [2603.20799](https://arxiv.org/abs/2603.20799) RLVR Training of LLMs Does Not Improve Thinking Ability for General QA: Evaluation Method and a Simple Solution
+- [2603.27184](https://arxiv.org/abs/2603.27184) Incentivizing Temporal-Awareness in Egocentric Video Understanding Models [mm]
+- [2604.16893](https://arxiv.org/abs/2604.16893) EasyVideoR1: Easier RL for Video Understanding [mm]
+- [2604.18510](https://arxiv.org/abs/2604.18510) Different Paths to Harmful Compliance: Behavioral Side Effects and Mechanistic Divergence Across LLM Jailbreaks
+- [2605.06523](https://arxiv.org/abs/2605.06523) On the Implicit Reward Overfitting and the Low-rank Dynamics in RLVR
+- [2605.07063](https://arxiv.org/abs/2605.07063) Dr. Post-Training: A Data Regularization Perspective on LLM Post-Training
+- [2605.12913](https://arxiv.org/abs/2605.12913) Revisiting DAgger in the Era of LLM-Agents [agent]
+- [2605.19282](https://arxiv.org/abs/2605.19282) Pion, Rethinking Muon Beyond Pretraining: Spectral Failures and High-Pass Remedies for VLA and RLVR
+- [2605.21295](https://arxiv.org/abs/2605.21295) TimeSRL: Generalizable Time-Series Behavioral Modeling via Semantic RL-Tuned LLMs -- A Case Study in Mental Health
+- [2605.25252](https://arxiv.org/abs/2605.25252) Quantifying Empirical Compute-Supervision Tradeoffs in RLVR [mm]
+- [2605.29401](https://arxiv.org/abs/2605.29401) Rethinking Post-Training Recipes for Multimodal Time-Series Forecasting [mm]
+- [2605.31058](https://arxiv.org/abs/2605.31058) Combinatorial Synthesis: Scaling Code RLVR via Atomic Decomposition and Recombination
+- [2606.03087](https://arxiv.org/abs/2606.03087) Learning to Solve, Forgetting to Retain: Correct-Set Turnover in RLVR
+- [2606.04703](https://arxiv.org/abs/2606.04703) Rethinking Continual Experience Internalization for Self-Evolving LLM Agents [agent]
+- [2606.09525](https://arxiv.org/abs/2606.09525) Emergence of Context Characteristics Sensitivity in Large Language Models
+- [2606.09821](https://arxiv.org/abs/2606.09821) Rethinking the Divergence Regularization in LLM RL
+- [2606.17250](https://arxiv.org/abs/2606.17250) Rethinking Groups in Critic-Free RLVR
+- [2606.18521](https://arxiv.org/abs/2606.18521) Sparsity Curse: Understanding RLVR Model Parameter Space from Model Merging
+- [2606.19222](https://arxiv.org/abs/2606.19222) Mechanism-Guided Selective Unlearning for RLVR-Induced Reasoning [agent]
+- [2606.22043](https://arxiv.org/abs/2606.22043) When Does a Video-Language Model Stop Watching? Reward Strength Controls the Formation and Reversal of Visual Shortcuts in Multimodal RLVR [mm]
+- [2606.22570](https://arxiv.org/abs/2606.22570) What are Key Factors for Updates in RL for LLM Reasoning?
+- [2607.01232](https://arxiv.org/abs/2607.01232) Is One Layer Enough? Training A Single Transformer Layer Can Match Full-Parameter RL Training
+- [2607.06720](https://arxiv.org/abs/2607.06720) When Does In-Context Search Help? A Sampling-Complexity Theory of Reflection-Driven Reasoning [agent]
+- [2607.12395](https://arxiv.org/abs/2607.12395) Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning
+- [2607.16097](https://arxiv.org/abs/2607.16097) Understanding Reasoning from Pretraining to Post-Training
+- [2607.19691](https://arxiv.org/abs/2607.19691) SLPO: Scaling Latent Reasoning via a Surrogate Policy
+- [2608.02867](https://arxiv.org/abs/2608.02867) BODHI: Do LLMs Branch Out and Discover Heterogeneous Inferences?
+- [2608.04646](https://arxiv.org/abs/2608.04646) Evaluating Theory of Mind in Reasoning Models: Robustness over Reasoning
+- [2608.08802](https://arxiv.org/abs/2608.08802) Improving Generalization Robustness of Multimodal RLVR [mm]
+- [2608.13546](https://arxiv.org/abs/2608.13546) Alaya-EVOKE: From Linear-Scaling Supervision to Endless World [mm]
+- [2608.16320](https://arxiv.org/abs/2608.16320) StreamOPD: A Post-Training Recipe with Spatio-Temporal Cue Gating for Streaming Video Understanding [mm]
+- [2608.31075](https://arxiv.org/abs/2608.31075) Scaling Large Reasoning Models beyond Human Supervision: A Path toward Superintelligence [mm]
+- [2609.04565](https://arxiv.org/abs/2609.04565) Extremely Sparse Supervision Incentivizes Reasoning Ability [mm]
+- [2609.04735](https://arxiv.org/abs/2609.04735) Training Large Language Models for Small-Molecule Design with Synthetic Task Scaling
+- [2609.22068](https://arxiv.org/abs/2609.22068) CodeMidas: Scaling Agentic Coding RL Environments from Code Itself [agent]
+
+<a id="agent"></a>
+## Agentic, multi-turn & tool-use RL (53)
+
+- [2601.01569](https://arxiv.org/abs/2601.01569) CaveAgent: Transforming LLMs into Stateful Runtime Operators
+- [2601.03555](https://arxiv.org/abs/2601.03555) SCRIBE: Structured Mid-Level Supervision for Tool-Using Language Models [mm]
+- [2601.04611](https://arxiv.org/abs/2601.04611) Character-R1: Enhancing Role-Aware Reasoning in Role-Playing Agents via RLVR
+- [2601.04620](https://arxiv.org/abs/2601.04620) AgentDevel: Reframing Self-Evolving LLM Agents as Release Engineering
+- [2601.07280](https://arxiv.org/abs/2601.07280) ReasonTabQA: A Comprehensive Benchmark for Table Question Answering from Real World Industrial Scenarios
+- [2601.07782](https://arxiv.org/abs/2601.07782) Beyond Single-Shot: Multi-step Tool Retrieval via Query Planning
+- [2601.08237](https://arxiv.org/abs/2601.08237) The End of Reward Engineering: How LLMs Are Redefining Multi-Agent Coordination
+- [2601.09032](https://arxiv.org/abs/2601.09032) The Hierarchy of Agentic Capabilities: Evaluating Frontier Models on Realistic RL Environments
+- [2601.18207](https://arxiv.org/abs/2601.18207) PaperSearchQA: Learning to Search and Reason over Scientific Papers with RLVR
+- [2601.20126](https://arxiv.org/abs/2601.20126) Rewarding Intellectual Humility Learning When Not To Answer In Large Language Models
+- [2601.20649](https://arxiv.org/abs/2601.20649) P2S: Probabilistic Process Supervision for General-Domain Reasoning Question Answering [mm]
+- [2601.21008](https://arxiv.org/abs/2601.21008) Solver-in-the-Loop: MDP-Based Benchmarks for Self-Correction and Behavioral Rationality in Operations Research
+- [2602.06391](https://arxiv.org/abs/2602.06391) POINTS-GUI-G: GUI-Grounding Journey
+- [2602.15849](https://arxiv.org/abs/2602.15849) IntelliAsk: Learning to Ask High-Quality Research Questions via RLVR
+- [2602.17558](https://arxiv.org/abs/2602.17558) RetouchIQ: MLLM Agents for Instruction-Based Image Retouching with Generalist Reward [mm]
+- [2602.24286](https://arxiv.org/abs/2602.24286) CUDA Agent: Large-Scale Agentic RL for High-Performance CUDA Kernel Generation
+- [2603.01223](https://arxiv.org/abs/2603.01223) Learn Hard Problems During RL with Reference Guided Fine-tuning
+- [2603.01607](https://arxiv.org/abs/2603.01607) CARE: Towards Clinical Accountability in Multi-Modal Medical Reasoning with an Evidence-Grounded Agentic Framework
+- [2603.10165](https://arxiv.org/abs/2603.10165) OpenClaw-RL: Train Any Agent Simply by Talking
+- [2603.12145](https://arxiv.org/abs/2603.12145) Automatic Generation of High-Performance RL Environments
+- [2603.15255](https://arxiv.org/abs/2603.15255) SAGE: Multi-Agent Self-Evolution for LLM Reasoning
+- [2603.24093](https://arxiv.org/abs/2603.24093) Towards Effective Experiential Learning: Dual Guidance for Utilization and Internalization
+- [2604.03675](https://arxiv.org/abs/2604.03675) OASES: Outcome-Aligned Search-Evaluation Co-Training for Agentic Search
+- [2604.08523](https://arxiv.org/abs/2604.08523) ClawBench: Evaluating Browser Agents on Live Production Websites with Submission-Interception
+- [2604.08990](https://arxiv.org/abs/2604.08990) ActFER: Agentic Facial Expression Recognition via Active Tool-Augmented Visual Reasoning [mm]
+- [2604.14144](https://arxiv.org/abs/2604.14144) SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Geometric Environments
+- [2604.27840](https://arxiv.org/abs/2604.27840) CastFlow: Learning Role-Specialized Agentic Workflows for Time Series Forecasting
+- [2605.02943](https://arxiv.org/abs/2605.02943) Healthcare AI GYM for Medical Agents
+- [2605.06326](https://arxiv.org/abs/2605.06326) Teaching Thinking Models to Reason with Tools: A Full-Pipeline Recipe for Tool-Integrated Reasoning
+- [2605.08703](https://arxiv.org/abs/2605.08703) RewardHarness: Self-Evolving Agentic Post-Training
+- [2605.11706](https://arxiv.org/abs/2605.11706) GRAFT: Graph-Tokenized LLMs for Tool Planning
+- [2605.17792](https://arxiv.org/abs/2605.17792) HydroAgent: Closing the Gap Between Frontier LLMs and Human Experts in Hydrologic Model Calibration via Simulator-Grounded RL
+- [2605.20075](https://arxiv.org/abs/2605.20075) CopT: Contrastive On-Policy Thinking with Continuous Spaces for General and Agentic Reasoning
+- [2605.23904](https://arxiv.org/abs/2605.23904) SkillOpt: Executive Strategy for Self-Evolving Agent Skills
+- [2605.24432](https://arxiv.org/abs/2605.24432) Found in Conversation: LLMs Teach Themselves to Close the Multi-Turn Gap
+- [2606.00135](https://arxiv.org/abs/2606.00135) On Effectiveness and Efficiency of Agentic Tool-calling and RL Training
+- [2606.01991](https://arxiv.org/abs/2606.01991) SafeMCP: Proactive Power Regulation for LLM Agent Defense via Environment-Grounded Look-Ahead Reasoning
+- [2606.02372](https://arxiv.org/abs/2606.02372) COMAP: Co-Evolving World Models and Agent Policies for LLM Agents
+- [2606.09052](https://arxiv.org/abs/2606.09052) INFUSER: Influence-Guided Self-Evolution Improves Reasoning
+- [2606.09371](https://arxiv.org/abs/2606.09371) Capability-Aligned Hierarchical Learning for Tool-Augmented LLMs
+- [2606.10581](https://arxiv.org/abs/2606.10581) ParaBridge: Bridging Paralinguistic Perception and Dialogue Behavior in Speech Language Models [mm]
+- [2606.17053](https://arxiv.org/abs/2606.17053) Context-Aware RL for Agentic and Multimodal LLMs [mm]
+- [2606.21811](https://arxiv.org/abs/2606.21811) Steer, Don't Solve: Training Small Critic Models for Large Code Agents
+- [2606.30704](https://arxiv.org/abs/2606.30704) From Search to Synthesis: Training LLMs as Zero-Shot Workflow Generators
+- [2607.01465](https://arxiv.org/abs/2607.01465) Beyond Next-Token Prediction: An RLVR Proof of Concept for Tool-Use Agents on Atlassian Workflows
+- [2607.02959](https://arxiv.org/abs/2607.02959) Incentivizing Vision Language Models to Search for Long Video Question Answering [mm]
+- [2607.19790](https://arxiv.org/abs/2607.19790) Trace: A Taxonomy-Guided Environment for Multidomain Visual Reasoning [mm]
+- [2607.20908](https://arxiv.org/abs/2607.20908) Multi-turn RL with Structural and Performance Aware Rewards for CUDA Kernel Generation
+- [2607.21461](https://arxiv.org/abs/2607.21461) AREX: Towards a Recursively Self-Improving Agent for Deep Research
+- [2608.02407](https://arxiv.org/abs/2608.02407) Antares: Foundation Models for Agentic Vulnerability Localization
+- [2608.05446](https://arxiv.org/abs/2608.05446) EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents
+- [2608.14312](https://arxiv.org/abs/2608.14312) Envs-FORGE: Frontier-Optimized Reward-Grounded Environment Synthesis for Agent RL
+- [2608.16386](https://arxiv.org/abs/2608.16386) Mint-Agent: Introducing Finance-Native Agentic Foundation Models
+
+<a id="mm"></a>
+## Multimodal / VLM / diffusion RL (32)
+
+- [2601.00215](https://arxiv.org/abs/2601.00215) Disentangling Perception and Reasoning in Multimodal LLMs via Reward Design
+- [2601.06336](https://arxiv.org/abs/2601.06336) Future-as-Label: Scalable Supervision from Real-World Outcomes
+- [2601.14251](https://arxiv.org/abs/2601.14251) LightOnOCR: A 1B End-to-End Multilingual Vision-Language Model for State-of-the-Art OCR
+- [2601.20305](https://arxiv.org/abs/2601.20305) Endogenous Reprompting: Self-Evolving Cognitive Alignment for Unified Multimodal Models
+- [2602.06270](https://arxiv.org/abs/2602.06270) VowelPrompt: Hearing Speech Emotions from Text via Vowel-level Prosodic Augmentation
+- [2602.11124](https://arxiv.org/abs/2602.11124) PhyCritic: Multimodal Critic Models for Physical AI
+- [2602.22623](https://arxiv.org/abs/2602.22623) ContextRL: Enhancing MLLM's Knowledge Discovery Efficiency with Context-Augmented RL
+- [2603.01228](https://arxiv.org/abs/2603.01228) Towards Policy-Adaptive Image Guardrail: Benchmark and Method
+- [2603.03437](https://arxiv.org/abs/2603.03437) Beyond Accuracy: Evaluating Visual Grounding In Multimodal Medical Reasoning
+- [2603.12938](https://arxiv.org/abs/2603.12938) Thinking in Streaming Video
+- [2603.14659](https://arxiv.org/abs/2603.14659) VisionCoach: Reinforcing Grounded Video Reasoning via Visual-Perception Prompting
+- [2603.25077](https://arxiv.org/abs/2603.25077) Bridging Perception and Reasoning: Token Reweighting for RLVR in Multimodal LLMs
+- [2603.28618](https://arxiv.org/abs/2603.28618) Seeing with You: Perception-Reasoning Coevolution for Multimodal Reasoning
+- [2604.03993](https://arxiv.org/abs/2604.03993) Can LLMs Learn to Reason Robustly under Noisy Supervision?
+- [2604.07864](https://arxiv.org/abs/2604.07864) ZeroCoder: Can LLMs Improve Code Generation Without Ground-Truth Supervision?
+- [2604.08322](https://arxiv.org/abs/2604.08322) Fundus-R1: Training a Fundus-Reading MLLM with Knowledge-Aware Reasoning on Public Data
+- [2604.18574](https://arxiv.org/abs/2604.18574) When Can LLMs Learn to Reason with Weak Supervision?
+- [2604.25719](https://arxiv.org/abs/2604.25719) Step-Audio-R1.5 Technical Report
+- [2604.25907](https://arxiv.org/abs/2604.25907) How Fast Should a Model Commit to Supervision? Training Reasoning Models on the Tsallis Loss Continuum
+- [2605.02378](https://arxiv.org/abs/2605.02378) Enhancing Multimodal In-Context Learning via Inductive-Deductive Reasoning
+- [2605.22072](https://arxiv.org/abs/2605.22072) Faithful-MR1: Faithful Multimodal Reasoning via Anchoring and Reinforcing Visual Attention
+- [2605.28023](https://arxiv.org/abs/2605.28023) VCap: Hypergeometric Rewards for Weak-to-Strong Visual Captioning
+- [2605.30912](https://arxiv.org/abs/2605.30912) Attend to Evidence: Evidence-Anchored Spatial Attention Supervision for Multimodal RLVR
+- [2606.02774](https://arxiv.org/abs/2606.02774) GeoDrive-Bench: Benchmarking Region-Specific Multimodal Reasoning in Autonomous Driving
+- [2606.08035](https://arxiv.org/abs/2606.08035) DyCo-RL: Dynamic Cross-Modal Coordination for Visual Reasoning
+- [2607.01170](https://arxiv.org/abs/2607.01170) Diffusion-GR2: Diffusion Generative Reasoning Re-ranker
+- [2607.13461](https://arxiv.org/abs/2607.13461) Joint On-and-Off Policy Learning for Vision-and-Language Navigation
+- [2607.24522](https://arxiv.org/abs/2607.24522) FlowCTS: On-policy Continuous Trajectory Supervision of Flow Models
+- [2608.06756](https://arxiv.org/abs/2608.06756) Capek 0.5: An Execution-Centric Vision-Language Model for Embodied Intelligence
+- [2608.13395](https://arxiv.org/abs/2608.13395) FIRE-VLA: Failure-Informed Self-Evolution for Vision-Language-Action Models in Autonomous Driving
+- [2608.16284](https://arxiv.org/abs/2608.16284) TransAnyText: Translating Arbitrary Text in E-commerce Images via Structured Visual Generation
+- [2608.30559](https://arxiv.org/abs/2608.30559) SPHERE: Automatic Music Upmixing via Audio Language Model Post-Training with Spatial Heuristic Rewards
+
+<a id="other"></a>
+## Domain applications & other (85)
+
+- [2601.03205](https://arxiv.org/abs/2601.03205) UltraLogic: Enhancing LLM Reasoning through Large-Scale Data Synthesis and Bipolar Float Reward
+- [2601.06677](https://arxiv.org/abs/2601.06677) Plasticity vs. Rigidity: The Impact of Low-Rank Adapters on Reasoning on a Micro-Budget
+- [2601.09361](https://arxiv.org/abs/2601.09361) GeoRA: Geometry-Aware Low-Rank Adaptation for RLVR
+- [2601.20829](https://arxiv.org/abs/2601.20829) Training Reasoning Models on Saturated Problems via Failure-Prefix Conditioning
+- [2601.21051](https://arxiv.org/abs/2601.21051) Llama-3.1-FoundationAI-SecurityLLM-Reasoning-8B Technical Report
+- [2602.00426](https://arxiv.org/abs/2602.00426) LLMs as High-Dimensional Nonlinear Autoregressive Models with Attention: Training, Alignment and Inference
+- [2602.03773](https://arxiv.org/abs/2602.03773) Reasoning Cache: Continual Improvement Over Long Horizons via Short-Horizon RL
+- [2602.03978](https://arxiv.org/abs/2602.03978) Monitorability as a Free Gift: How RLVR Spontaneously Aligns Reasoning
+- [2602.03979](https://arxiv.org/abs/2602.03979) Likelihood-Based Reward Designs for General LLM Reasoning
+- [2602.06570](https://arxiv.org/abs/2602.06570) Baichuan-M3: Modeling Clinical Inquiry for Reliable Medical Decision-Making
+- [2602.06687](https://arxiv.org/abs/2602.06687) Evaluating and Enhancing the Vulnerability Reasoning Capabilities of Large Language Models
+- [2602.07774](https://arxiv.org/abs/2602.07774) GR2: Generative Reasoning Re-ranker
+- [2602.08237](https://arxiv.org/abs/2602.08237) Document Reconstruction Unlocks Scalable Long-Context RLVR
+- [2602.08489](https://arxiv.org/abs/2602.08489) Beyond Correctness: Learning Robust Reasoning via Transfer
+- [2602.11792](https://arxiv.org/abs/2602.11792) Detecting RLVR Training Data via Structural Convergence of Reasoning
+- [2602.19187](https://arxiv.org/abs/2602.19187) Adaptive Problem Generation via Symbolic Representations
+- [2602.19455](https://arxiv.org/abs/2602.19455) SenTSR-Bench: Thinking with Injected Knowledge for Time-Series Reasoning
+- [2602.22193](https://arxiv.org/abs/2602.22193) Improving Parametric Knowledge Access in Reasoning Language Models
+- [2602.22721](https://arxiv.org/abs/2602.22721) Replacing Multi-Step Assembly of Data Preparation Pipelines with One-Step LLM Pipeline Generation for Table QA
+- [2603.02208](https://arxiv.org/abs/2603.02208) Reasoning Core: A Scalable Procedural Data Generation Suite for Symbolic Pre-training and Post-Training
+- [2603.10767](https://arxiv.org/abs/2603.10767) mAceReason-Math: A Dataset of High-Quality Multilingual Math Problems Ready For RLVR
+- [2603.12248](https://arxiv.org/abs/2603.12248) Matching Features, Not Tokens: Energy-Based Fine-Tuning of Language Models
+- [2603.12273](https://arxiv.org/abs/2603.12273) Aligning Language Models from User Interactions
+- [2603.16856](https://arxiv.org/abs/2603.16856) OEL: Online Experiential Learning for Language Models
+- [2603.19118](https://arxiv.org/abs/2603.19118) How Uncertainty Estimation Scales with Sampling in Reasoning Models
+- [2603.22117](https://arxiv.org/abs/2603.22117) On the Direction of RLVR Updates for LLM Reasoning: Identification and Exploitation
+- [2603.24844](https://arxiv.org/abs/2603.24844) Reaching Beyond the Mode: RL for Distributional Reasoning in Language Models
+- [2604.01591](https://arxiv.org/abs/2604.01591) ThinkTwice: Jointly Optimizing Large Language Models for Reasoning and Self-Refinement
+- [2604.07747](https://arxiv.org/abs/2604.07747) Mitigating Distribution Sharpening in Math RLVR via Distribution-Aligned Hint Synthesis and Backward Hint Annealing
+- [2604.11600](https://arxiv.org/abs/2604.11600) Geoparsing: Diagram Parsing for Plane and Solid Geometry with a Unified Formal Language
+- [2604.18381](https://arxiv.org/abs/2604.18381) Learning from Less: Measuring the Effectiveness of RLVR in Low Data and Compute Regimes
+- [2604.22880](https://arxiv.org/abs/2604.22880) TexOCR: Advancing Document OCR Models for Compilable Page-to-LaTeX Reconstruction
+- [2604.23054](https://arxiv.org/abs/2604.23054) DeepImagine: Learning Biomedical Reasoning via Successive Counterfactual Imagining
+- [2605.03862](https://arxiv.org/abs/2605.03862) Correct Is Not Enough: Training Reasoning Planners with Executor-Grounded Rewards
+- [2605.09996](https://arxiv.org/abs/2605.09996) Omni-Persona: Systematic Benchmarking and Improving Omnimodal Personalization
+- [2605.15588](https://arxiv.org/abs/2605.15588) Calibrating LLMs with Semantic-level Reward
+- [2605.20270](https://arxiv.org/abs/2605.20270) Conformal Selective Acting: Anytime-Valid Risk Control for RLVR-Trained LLMs
+- [2605.20506](https://arxiv.org/abs/2605.20506) Ditto: Reinforcing Human Behavior Simulation via Verbal Feedback
+- [2605.20863](https://arxiv.org/abs/2605.20863) PlexRL: Cluster-Level Orchestration of Serviceized LLM Execution for RLVR
+- [2605.21468](https://arxiv.org/abs/2605.21468) You Only Need Minimal RLVR Training: Extrapolating LLMs via Rank-1 Trajectories
+- [2605.22240](https://arxiv.org/abs/2605.22240) Unlocking Proactivity in Task-Oriented Dialogue
+- [2605.23384](https://arxiv.org/abs/2605.23384) Metacognition as Reward: Reinforcing LLM Reasoning via Knowledge and Regulation Signals
+- [2605.26971](https://arxiv.org/abs/2605.26971) RLVR Datasets and Where to Find Them: Tracing Data Lineage for Better Training Data
+- [2605.28464](https://arxiv.org/abs/2605.28464) The Cases LJP Never Sees: Prosecution Decision Prediction for More Complete Criminal Liability Assessment
+- [2605.28742](https://arxiv.org/abs/2605.28742) CORE: Contrastive Reflection Enables Rapid Improvements in Reasoning
+- [2605.31034](https://arxiv.org/abs/2605.31034) Annealed Softmax Greedy in Many-Armed Bayesian Bandits
+- [2605.31268](https://arxiv.org/abs/2605.31268) Mellum2 Technical Report
+- [2606.00869](https://arxiv.org/abs/2606.00869) Enhancing LLM Metacognition via Cognitive Pairwise Training
+- [2606.03503](https://arxiv.org/abs/2606.03503) ThoughtFold: Folding Reasoning Chains via Introspective Preference Learning
+- [2606.03603](https://arxiv.org/abs/2606.03603) World Models Meet Language Models: On the Complementarity of Concrete and Abstract Reasoning
+- [2606.03800](https://arxiv.org/abs/2606.03800) Trading Human Curation for Synthetic Augmentation in RLVR
+- [2606.03979](https://arxiv.org/abs/2606.03979) Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories
+- [2606.08633](https://arxiv.org/abs/2606.08633) Towards Long-Horizon Vessel Trajectory and Destination Forecasting with Reasoning Large Language Models
+- [2606.08854](https://arxiv.org/abs/2606.08854) sGPO: Trading Inference FLOPs for Training Efficiency in RLVR
+- [2606.09124](https://arxiv.org/abs/2606.09124) A Regret Minimization Framework on Preference Learning in Large Language Models
+- [2606.29938](https://arxiv.org/abs/2606.29938) LatentRevise: Learning from Zero-Hit Reasoning
+- [2606.30518](https://arxiv.org/abs/2606.30518) Regime-Aware Peer Specialization for Robust RAG under Heterogeneous Knowledge Conflicts
+- [2606.31984](https://arxiv.org/abs/2606.31984) GR2 Technical Report
+- [2607.02390](https://arxiv.org/abs/2607.02390) DecompRL: Solving Harder Problems by Learning Modular Code Generation
+- [2607.02605](https://arxiv.org/abs/2607.02605) A Survey of LLM-Driven Penetration Testing: Taxonomy, Co-Evolution, and Open Challenges
+- [2607.02869](https://arxiv.org/abs/2607.02869) Reward Granularity in RLVR: Comparing Process and Outcome Reward Structures for Mathematical Reasoning in Small Language Models
+- [2607.06993](https://arxiv.org/abs/2607.06993) Large Behavior Model: A Promptable Digital Twin of the Retail Customer
+- [2607.07435](https://arxiv.org/abs/2607.07435) RLVP: Penalize the Path, Reward the Outcome
+- [2607.07690](https://arxiv.org/abs/2607.07690) Agon: Competitive Cross-Model RL with Implicit Rival Grading of Reasoning
+- [2607.11506](https://arxiv.org/abs/2607.11506) SCOPE-RL: Optimizing Reasoning Paths Before and After Success
+- [2607.19181](https://arxiv.org/abs/2607.19181) Reasoning Before Translation: Enhancing Legal Machine Translation with Structured Reasoning
+- [2607.20062](https://arxiv.org/abs/2607.20062) Solar Open 2 Technical Report
+- [2607.21856](https://arxiv.org/abs/2607.21856) LeAct: Learning to Reason from Expert Actions
+- [2607.22864](https://arxiv.org/abs/2607.22864) Spatial-IQ: Deconstructing Spatial Intelligence via Hierarchical Capability Tests
+- [2607.24653](https://arxiv.org/abs/2607.24653) Kimi K3: Open Frontier Intelligence
+- [2607.28460](https://arxiv.org/abs/2607.28460) Cybersecurity Detection Classification with Reasoning-enabled Language Models
+- [2607.28568](https://arxiv.org/abs/2607.28568) Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering
+- [2608.01000](https://arxiv.org/abs/2608.01000) Judging Is Not Enumerating: Silent Omissions in LLM-Authored Acceptable Sets
+- [2608.02139](https://arxiv.org/abs/2608.02139) Self-Improving Large Language Models via Progressive Experience Evolution
+- [2608.02352](https://arxiv.org/abs/2608.02352) Qwen-CUA: Native Computer Use for (almost) Everything
+- [2608.08889](https://arxiv.org/abs/2608.08889) LLM Reasoning for Subjective Tasks: Failure Modes, Mitigation, and Dynamic Reasoning Routing
+- [2608.09119](https://arxiv.org/abs/2608.09119) Motif 3: Technical Report
+- [2608.17301](https://arxiv.org/abs/2608.17301) SignalReasoner: Assessing the Upper Bound of 3B Models for Signal Mathematical Reasoning
+- [2608.18574](https://arxiv.org/abs/2608.18574) Continual Reasoning Gym: Diagnosing and Harnessing Shared Reasoning in Continual RLVR
+- [2608.25358](https://arxiv.org/abs/2608.25358) Where vs What: Decomposing Structural and Content Failures in LLM-Generated Structured Outputs
+- [2608.27046](https://arxiv.org/abs/2608.27046) Performance Foundations of Parallel & Distributed Reasoning Language Models
+- [2608.27409](https://arxiv.org/abs/2608.27409) Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms
+- [2608.29188](https://arxiv.org/abs/2608.29188) Locked at the Entrance, Open Inside: Where RLVR Narrows the Solution Space
+- [2609.01867](https://arxiv.org/abs/2609.01867) Thinking effort aligns between humans and reasoning models in abductive reasoning
+- [2609.03960](https://arxiv.org/abs/2609.03960) FiMI Banking: A Sovereign Model for Indian Retail Banking

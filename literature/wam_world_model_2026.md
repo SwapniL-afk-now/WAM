@@ -1,0 +1,558 @@
+# 2026 World-Model / WAM / VLA Papers (full list)
+
+525 unique arXiv papers (lists + web-verified additions) with 2026 IDs from OpenMOSS/Awesome-WAM, XuejiFang/awesome-vla-wam, LMD0311/Awesome-World-Model and Denghaoyuan123/Awesome-RL-VLA.
+
+Titles are auto-extracted. `(title not captured)` means the source list only had link badges; `(verify)` means the source list attached the same label to several IDs, so the title may belong to a neighbouring ID. `✓` marks titles checked by web search during this review (including papers the lists missed).
+
+| Group | Papers |
+|---|---|
+| [RL, rewards, distillation & post-training](#rl) | 84 |
+| [World action models](#wam) | 52 |
+| [VLA and robot policies](#vla) | 88 |
+| [Efficiency (caching, few-step, quantization, sparse)](#eff) | 12 |
+| [Other world models, benchmarks & surveys](#wm) | 289 |
+
+<a id="rl"></a>
+## RL, rewards, distillation & post-training (84)
+
+- [2601.04035](https://arxiv.org/abs/2601.04035) MobileDreamer: Generative Sketch World Model for GUI Agent
+- [2601.07463](https://arxiv.org/abs/2601.07463) Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning
+- [2601.10905](https://arxiv.org/abs/2601.10905) Action Shapley: A Training Data Selection Metric for World Model in Reinforcement Learning
+- [2601.12428](https://arxiv.org/abs/2601.12428) ReWorld: Multi-Dimensional Reward Modeling for Embodied World Models
+- [2601.19336](https://arxiv.org/abs/2601.19336) [EAWM] From Observations to Events: Event-Aware World Model for Reinforcement Learning.
+- [2601.19969](https://arxiv.org/abs/2601.19969) E2HiL
+- [2601.22032](https://arxiv.org/abs/2601.22032) Drive-JEPA: Video JEPA Meets Multimodal Trajectory Distillation for End-to-End Driving
+- [2602.00743](https://arxiv.org/abs/2602.00743) SA-VLA
+- [2602.00919](https://arxiv.org/abs/2602.00919) IQL + actor-critic
+- [2602.02454](https://arxiv.org/abs/2602.02454) World-Gymnast: Training Robots with Reinforcement Learning in a World Model ✓
+- [2602.09023](https://arxiv.org/abs/2602.09023) TwinRL-VLA
+- [2602.11075](https://arxiv.org/abs/2602.11075) RISE: Self-Improving Robot Policy with Compositional World Model ✓
+- [2602.12099](https://arxiv.org/abs/2602.12099) GigaBrain-0.5M: a VLA That Learns From World Model-Based Reinforcement Learning
+- [2602.12281](https://arxiv.org/abs/2602.12281) CoVer-VLA, Scaling Verification Can Be More Effective than Scaling Policy Learning for Vision-Language-Action Alignment
+- [2602.12628](https://arxiv.org/abs/2602.12628) RL-Co
+- [2602.12691](https://arxiv.org/abs/2602.12691) AWR(Advantage-Weighted Regression)
+- [2602.13977](https://arxiv.org/abs/2602.13977) WoVR: World Models as Reliable Simulators for Post-Training VLA Policies with RL ✓
+- [2602.15549](https://arxiv.org/abs/2602.15549) VLM-DEWM: Dynamic External World Model for Verifiable and Resilient Vision-Language Planning in Manufacturing
+- [2602.18739](https://arxiv.org/abs/2602.18739) When World Models Dream Wrong: Physical-Conditioned Adversarial Attacks against World Models
+- [2602.20715](https://arxiv.org/abs/2602.20715) IG-RFT
+- [2602.23997](https://arxiv.org/abs/2602.23997) Foundation World Models for Agents that Learn, Verify, and Adapt Reliably Beyond Static Environments. AAMAS 26
+- [2603.02083](https://arxiv.org/abs/2603.02083) π_StepNFT
+- [2603.02115](https://arxiv.org/abs/2603.02115) ROBOMETER
+- [2603.08519](https://arxiv.org/abs/2603.08519) AtomVLA
+- [2603.09542](https://arxiv.org/abs/2603.09542) NS-VLA
+- [2603.10422](https://arxiv.org/abs/2603.10422) Simulation Distillation (verify)
+- [2603.11110](https://arxiv.org/abs/2603.11110) Simulation Distillation (verify)
+- [2603.13925](https://arxiv.org/abs/2603.13925) SmoothVLA
+- [2603.15759](https://arxiv.org/abs/2603.15759) Simulation Distillation (verify)
+- [2603.16666](https://arxiv.org/abs/2603.16666) Fast-WAM: Do World Action Models Need Test-time Future Imagination? ✓
+- [2603.18202](https://arxiv.org/abs/2603.18202) R2-Dreamer: Redundancy-Reduced World Models without Decoders or Augmentation.
+- [2603.18464](https://arxiv.org/abs/2603.18464) AcceRL
+- [2603.18532](https://arxiv.org/abs/2603.18532) Gen3D-RL-VLA
+- [2603.19370](https://arxiv.org/abs/2603.19370) VAMPO: Policy Optimization for Improving Visual Dynamics in Video Action Models ✓
+- [2603.20607](https://arxiv.org/abs/2603.20607) VLA-MBPO
+- [2603.24587](https://arxiv.org/abs/2603.24587) DreamerAD: Efficient Reinforcement Learning via Latent World Model for Autonomous Driving
+- [2603.25685](https://arxiv.org/abs/2603.25685) Persistent Robot World Models: Stabilizing Multi-Step Rollouts via Reinforcement Learning ✓
+- [2603.26666](https://arxiv.org/abs/2603.26666) VLA-OPD: Bridging Offline SFT and Online RL for Vision-Language-Action Models via On-Policy Distillation
+- [2604.01985](https://arxiv.org/abs/2604.01985) World Action Verifier: Self-Improving World Models via Forward-Inverse Asymmetry ✓
+- [2604.03037](https://arxiv.org/abs/2604.03037) ARM
+- [2604.05595](https://arxiv.org/abs/2604.05595) Diversity-aware RL
+- [2604.13733](https://arxiv.org/abs/2604.13733) VLA-guided RL agent
+- [2604.17706](https://arxiv.org/abs/2604.17706) OmniVLA-RL (MoT)
+- [2604.23073](https://arxiv.org/abs/2604.23073) RL Token
+- [2604.25859](https://arxiv.org/abs/2604.25859) Privileged Foresight Distillation: Zero-Cost Future Correction for World Action Models ✓
+- [2604.28192](https://arxiv.org/abs/2604.28192) LaST-R1, LaST-R1: Reinforcing Robotic Manipulation via Adaptive Physical Latent Reasoning
+- [2605.06222](https://arxiv.org/abs/2605.06222) When to Trust Imagination: Adaptive Action Execution for World Action Models ✓
+- [2605.26282](https://arxiv.org/abs/2605.26282) MBDPO: Scaling World-Model Reinforcement Learning Through Diffusion Policy Optimization ✓
+- [2606.03252](https://arxiv.org/abs/2606.03252) AirDreamer: Generalist Drone Navigation with World Models
+- [2606.05254](https://arxiv.org/abs/2606.05254) Flash-WAM, Flash-WAM: Modality-Aware Distillation for World Action Models
+- [2606.10040](https://arxiv.org/abs/2606.10040) Efficient-WAM: A 1B-Parameter World-Action Model with Low-Cost Future Imagination ✓
+- [2606.12072](https://arxiv.org/abs/2606.12072) World Model Self-Distillation: Training World Models to Solve General Tasks ✓
+- [2606.17906](https://arxiv.org/abs/2606.17906) WAM-RL: World-Action Model Reinforcement Learning with Reconstruction Rewards and Online Video SFT ✓
+- [2606.21172](https://arxiv.org/abs/2606.21172) BadDreamer: Transferable Backdoor Attacks against Video World Models for Autonomous Driving
+- [2606.23623](https://arxiv.org/abs/2606.23623) dVLA-RL: Reinforcement Learning over Denoising Trajectories for Discrete Diffusion VLA Models ✓
+- [2606.25800](https://arxiv.org/abs/2606.25800) ROAD-VLA: Robust Online Adaptation via Self-Distillation for Vision-Language-Action Models ✓
+- [2607.06988](https://arxiv.org/abs/2607.06988) WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time ✓
+- [2607.10630](https://arxiv.org/abs/2607.10630) World Models as Adversaries: Multi-Agent Self-Play Fine-Tuning for Robust Motion Planning
+- [2607.11964](https://arxiv.org/abs/2607.11964) LIDAR-AD: A Decoder-Free Latent-Interaction Dreamer with Action-Residual Chains for Autonomous Driving
+- [2607.16602](https://arxiv.org/abs/2607.16602) PAVXploreRL: Physical-Action-Visual World Model Reinforcement Learning with Action Exploration ✓
+- [2607.17454](https://arxiv.org/abs/2607.17454) Test-Time Scaling for World Action Models via Zero-Shot Geometric Evaluation ✓
+- [2607.26037](https://arxiv.org/abs/2607.26037) Reinformed Dreamer (verify)
+- [2607.26040](https://arxiv.org/abs/2607.26040) Reinformed Dreamer (verify)
+- [2607.29613](https://arxiv.org/abs/2607.29613) WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning ✓
+- [2608.04964](https://arxiv.org/abs/2608.04964) WorldCycle: Self-Verifiable Reinforcement Learning for Long-Horizon Video World Models ✓
+- [2608.06197](https://arxiv.org/abs/2608.06197) EnvACE: Internalizing Environment Dynamics via World Rehearsal for Agentic Reinforcement Learning
+- [2608.08558](https://arxiv.org/abs/2608.08558) Vid2WAM: Distilling Video Diffusion Priors into World Action Models ✓
+- [2608.10386](https://arxiv.org/abs/2608.10386) Dreamer-SAC: Off-Policy Learning in Latent World Models for Sample-Efficient Autonomous Driving
+- [2608.14490](https://arxiv.org/abs/2608.14490) Twin: Playing an Unknown Game with a Test-Time Digital Twin
+- [2608.20430](https://arxiv.org/abs/2608.20430) RISE: Adaptive Imagination for World Action Models ✓
+- [2608.20735](https://arxiv.org/abs/2608.20735) ForeTime-VLA: Causal Future-Token Distillation from a World Action Model for Conveyor-Belt Manipulation ✓
+- [2608.22364](https://arxiv.org/abs/2608.22364) WAM-OPD: On-Policy Distillation for World Action Models ✓
+- [2608.23927](https://arxiv.org/abs/2608.23927) GlanceWAM: Sparse Test-Time Imagination for World-Action Models
+- [2608.24714](https://arxiv.org/abs/2608.24714) GaussianWAM: Distilling Geometry and Semantics from 3D Gaussian Fields into World-Action Models
+- [2608.24882](https://arxiv.org/abs/2608.24882) Latent Action as Intention Enables Efficient Future Imagination for World Action Models ✓
+- [2608.30237](https://arxiv.org/abs/2608.30237) Motus2: A Self-Evolving General World Model for Dexterous Manipulation
+- [2608.30530](https://arxiv.org/abs/2608.30530) WebWorld: The Browser as a World Model for Self-Improving Web Code.
+- [2609.03681](https://arxiv.org/abs/2609.03681) WISE: World-model-guided Imagination Scheduling for Efficient Post-training of VLA Models ✓
+- [2609.03729](https://arxiv.org/abs/2609.03729) FactoSR: Unfold The World: Factorize 4D Properties in Reinforcing Spatial Reasoning.
+- [2609.03952](https://arxiv.org/abs/2609.03952) WorldReward: Reward Modeling for Camera-Conditioned World Models ✓
+- [2609.06578](https://arxiv.org/abs/2609.06578) Learning to Use Imagination: Progress-Conditioned Future Utilization for World Action Models ✓
+- [2609.15570](https://arxiv.org/abs/2609.15570) DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models ✓
+- [2609.22879](https://arxiv.org/abs/2609.22879) Prioritized Rollouts for Efficient World Model-based Vision-Language-Action Policy Optimization ✓
+- [2609.24033](https://arxiv.org/abs/2609.24033) Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA RL ✓
+
+<a id="wam"></a>
+## World action models (52)
+
+- [2602.15922](https://arxiv.org/abs/2602.15922) DreamZero: World Action Models are Zero-shot Policies ✓
+- [2603.17240](https://arxiv.org/abs/2603.17240) GigaWorld-Policy: An Efficient Action-Centered World-Action Model ✓
+- [2603.22078](https://arxiv.org/abs/2603.22078) Do World Action Models Generalize Better than VLAs? A Robustness Study
+- [2603.24581](https://arxiv.org/abs/2603.24581) Latent-WAM: Latent World Action Modeling for End-to-End Autonomous Driving
+- [2603.28955](https://arxiv.org/abs/2603.28955) Enhancing Policy Learning with World-Action Model ✓
+- [2604.26694](https://arxiv.org/abs/2604.26694) Unified 4D World Action Modeling from Video Priors with Asynchronous Denoising ✓
+- [2605.06247](https://arxiv.org/abs/2605.06247) CKT-WAM: Parameter-Efficient Context Knowledge Transfer Between World Action Models ✓
+- [2606.03188](https://arxiv.org/abs/2606.03188) GeoSem-WAM: Geometry- and Semantic-Aware World Action Models ✓
+- [2606.05645](https://arxiv.org/abs/2606.05645) Discrete-WAM: Unified Discrete Vision-Action Token Editing for World-Policy Learning
+- [2606.08242](https://arxiv.org/abs/2606.08242) Light-WAM: Efficient World Action Models with State-Fusion Action Decoding ✓
+- [2606.09811](https://arxiv.org/abs/2606.09811) AHA-WAM: Asynchronous Horizon-Adaptive World-Action Modeling with Observation-Guided Context Routing ✓
+- [2606.15768](https://arxiv.org/abs/2606.15768) LaWAM, LaWAM: Latent World Action Models for Efficient Dynamics-Aware Robot Policies
+- [2606.19531](https://arxiv.org/abs/2606.19531) ImageWAM, ImageWAM: Do World Action Models Really Need Video Generation, or Just Image Editing?
+- [2606.20562](https://arxiv.org/abs/2606.20562) MemoryWAM, MemoryWAM: Efficient World Action Modeling with Persistent Memory
+- [2606.27504](https://arxiv.org/abs/2606.27504) ReWorld: Learning Better Representations for World Action Models
+- [2607.00836](https://arxiv.org/abs/2607.00836) From World Models to World Action Models: A Concise Tutorial for Robotics
+- [2607.05468](https://arxiv.org/abs/2607.05468) MECo-WAM: Learning 4D Geometric Priors for Inference-Efficient World Action Models
+- [2607.13017](https://arxiv.org/abs/2607.13017) FlowWAM, FlowWAM: Optical Flow as a Unified Action Representation for World Action Models
+- [2607.14997](https://arxiv.org/abs/2607.14997) AeroAct: Action-Centered World-Action Models for Language-Conditioned Quadrotor Flight
+- [2607.17521](https://arxiv.org/abs/2607.17521) GeoWorldAD: Geometry World Action Model for Autonomous Driving
+- [2607.25918](https://arxiv.org/abs/2607.25918) DC-WAM: Dynamic-Centric Visual Supervision and Reasoning for World-Action Models ✓
+- [2607.27511](https://arxiv.org/abs/2607.27511) World Action Planner (verify)
+- [2607.27599](https://arxiv.org/abs/2607.27599) World Action Planner (verify)
+- [2607.28243](https://arxiv.org/abs/2607.28243) EgoGenesis: Egocentric World-Action Modeling with Online Anchored Projective Memory and Action-3D RoPE
+- [2607.28391](https://arxiv.org/abs/2607.28391) TacWAM: Anchor-Guided World Action Model with Mechanics-Aware Tactile Prediction
+- [2607.28405](https://arxiv.org/abs/2607.28405) QuantWAMs: Calibrating at the Right Granularity for World Action Models
+- [2607.28993](https://arxiv.org/abs/2607.28993) ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts
+- [2607.29235](https://arxiv.org/abs/2607.29235) FBFM: A Training-Free Asynchronous Feedback Mechanism for Flow-Matching in World-Action Models Execution
+- [2608.03244](https://arxiv.org/abs/2608.03244) UniNav: A Unified World-Action Diffusion Model for Visual Navigation
+- [2608.03701](https://arxiv.org/abs/2608.03701) LiLa-WAM: Lightweight Latent Reasoning World-Action Model for Robotic Manipulation
+- [2608.04404](https://arxiv.org/abs/2608.04404) Faster-WAM: Efficient Inference-Time Future Conditioning for Robust World Action Models ✓
+- [2608.04657](https://arxiv.org/abs/2608.04657) MobileWAM: Bridging World Action Models to Mobile Manipulation with Chain-of-Foresight
+- [2608.04996](https://arxiv.org/abs/2608.04996) DreamWAM: Beyond RGB Future Prediction for World Action Models
+- [2608.05903](https://arxiv.org/abs/2608.05903) Robust-WAM: Bridging Generative Pretraining and Semantic Foresight in World-Action Models
+- [2608.06008](https://arxiv.org/abs/2608.06008) Adaptive-WAM: Quality-Guided Early-Exit Planning from Intermediate Video-Diffusion Features
+- [2608.06994](https://arxiv.org/abs/2608.06994) PILOT: Decoupling Intention from Trajectory: A Representational Deduction Framework for World Action Models
+- [2608.07468](https://arxiv.org/abs/2608.07468) SimWAM: A Simple World Action Model for End-to-End Autonomous Driving
+- [2608.10780](https://arxiv.org/abs/2608.10780) StageWAM: Joint-Embedding Stage Prediction for World-Action Models in Robot Manipulation
+- [2608.10860](https://arxiv.org/abs/2608.10860) Flex-$\pi$: A Multi-Stream World-Action Model with Compute Flexibility
+- [2608.11605](https://arxiv.org/abs/2608.11605) Foresight Without Seeing: Latent Futures for World Action Models ✓
+- [2608.19085](https://arxiv.org/abs/2608.19085) DA-WAM: Decision-Aligned Future Latents for Driving World Models
+- [2608.20114](https://arxiv.org/abs/2608.20114) DECOWAM: Decoupled Whole-Body World-Action Model for Legged Mobile Manipulation
+- [2608.20974](https://arxiv.org/abs/2608.20974) WA-JEPA: Rethinking the Video JEPA Paradigm for World-Action Modeling in Autonomous Driving
+- [2608.22403](https://arxiv.org/abs/2608.22403) LD4WAM: Learning Latent Dynamics from Human Videos for World Action Models
+- [2608.23486](https://arxiv.org/abs/2608.23486) GeoWAM: Visual Geometry World Action Models for Autonomous Driving
+- [2608.25956](https://arxiv.org/abs/2608.25956) 4DGS-WAM: Bridging Past and Future with an Object-Centric World Action Model based on 4D Gaussian Splatting
+- [2608.26103](https://arxiv.org/abs/2608.26103) Zero-WAM, Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization
+- [2608.26200](https://arxiv.org/abs/2608.26200) GameWAM: A World Action Model for Video Games
+- [2608.27259](https://arxiv.org/abs/2608.27259) Making Latent Evolution Explicit: Operator-Structured Transitions for World Action Models
+- [2609.03602](https://arxiv.org/abs/2609.03602) SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving
+- [2609.16074](https://arxiv.org/abs/2609.16074) World-Action Models for Robot Learning and Control: A Survey ✓
+- [2609.20709](https://arxiv.org/abs/2609.20709) MoWAM: Explicit Future Motion Prediction for Efficient World Action Models ✓
+
+<a id="vla"></a>
+## VLA and robot policies (88)
+
+- [2601.03782](https://arxiv.org/abs/2601.03782) PointWorld: Scaling 3D World Models for In-The-Wild Robotic Manipulation.
+- [2601.06748](https://arxiv.org/abs/2601.06748) Nora / OpenVLA / TraceVLA
+- [2601.11404](https://arxiv.org/abs/2601.11404) ACoT-VLA, ACoT-VLA: Action Chain-of-Thought for Vision-Language-Action Models
+- [2601.16163](https://arxiv.org/abs/2601.16163) Cosmos Policy
+- [2601.18692](https://arxiv.org/abs/2601.18692) Lingbot-VLA, A Pragmatic VLA Foundation Model
+- [2601.22153](https://arxiv.org/abs/2601.22153) DynamicVLA, DynamicVLA: A Vision-Language-Action Model for Dynamic Object Manipulation
+- [2602.03793](https://arxiv.org/abs/2602.03793) World-VLA-Loop (verify)
+- [2602.05765](https://arxiv.org/abs/2602.05765) π0 / π0.5 / GR00T N1.5 / OpenVLA-OFT
+- [2602.06130](https://arxiv.org/abs/2602.06130) World-VLA-Loop (verify)
+- [2602.06508](https://arxiv.org/abs/2602.06508) World-VLA-Loop: Closed-Loop Learning of Video World Model and VLA Policy ✓
+- [2602.06556](https://arxiv.org/abs/2602.06556) LIBERO-X - *LIBERO-X: Robustness Litmus for Vision-Language-Action Models
+- [2602.06949](https://arxiv.org/abs/2602.06949) DreamDojo, DreamDojo: A Generalist Robot World Model from Large-Scale Human Videos
+- [2602.10098](https://arxiv.org/abs/2602.10098) VLA-JEPA, VLA-JEPA: Enhancing Vision-Language-Action Model with Latent World Model
+- [2602.10717](https://arxiv.org/abs/2602.10717) Say, Dream, and Act: Learning Video World Models for Instruction-Driven Robot Manipulation
+- [2602.10983](https://arxiv.org/abs/2602.10983) Scaling World Model for Hierarchical Manipulation Policies
+- [2602.11236](https://arxiv.org/abs/2602.11236) ABot-M0, ABot-M0: VLA Foundation Model for Robotic Manipulation with Action Manifold Learning
+- [2602.12063](https://arxiv.org/abs/2602.12063) VLAW: Iterative Co-Improvement of Vision-Language-Action Policy and World Model ✓
+- [2602.13710](https://arxiv.org/abs/2602.13710) HBVLA, HBVLA: Pushing 1-Bit Post-Training Quantization for Vision-Language-Action Models
+- [2602.16710](https://arxiv.org/abs/2602.16710) Egoscale, EgoScale: Scaling Dexterous Manipulation with Diverse Egocentric Human Data
+- [2602.18224](https://arxiv.org/abs/2602.18224) SimVLA, SimVLA: A Simple VLA Baseline for Robotic Manipulation
+- [2602.18532](https://arxiv.org/abs/2602.18532) VLANeXt, VLANeXt: Recipes for Building Strong VLA Models
+- [2602.20057](https://arxiv.org/abs/2602.20057) AdaWorldPolicy
+- [2603.01229](https://arxiv.org/abs/2603.01229) RMBench, RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design
+- [2603.01549](https://arxiv.org/abs/2603.01549) Pri4R, Pri4R: Learning World Dynamics for Vision-Language-Action Models with Privileged 4D Representation
+- [2603.04379](https://arxiv.org/abs/2603.04379) RoboTrustBench (verify)
+- [2603.04639](https://arxiv.org/abs/2603.04639) RoboMME - *RoboMME: Benchmarking and Understanding Memory for Robotic Generalist Policies
+- [2603.08113](https://arxiv.org/abs/2603.08113) SAMoE-VLA: A Scene Adaptive Mixture-of-Experts Vision-Language-Action Model for Autonomous Driving
+- [2603.11041](https://arxiv.org/abs/2603.11041) DynVLA: Learning World Dynamics for Action Reasoning in Autonomous Driving
+- [2603.16860](https://arxiv.org/abs/2603.16860) GigaWorld-Policy (verify)
+- [2603.17117](https://arxiv.org/abs/2603.17117) GigaWorld-Policy (verify)
+- [2603.22435](https://arxiv.org/abs/2603.22435) CaP-X, CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation
+- [2603.22760](https://arxiv.org/abs/2603.22760) SG-VLA, SG-VLA: Learning Spatially-Grounded Vision-Language-Action Models for Mobile Manipulation
+- [2603.25406](https://arxiv.org/abs/2603.25406) MMaDA-VLA: Large Diffusion Vision-Language-Action Model with Unified Multi-Modal Instruction and Generation
+- [2603.29844](https://arxiv.org/abs/2603.29844) DIAL DIAL: Decoupling Intent and Action via Latent World Modeling for End-to-End VLA
+- [2604.05014](https://arxiv.org/abs/2604.05014) StarVLA, StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing
+- [2604.07607](https://arxiv.org/abs/2604.07607) EgoVerse, EgoVerse: An Egocentric Human Dataset for Robot Learning from Around the World
+- [2604.11757](https://arxiv.org/abs/2604.11757) StarVLA-α, StarVLA-α: Reducing Complexity in Vision-Language-Action Systems
+- [2604.15483](https://arxiv.org/abs/2604.15483) π0.7, π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities
+- [2604.20834](https://arxiv.org/abs/2604.20834) PokeVLA, PokeVLA: Empowering Pocket-Sized Vision-Language-Action Model with Comprehensive World Knowledge Guidance
+- [2604.23775](https://arxiv.org/abs/2604.23775) Vision-Language-Action Safety: Threats, Challenges, Evaluations, and Mechanisms
+- [2605.11817](https://arxiv.org/abs/2605.11817) GridS, See What Matters: Differentiable Grid Sample Pruning for Generalizable Vision-Language-Action Model
+- [2605.19282](https://arxiv.org/abs/2605.19282) Pion, Rethinking Muon Beyond Pretraining: Spectral Failures and High-Pass Remedies for VLA and RLVR
+- [2605.24934](https://arxiv.org/abs/2605.24934) HumanEgo, HumanEgo: Zero-Shot Robot Learning from Minutes of Human Egocentric Videos
+- [2605.29605](https://arxiv.org/abs/2605.29605) VLAConf, VLAConf: Calibrated Task-Success Confidence for Vision-Language-Action Models
+- [2605.30280](https://arxiv.org/abs/2605.30280) Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments
+- [2606.01027](https://arxiv.org/abs/2606.01027) τ0-WM, τ0-WM: A Unified Video-Action World Model for Robotic Manipulation
+- [2606.01600](https://arxiv.org/abs/2606.01600) RoboTrustBench (verify)
+- [2606.02577](https://arxiv.org/abs/2606.02577) RoboDream: Compositional World Models for Scalable Robot Data Synthesis
+- [2606.04463](https://arxiv.org/abs/2606.04463) OSCAR: Omni-Embodiment Action-Conditioned World Model for Robotics
+- [2606.05773](https://arxiv.org/abs/2606.05773) PiL-World: A Chunk-Wise World Model for VLA Policy-in-the-Loop Evaluation
+- [2606.06904](https://arxiv.org/abs/2606.06904) ActionMap, ActionMap: Robot Policy Learning via Voxel Action Heatmap
+- [2606.07100](https://arxiv.org/abs/2606.07100) LARA, LARA: Latent Action Representation Alignment for Vision-Language-Action Models
+- [2606.17030](https://arxiv.org/abs/2606.17030) Qwen-RobotWorld
+- [2606.17046](https://arxiv.org/abs/2606.17046) GAM, Geometric Action Model for Robot Policy Learning
+- [2606.17846](https://arxiv.org/abs/2606.17846) Qwen-RobotManip (verify)
+- [2606.20521](https://arxiv.org/abs/2606.20521) Xiaomi-Robotics-1 (verify)
+- [2606.20867](https://arxiv.org/abs/2606.20867) Qwen-RobotManip (verify)
+- [2606.32028](https://arxiv.org/abs/2606.32028) DVG-WM: Disentangled Video Generation Enables Efficient Embodied World Model for Robotic Manipulation
+- [2607.01060](https://arxiv.org/abs/2607.01060) RoboWorld: Fast and Reliable Neural Simulators for Generalist Robot Policy Evaluation
+- [2607.02501](https://arxiv.org/abs/2607.02501) Embodied.cpp, Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots
+- [2607.04434](https://arxiv.org/abs/2607.04434) RoboDojo, RoboDojo: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies
+- [2607.04517](https://arxiv.org/abs/2607.04517) Xiaomi-Robotics-1 (verify)
+- [2607.08375](https://arxiv.org/abs/2607.08375) WCog-VLA: A Dual-Level World-Cognitive Vision-Language-Action Model for End-to-End Autonomous Driving
+- [2607.08448](https://arxiv.org/abs/2607.08448) Gemini Robotics 2 (verify)
+- [2607.14005](https://arxiv.org/abs/2607.14005) M4World: A Multi-view Multimodal Driving World Model for Interactive Object Manipulation and Minute-long Streaming
+- [2607.14183](https://arxiv.org/abs/2607.14183) Open-AoE, Open-AoE: An Open Egocentric Manipulation Dataset and Toolchain for Embodied Learning
+- [2607.15330](https://arxiv.org/abs/2607.15330) Xiaomi-Robotics-1 (verify)
+- [2607.20988](https://arxiv.org/abs/2607.20988) HyWorldVLA: A Vision-Language-Action Model with Hybrid World Modeling for Autonomous Driving
+- [2607.22530](https://arxiv.org/abs/2607.22530) ViTacWorld: Scaling Visuo-Tactile World Models for Contact-Rich Robot Manipulation
+- [2607.24744](https://arxiv.org/abs/2607.24744) Data Pyramid for Embodied Manipulation
+- [2607.25895](https://arxiv.org/abs/2607.25895) HiFi-UMI, HiFi-UMI: Learning Deployable Manipulation Policies from High-Fidelity UMI Data Alone
+- [2607.27205](https://arxiv.org/abs/2607.27205) Gemini Robotics 2 (verify)
+- [2607.29302](https://arxiv.org/abs/2607.29302) BWM: A Low-Cost High-Fidelity World Simulator for Robot Learning
+- [2607.29393](https://arxiv.org/abs/2607.29393) AquaJEPA: Action-Conditioned Multimodal Predictive Representations for Underwater Robot Dynamics
+- [2608.05706](https://arxiv.org/abs/2608.05706) LAWM-3D, LAWM-3D: Learning 3D-Aware Latent Actions from Human Videos for Generalizable Robot World Models
+- [2608.06332](https://arxiv.org/abs/2608.06332) GeniWorld: A Generalizable Interactive World Model for Robotic Manipulation via Visual Actions
+- [2608.10449](https://arxiv.org/abs/2608.10449) PBD-AG: Persistent Baseline-Delta Active Graphs with Uncertainty-Aware Inspection for Long-Horizon Service Robots
+- [2608.13049](https://arxiv.org/abs/2608.13049) H2R-Bench: Benchmarking Human-to-Robot Manipulation Video Generation in World Models
+- [2608.13103](https://arxiv.org/abs/2608.13103) S2-HWM: Sparse Event-Structured Hierarchical World Model for Long-Horizon Surgical Robot Manipulation
+- [2608.22067](https://arxiv.org/abs/2608.22067) DELE-w0.5: Inferring Action from Future Latent State for Robotic Manipulation
+- [2608.22278](https://arxiv.org/abs/2608.22278) DreamMimic: Learning Visuomotor Whole-Body Loco-Manipulation via World Model.
+- [2609.02546](https://arxiv.org/abs/2609.02546) ZETA, ZETA: A Controlled Study of Zero-Shot Cross-Embodiment VLA Transfer for Tabletop Manipulation
+- [2609.03715](https://arxiv.org/abs/2609.03715) [🌟] MINERVA, MINERVA: How Small Can a Manipulation Policy Be and Still Solve LIBERO?
+- [2609.03927](https://arxiv.org/abs/2609.03927) Toward Unified Robot Learning: Bridging Representation, Vision-Language-Action, and World Models. TMLR 26
+- [2609.04193](https://arxiv.org/abs/2609.04193) GIFT: Guided Intermediate Feature Training via Action-Oriented Structural Supervision for Robotic Manipulation
+- [2609.04851](https://arxiv.org/abs/2609.04851) Coupled Control and Wireless World Models for Resilient Remote Robotic Control
+- [2609.04911](https://arxiv.org/abs/2609.04911) TourPhysics: Bringing Physics to World Models for Exploration and Manipulation from a Single Image
+- [2609.10522](https://arxiv.org/abs/2609.10522) Show-Harness, Show-Harness: Just a VLM Agent Can Play Robots
+
+<a id="eff"></a>
+## Efficiency (caching, few-step, quantization, sparse) (12)
+
+- [2601.09452](https://arxiv.org/abs/2601.09452) MAD: Motion Appearance Decoupling for efficient Driving World Models.
+- [2601.12277](https://arxiv.org/abs/2601.12277) An Efficient and Multi-Modal Navigation System with One-Step World Model
+- [2603.00376](https://arxiv.org/abs/2603.00376) NeuroHex: Highly-Efficient Hex Coordinate System for Creating World Models to Enable Adaptive AI. NICE 26
+- [2603.06331](https://arxiv.org/abs/2603.06331) WorldCache: Accelerating World Models for Free via Heterogeneous Token Caching
+- [2603.07264](https://arxiv.org/abs/2603.07264) Kinematics-Aware Latent World Models for Data-Efficient Autonomous Driving
+- [2606.28758](https://arxiv.org/abs/2606.28758) X-Mind: Efficient Visual Chain-of-Thought via Predictive World Model for End-to-End Driving
+- [2607.15065](https://arxiv.org/abs/2607.15065) DriftWorld: Fast World Modeling through Drifting
+- [2608.05695](https://arxiv.org/abs/2608.05695) DreamGuard: Efficient Runtime Guardrail for LLM Agents via Risk-Aware World Model
+- [2608.14022](https://arxiv.org/abs/2608.14022) ForgeWM: Progressive Causal Training for Few-Step Action-Conditioned Video World Models
+- [2608.16354](https://arxiv.org/abs/2608.16354) DriveCache: Action-Aware Caching for Driving World Model Inference
+- [2608.22764](https://arxiv.org/abs/2608.22764) LpWM: A Case for Sparse Representations in World Models
+- [2609.03931](https://arxiv.org/abs/2609.03931) SPAR3S: Sparse Auto-Regressive Modeling for Scene Generation from Multi-View Images.
+
+<a id="wm"></a>
+## Other world models, benchmarks & surveys (289)
+
+- [2601.00051](https://arxiv.org/abs/2601.00051) TeleWorld: Towards Dynamic Multimodal Synthesis with a 4D World Model
+- [2601.00393](https://arxiv.org/abs/2601.00393) NeoVerse: Enhancing 4D World Model with in-the-wild Monocular Videos.
+- [2601.00755](https://arxiv.org/abs/2601.00755) A formal theory on problem space as a semantic world model in systems engineering
+- [2601.00844](https://arxiv.org/abs/2601.00844) World Modeling Workshop 26 (verify)
+- [2601.00930](https://arxiv.org/abs/2601.00930) AlignUSER: Human-Aligned LLM Agents via World Models for Recommender System Evaluation
+- [2601.01075](https://arxiv.org/abs/2601.01075) Flow Equivariant World Models: Memory for Partially Observed Dynamic Environments
+- [2601.01528](https://arxiv.org/abs/2601.01528) DrivingGen: A Comprehensive Benchmark for Generative Video World Models in Autonomous Driving
+- [2601.01705](https://arxiv.org/abs/2601.01705) World Modeling Workshop 26 (verify)
+- [2601.02427](https://arxiv.org/abs/2601.02427) NitroGen, NitroGen: An Open Foundation Model for Generalist Gaming Agents
+- [2601.02456](https://arxiv.org/abs/2601.02456) InternData-A1
+- [2601.03044](https://arxiv.org/abs/2601.03044) HG-DAgger / RECAP
+- [2601.03517](https://arxiv.org/abs/2601.03517) Semantic Belief-State World Model for 3D Human Motion Prediction
+- [2601.03905](https://arxiv.org/abs/2601.03905) Current Agents Fail to Leverage World Model as Tool for Foresight
+- [2601.04137](https://arxiv.org/abs/2601.04137) Wow, wo, val! A Comprehensive Embodied World Model Evaluation Turing Testl
+- [2601.04453](https://arxiv.org/abs/2601.04453) UniDrive-WM: Unified Understanding, Planning and Generation World Model For Autonomous Driving.
+- [2601.05138](https://arxiv.org/abs/2601.05138) VerseCrafter: Dynamic Realistic Video World Model with 4D Geometric Control.
+- [2601.05230](https://arxiv.org/abs/2601.05230) Learning Latent Action World Models In The Wild
+- [2601.06604](https://arxiv.org/abs/2601.06604) Object-Centric World Models Meet Monte Carlo Tree Search
+- [2601.08955](https://arxiv.org/abs/2601.08955) Imagine-then-Plan: Agent Learning from Adaptive Lookahead with World Models
+- [2601.10553](https://arxiv.org/abs/2601.10553) Stereo World Model (verify)
+- [2601.11421](https://arxiv.org/abs/2601.11421) GM100, The Great March 100: 100 Detail-oriented Tasks for Evaluating Embodied AI Agents
+- [2601.13247](https://arxiv.org/abs/2601.13247) Boltzmann-GPT (verify)
+- [2601.14354](https://arxiv.org/abs/2601.14354) VJEPA: Variational Joint Embedding Predictive Architectures as Probabilistic World Models
+- [2601.15284](https://arxiv.org/abs/2601.15284) Walk through Paintings: Egocentric World Models from Internet Priors
+- [2601.15533](https://arxiv.org/abs/2601.15533) From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models
+- [2601.16007](https://arxiv.org/abs/2601.16007) PhysicsMind: Sim and Real Mechanics Benchmarking for Physical Reasoning and Prediction in Foundational VLMs and World Models
+- [2601.17067](https://arxiv.org/abs/2601.17067) A Mechanistic View on Video Generation as World Models: State and Dynamics
+- [2601.17094](https://arxiv.org/abs/2601.17094) Boltzmann-GPT (verify)
+- [2601.17507](https://arxiv.org/abs/2601.17507) Boltzmann-GPT (verify)
+- [2601.19834](https://arxiv.org/abs/2601.19834) Visual Generation Unlocks Human-Like Reasoning through Multimodal World Models
+- [2601.20539](https://arxiv.org/abs/2601.20539) Lingbot-World (verify)
+- [2601.20540](https://arxiv.org/abs/2601.20540) Lingbot-World (verify)
+- [2601.21282](https://arxiv.org/abs/2601.21282) WorldBench: Disambiguating Physics for Diagnostic Evaluation of World Modelsl
+- [2601.21998](https://arxiv.org/abs/2601.21998) (title not captured)
+- [2602.03747](https://arxiv.org/abs/2602.03747) LIVE: Long-horizon Interactive Video World Modeling
+- [2602.03973](https://arxiv.org/abs/2602.03973) gradient-based steer
+- [2602.05842](https://arxiv.org/abs/2602.05842) (title not captured)
+- [2602.07050](https://arxiv.org/abs/2602.07050) Interpreting Physics in Video World Models
+- [2602.07277](https://arxiv.org/abs/2602.07277) Cross-View World Models
+- [2602.08025](https://arxiv.org/abs/2602.08025) MIND: Benchmarking Memory Consistency and Action Control in World Models
+- [2602.08971](https://arxiv.org/abs/2602.08971) WorldArena, WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models
+- [2602.09600](https://arxiv.org/abs/2602.09600) Agent World Model (verify)
+- [2602.09878](https://arxiv.org/abs/2602.09878) (title not captured)
+- [2602.10090](https://arxiv.org/abs/2602.10090) Agent World Model (verify)
+- [2602.10104](https://arxiv.org/abs/2602.10104) Olaf-World: Orienting Latent Actions for Video World Modeling
+- [2602.10556](https://arxiv.org/abs/2602.10556) LAP, LAP: Language-Action Pre-Training Enables Zero-shot Cross-Embodiment Transfer
+- [2602.10884](https://arxiv.org/abs/2602.10884) (title not captured)
+- [2602.12062](https://arxiv.org/abs/2602.12062) HoloBrain-0, HoloBrain-0 Technical Report
+- [2602.12215](https://arxiv.org/abs/2602.12215) LDA-1B, LDA-1B: Scaling Latent Dynamics Action Model via Universal Embodied Data Ingestion
+- [2602.12540](https://arxiv.org/abs/2602.12540) Self-Supervised JEPA-based World Models for LiDAR Occupancy Completion and Forecasting
+- [2602.16229](https://arxiv.org/abs/2602.16229) Factored Latent Action World Models
+- [2602.17259](https://arxiv.org/abs/2602.17259) (title not captured)
+- [2602.18639](https://arxiv.org/abs/2602.18639) Learning Invariant Visual Representations for Planning with Joint-Embedding Predictive World Models
+- [2602.20685](https://arxiv.org/abs/2602.20685) RAYNOVA: Scale-Temporal Autoregressive World Modeling in Ray Space.
+- [2602.22010](https://arxiv.org/abs/2602.22010) WoG, World Guidance World Modeling in Condition Space for Action Generation
+- [2602.22208](https://arxiv.org/abs/2602.22208) Solaris: Building a Multiplayer Video World Model in Minecraft
+- [2602.22452](https://arxiv.org/abs/2602.22452) CWM: Contrastive World Models for Action Feasibility Learning in Embodied Agent Pipelines
+- [2602.22960](https://arxiv.org/abs/2602.22960) UCM: Unifying Camera Control and Memory with Time-aware Positional Encoding Warping for World Models
+- [2602.23058](https://arxiv.org/abs/2602.23058) Divide and Conquer (verify)
+- [2602.23152](https://arxiv.org/abs/2602.23152) The Trinity of Consistency as a Defining Principle for General World Models
+- [2602.23164](https://arxiv.org/abs/2602.23164) MetaOthello: A Controlled Study of Multiple World Models in Transformers
+- [2602.23259](https://arxiv.org/abs/2602.23259) Risk-Aware World Model Predictive Control for Generalizable End-to-End Autonomous Driving
+- [2603.00110](https://arxiv.org/abs/2603.00110) (title not captured)
+- [2603.00466](https://arxiv.org/abs/2603.00466) DreamWorld: Unified World Modeling in Video Generation
+- [2603.02697](https://arxiv.org/abs/2603.02697) ShareVerse: Multi-Agent Consistent Video Generation for Shared World Modeling
+- [2603.03482](https://arxiv.org/abs/2603.03482) Beyond Pixel Histories: World Models with Persistent 3D State
+- [2603.04317](https://arxiv.org/abs/2603.04317) World Properties without World Models: Recovering Spatial and Temporal Structure from Co-occurrence Statistics in Static Word Embeddings
+- [2603.04715](https://arxiv.org/abs/2603.04715) Probabilistic Dreaming for World Models.
+- [2603.05438](https://arxiv.org/abs/2603.05438) Divide and Conquer (verify)
+- [2603.05815](https://arxiv.org/abs/2603.05815) From Pixels to Tokens (verify)
+- [2603.07039](https://arxiv.org/abs/2603.07039) World Modeling Workshop 26 (verify)
+- [2603.07145](https://arxiv.org/abs/2603.07145) LiveWorld: Simulating Out-of-Sight Dynamics in Generative Video World Models
+- [2603.07545](https://arxiv.org/abs/2603.07545) Stereo World Model (verify)
+- [2603.07799](https://arxiv.org/abs/2603.07799) MWM: Mobile World Models for Action-Conditioned Consistent Prediction
+- [2603.08546](https://arxiv.org/abs/2603.08546) Interactive World Simulator
+- [2603.09086](https://arxiv.org/abs/2603.09086) Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation Framework, and Open Challenges
+- [2603.09241](https://arxiv.org/abs/2603.09241) RAE-NWM: Navigation World Model in Dense Visual Representation Space
+- [2603.10448](https://arxiv.org/abs/2603.10448) (title not captured)
+- [2603.11653](https://arxiv.org/abs/2603.11653) Simple Recipe Works
+- [2603.11911](https://arxiv.org/abs/2603.11911) InSpatio-WorldFM (verify)
+- [2603.14497](https://arxiv.org/abs/2603.14497) WorldVLM: Combining World Model Forecasting and Vision-Language Reasoning
+- [2603.14938](https://arxiv.org/abs/2603.14938) FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous Driving
+- [2603.14948](https://arxiv.org/abs/2603.14948) [WorldDrive] Bridging Scene Generation and Planning: Driving with World Model via Unifying Vision and Motion Representation
+- [2603.16195](https://arxiv.org/abs/2603.16195) (title not captured)
+- [2603.17375](https://arxiv.org/abs/2603.17375) Stereo World Model (verify)
+- [2603.17808](https://arxiv.org/abs/2603.17808) InSpatio-WorldFM (verify)
+- [2603.19201](https://arxiv.org/abs/2603.19201) (title not captured)
+- [2603.19235](https://arxiv.org/abs/2603.19235) [VEGA-3D] Generation Models Know Space: Unleashing Implicit 3D Priors for Scene Understanding.
+- [2603.19312](https://arxiv.org/abs/2603.19312) LeWorldModel, LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels
+- [2603.19979](https://arxiv.org/abs/2603.19979) X-World: Controllable Ego-Centric Multi-Camera World Models for Scalable End-to-End Driving
+- [2603.21341](https://arxiv.org/abs/2603.21341) MLLM + Diffusion
+- [2603.21557](https://arxiv.org/abs/2603.21557) From Part to Whole: 3D Generative World Model with an Adaptive Structural Hierarchy. ICME 26
+- [2603.22212](https://arxiv.org/abs/2603.22212) Omni-WorldBench
+- [2603.22281](https://arxiv.org/abs/2603.22281) ThinkJEPA: Empowering Latent World Models with Large Vision-Language Reasoning Model
+- [2603.22286](https://arxiv.org/abs/2603.22286) Describe-Then-Act (verify)
+- [2603.22430](https://arxiv.org/abs/2603.22430) Describe-Then-Act (verify)
+- [2603.23149](https://arxiv.org/abs/2603.23149) Describe-Then-Act (verify)
+- [2603.23376](https://arxiv.org/abs/2603.23376) ABot-PhysWorld
+- [2603.24506](https://arxiv.org/abs/2603.24506) Toward Physically Consistent Driving Video World Models under Challenging Trajectories
+- [2603.24835](https://arxiv.org/abs/2603.24835) DCARL: A Divide-and-Conquer Framework for Autoregressive Long-Trajectory Video Generation
+- [2603.25716](https://arxiv.org/abs/2603.25716) [HyDRA] Out of Sight but Not Out of Mind: Hybrid Memory for Dynamic Video World Models
+- [2603.25741](https://arxiv.org/abs/2603.25741) Vega: Learning to Drive with Natural Language Instructions
+- [2603.28545](https://arxiv.org/abs/2603.28545) RoboChallenge
+- [2604.01860](https://arxiv.org/abs/2604.01860) POCO (EM + Clipped)
+- [2604.04502](https://arxiv.org/abs/2604.04502) (title not captured)
+- [2604.06168](https://arxiv.org/abs/2604.06168) Action Images (verify)
+- [2604.09330](https://arxiv.org/abs/2604.09330) (title not captured)
+- [2604.09860](https://arxiv.org/abs/2604.09860) RoboLab, RoboLab: A High-Fidelity Simulation Benchmark for Analysis of Task Generalist Policies
+- [2604.11135](https://arxiv.org/abs/2604.11135) (title not captured)
+- [2604.14732](https://arxiv.org/abs/2604.14732) (title not captured)
+- [2604.16391](https://arxiv.org/abs/2604.16391) Action Images (verify)
+- [2604.16484](https://arxiv.org/abs/2604.16484) DexWorldModel
+- [2604.19683](https://arxiv.org/abs/2604.19683) (title not captured)
+- [2604.19730](https://arxiv.org/abs/2604.19730) Value-guided Denoising MDP
+- [2604.22152](https://arxiv.org/abs/2604.22152) (title not captured)
+- [2604.27792](https://arxiv.org/abs/2604.27792) (title not captured)
+- [2604.28196](https://arxiv.org/abs/2604.28196) HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation
+- [2605.01896](https://arxiv.org/abs/2605.01896) Divide and Conquer (verify)
+- [2605.02881](https://arxiv.org/abs/2605.02881) MolmoAct2, MolmoAct2 Action Reasoning Models for Real-World Deployment
+- [2605.02900](https://arxiv.org/abs/2605.02900) Safety in Embodied AI: A Survey of Risks, Attacks, and Defenses
+- [2605.03269](https://arxiv.org/abs/2605.03269) RLDX-1, RLDX-1 Technical Report
+- [2605.04678](https://arxiv.org/abs/2605.04678) From Pixels to Tokens (verify)
+- [2605.05092](https://arxiv.org/abs/2605.05092) Driver-WM: A Driver-Centric Traffic-Conditioned Latent World Model for In-Cabin Dynamics Rollout.
+- [2605.06747](https://arxiv.org/abs/2605.06747) HumanNet, HumanNet: Scaling Human-centric Video Learning to One Million Hours
+- [2605.07195](https://arxiv.org/abs/2605.07195) (title not captured)
+- [2605.07326](https://arxiv.org/abs/2605.07326) GEM: Generating LiDAR World Model via Deformable Mamba.
+- [2605.10426](https://arxiv.org/abs/2605.10426) Xiaomi EV World Model (verify)
+- [2605.12090](https://arxiv.org/abs/2605.12090) Read the survey
+- [2605.15116](https://arxiv.org/abs/2605.15116) Xiaomi EV World Model (verify)
+- [2605.15725](https://arxiv.org/abs/2605.15725) DiLA, DiLA: Disentangled Latent Action World Models
+- [2605.18137](https://arxiv.org/abs/2605.18137) Xiaomi EV World Model (verify)
+- [2605.19631](https://arxiv.org/abs/2605.19631) HEAT: Heterogeneous End-to-End Autonomous Driving via Trajectory-Guided World Models
+- [2605.20752](https://arxiv.org/abs/2605.20752) GaussianDream (verify)
+- [2605.27491](https://arxiv.org/abs/2605.27491) GaussianDream (verify)
+- [2606.01935](https://arxiv.org/abs/2606.01935) Unified Driving Tokens
+- [2606.02800](https://arxiv.org/abs/2606.02800) Cosmos 3, Cosmos 3: Omnimodal World Models for Physical AI
+- [2606.03159](https://arxiv.org/abs/2606.03159) NVIDIA OmniDreams
+- [2606.05979](https://arxiv.org/abs/2606.05979) World-Language-Action Model for Unified World Modeling, Language Reasoning, and Action Synthesis
+- [2606.06014](https://arxiv.org/abs/2606.06014) PLAN-S: Bridging Planning with Latent Style Dynamics for Autonomous Driving World Models
+- [2606.06147](https://arxiv.org/abs/2606.06147) WorldOlympiad (verify)
+- [2606.06194](https://arxiv.org/abs/2606.06194) ActiveMimic, ActiveMimic: Egocentric Video Pretraining with Active Perception
+- [2606.08555](https://arxiv.org/abs/2606.08555) (title not captured)
+- [2606.08737](https://arxiv.org/abs/2606.08737) (title not captured)
+- [2606.08962](https://arxiv.org/abs/2606.08962) (title not captured)
+- [2606.09215](https://arxiv.org/abs/2606.09215) WorldOlympiad (verify)
+- [2606.10363](https://arxiv.org/abs/2606.10363) (title not captured)
+- [2606.11129](https://arxiv.org/abs/2606.11129) WorldOlympiad (verify)
+- [2606.11187](https://arxiv.org/abs/2606.11187) Next Forcing, Next Forcing: Causal World Modeling with Multi-Chunk Prediction
+- [2606.12217](https://arxiv.org/abs/2606.12217) Making Foresight Actionable
+- [2606.12403](https://arxiv.org/abs/2606.12403) (title not captured)
+- [2606.12783](https://arxiv.org/abs/2606.12783) A Tutorial on World Models and Physical AI
+- [2606.12987](https://arxiv.org/abs/2606.12987) ReactSim-Bench (verify)
+- [2606.13460](https://arxiv.org/abs/2606.13460) ReactSim-Bench (verify)
+- [2606.13840](https://arxiv.org/abs/2606.13840) Multi-Agent Embodied Autonomous Driving: From V2X Information Exchange to Shared World Models
+- [2606.14058](https://arxiv.org/abs/2606.14058) ReactSim-Bench (verify)
+- [2606.15341](https://arxiv.org/abs/2606.15341) CausalDrive: Real-time Causal World Models for Autonomous Driving
+- [2606.16274](https://arxiv.org/abs/2606.16274) GraphWorld: Long-Horizon Planning with World Models for End-to-End Autonomous Driving
+- [2606.16533](https://arxiv.org/abs/2606.16533) Kairos, Kairos: A Native World Model Stack for Physical AI
+- [2606.17536](https://arxiv.org/abs/2606.17536) OmniDrive: An LLM-Choreographed Multi-Agent World Model with Unified Latent Co-Compression for Multi-View Driving Video Generation
+- [2606.21088](https://arxiv.org/abs/2606.21088) (title not captured)
+- [2606.27375](https://arxiv.org/abs/2606.27375) ABC-130k, Scalable Behavior Cloning with Open Data, Training, and Evaluation
+- [2606.27644](https://arxiv.org/abs/2606.27644) CascadeOcc: Rethinking 3D Occupancy World Models with Cascaded VQ Representations
+- [2606.28757](https://arxiv.org/abs/2606.28757) A Physics-Grounded Benchmark for Multi-Agent Dynamics in World Models
+- [2606.28804](https://arxiv.org/abs/2606.28804) ViPSim: Collaborating Visual and Parameter Spaces for Consistent Long-Horizon Embodied World Models
+- [2606.29879](https://arxiv.org/abs/2606.29879) LWDrive: Layer-Wise World-Model-Guided Vision-Language Model Planning for Autonomous Driving
+- [2606.30421](https://arxiv.org/abs/2606.30421) OWMDrive: Causality-Aware End-to-End Autonomous Driving via 4D Occupancy World Model
+- [2606.31209](https://arxiv.org/abs/2606.31209) Long-term Traffic Simulation via Structured Autoregressive Modeling.
+- [2606.31226](https://arxiv.org/abs/2606.31226) ForgeDrive: Bidirectional Cross-Conditioning for Unified Visual-Action Generation in Autonomous Driving
+- [2606.32026](https://arxiv.org/abs/2606.32026) AdaJEPA, AdaJEPA: An Adaptive Latent World Model
+- [2607.00148](https://arxiv.org/abs/2607.00148) 3D Point World Models: Point Completion Enables More Accurate Dynamics Learning
+- [2607.04500](https://arxiv.org/abs/2607.04500) Geographic Diversity Beats Data Volume for Cross-Domain Generalization in Zero-Label JEPA Driving World Models
+- [2607.04541](https://arxiv.org/abs/2607.04541) CRISP: A Spatiotemporal Camera-Radar Backbone for Driving via Forecasting-Based World-Model Pretraining
+- [2607.08127](https://arxiv.org/abs/2607.08127) Temporal Ratio (verify)
+- [2607.08639](https://arxiv.org/abs/2607.08639) Temporal Ratio (verify)
+- [2607.10781](https://arxiv.org/abs/2607.10781) Is Energy Guidance All You Need? Training-Free Norm Injection for Driving World Models
+- [2607.11397](https://arxiv.org/abs/2607.11397) WALA, WALA Learning Executable Latent Actions from Action-Labeled Demonstrations and Action-Free Videos
+- [2607.13410](https://arxiv.org/abs/2607.13410) Ego-Dynamics-Augmented World Model for Autonomous Driving with Zero-Shot Cross-Chassis Adaptation
+- [2607.15898](https://arxiv.org/abs/2607.15898) Orbis 2: A Hierarchical World Model for Driving
+- [2607.19191](https://arxiv.org/abs/2607.19191) ABot-World-0: Infinite Interactive World Rollout on a Single Desktop GPU
+- [2607.19343](https://arxiv.org/abs/2607.19343) Masked Visual Actions for Unified World Modeling
+- [2607.19876](https://arxiv.org/abs/2607.19876) KineBench: Benchmarking Embodied World Models via IDM-Free Kinematic Grounding.
+- [2607.21594](https://arxiv.org/abs/2607.21594) Streaming Multi-Agent Autoregressive Diffusion Model with World State Registers
+- [2607.23909](https://arxiv.org/abs/2607.23909) WorldDiT: A Unified Diffusion Architecture for World and Action Modeling
+- [2607.23969](https://arxiv.org/abs/2607.23969) VisualPatchWorld (verify)
+- [2607.24267](https://arxiv.org/abs/2607.24267) VisualPatchWorld (verify)
+- [2607.25236](https://arxiv.org/abs/2607.25236) VisualPatchWorld (verify)
+- [2607.25242](https://arxiv.org/abs/2607.25242) Medical world models in healthcare: foundations, applications, and challenges for trustworthy clinical translation
+- [2607.25337](https://arxiv.org/abs/2607.25337) Temporal-Distance JEPA
+- [2607.26056](https://arxiv.org/abs/2607.26056) INTACT: Isomorphic Intent-to-Action Learning for Search-Free World Models
+- [2607.26336](https://arxiv.org/abs/2607.26336) Learning Implicit Causal World Models from Multi-Agent Demonstrations
+- [2607.26452](https://arxiv.org/abs/2607.26452) CG-World: A Large-Scale World-State Dataset and Protocol for World Models
+- [2607.26579](https://arxiv.org/abs/2607.26579) ContactFlow: A video action conditioning that transfers across embodiments
+- [2607.26712](https://arxiv.org/abs/2607.26712) ActSWM: Action-Sensitive World Models for Long-Horizon Planning in Open-World Games
+- [2607.26754](https://arxiv.org/abs/2607.26754) What Can Latent World Models Know? (verify)
+- [2607.26789](https://arxiv.org/abs/2607.26789) What Can Latent World Models Know? (verify)
+- [2607.27017](https://arxiv.org/abs/2607.27017) What Can Latent World Models Know? (verify)
+- [2607.27924](https://arxiv.org/abs/2607.27924) ODEWorld: A Continuous Predictive Architecture via Physical-Time Flow
+- [2607.28226](https://arxiv.org/abs/2607.28226) Discover Artificial Intelligence 26 (verify)
+- [2607.28362](https://arxiv.org/abs/2607.28362) ShadowDancer: Teaching Video World Models Any Action by Learning Unified Dynamics Representations from a Video and Its Shadow
+- [2607.28624](https://arxiv.org/abs/2607.28624) PhiZero: A World Model Built Around Physical Language
+- [2607.29031](https://arxiv.org/abs/2607.29031) Auto-JEPA: A Latent World Model of Continuous Intent for End-to-End Autonomous Driving
+- [2608.03211](https://arxiv.org/abs/2608.03211) CrossScope: A Role-Asymmetric World Model for Joint Dual-Scope Surgical Video Prediction
+- [2608.03924](https://arxiv.org/abs/2608.03924) OpenETA, ETA: A New Agentic Paradigm for Embodied Tasks
+- [2608.04412](https://arxiv.org/abs/2608.04412) muSync-GS: Physics-Synchronized Driving Video Synthesis for Weather and Geometric Road Hazards
+- [2608.04653](https://arxiv.org/abs/2608.04653) Overcoming Statistical Bias in Action-Controllable World Models
+- [2608.05070](https://arxiv.org/abs/2608.05070) Uncertainty-Aware World Model for Aerial Image-Goal Navigation (verify)
+- [2608.05523](https://arxiv.org/abs/2608.05523) Uncertainty-Aware World Model for Aerial Image-Goal Navigation (verify)
+- [2608.05597](https://arxiv.org/abs/2608.05597) Uncertainty-Aware World Model for Aerial Image-Goal Navigation (verify)
+- [2608.05720](https://arxiv.org/abs/2608.05720) AppDeltaWorld (verify)
+- [2608.05799](https://arxiv.org/abs/2608.05799) AppDeltaWorld (verify)
+- [2608.05891](https://arxiv.org/abs/2608.05891) AppDeltaWorld (verify)
+- [2608.05948](https://arxiv.org/abs/2608.05948) GAUGE: A Measurement-Grounded Benchmark for Physical Fidelity in Simulation Engines and Video World Models
+- [2608.06257](https://arxiv.org/abs/2608.06257) MASS: Multiplayer World Models with Authoritative Shared State
+- [2608.06375](https://arxiv.org/abs/2608.06375) Dueling World Models (verify)
+- [2608.06544](https://arxiv.org/abs/2608.06544) Dueling World Models (verify)
+- [2608.06706](https://arxiv.org/abs/2608.06706) Dueling World Models (verify)
+- [2608.06770](https://arxiv.org/abs/2608.06770) Surg-UniWorld
+- [2608.06799](https://arxiv.org/abs/2608.06799) PSG-JEPA: Is Forward Prediction Enough? Physical State Grounding for JEPA World Models
+- [2608.07077](https://arxiv.org/abs/2608.07077) Transformers Struggle to Use Their Emergent World Models: Revisiting the Tower of Hanoi, and the Illusion of Thinking
+- [2608.07107](https://arxiv.org/abs/2608.07107) Addressable Memory for Video World Models (verify)
+- [2608.07267](https://arxiv.org/abs/2608.07267) Addressable Memory for Video World Models (verify)
+- [2608.07408](https://arxiv.org/abs/2608.07408) Addressable Memory for Video World Models (verify)
+- [2608.07409](https://arxiv.org/abs/2608.07409) UniJEPA: A Unified Joint-Embedding Predictive Architecture for Task-Agnostic Visual World Modeling.
+- [2608.07420](https://arxiv.org/abs/2608.07420) Beyond Myopic World Models
+- [2608.10439](https://arxiv.org/abs/2608.10439) Stream Forcing
+- [2608.10618](https://arxiv.org/abs/2608.10618) Toward the Cognitive--Physical Limits of Embodied Intelligence through a World-Model-Centric Autonomous Racing Agent
+- [2608.11204](https://arxiv.org/abs/2608.11204) Foresight Without Seeing (verify)
+- [2608.11521](https://arxiv.org/abs/2608.11521) Foresight Without Seeing (verify)
+- [2608.11601](https://arxiv.org/abs/2608.11601) GaussianDWM++ (verify)
+- [2608.12854](https://arxiv.org/abs/2608.12854) GaussianDWM++ (verify)
+- [2608.12939](https://arxiv.org/abs/2608.12939) Diagnosing JEPA World Models with Action-Conditioned Predictive Consistency
+- [2608.13438](https://arxiv.org/abs/2608.13438) DreamX-Phi 1.0 (verify)
+- [2608.13456](https://arxiv.org/abs/2608.13456) DreamX-Phi 1.0 (verify)
+- [2608.13489](https://arxiv.org/abs/2608.13489) DreamX-Phi 1.0 (verify)
+- [2608.13492](https://arxiv.org/abs/2608.13492) AlayaWorld: Interactive Long-Horizon World Modeling - Full Technical Report
+- [2608.13546](https://arxiv.org/abs/2608.13546) Alaya-EVOKE: From Linear-Scaling Supervision to Endless World
+- [2608.13552](https://arxiv.org/abs/2608.13552) PlayWorld: Benchmarking World Models with Agent Players over Long-Horizon Objectives
+- [2608.13678](https://arxiv.org/abs/2608.13678) hint$^2$: Hierarchical World Models for Inference-Time Temporal Logic Guidance
+- [2608.14125](https://arxiv.org/abs/2608.14125) Traj-LeWM: Path-Aware World-Model Planning via Latent Trajectory Cost
+- [2608.14530](https://arxiv.org/abs/2608.14530) No Gaussian Required (verify)
+- [2608.16234](https://arxiv.org/abs/2608.16234) GaussianDWM++ (verify)
+- [2608.16287](https://arxiv.org/abs/2608.16287) No Gaussian Required (verify)
+- [2608.16651](https://arxiv.org/abs/2608.16651) Orbit-Planner (verify)
+- [2608.17542](https://arxiv.org/abs/2608.17542) No Gaussian Required (verify)
+- [2608.18077](https://arxiv.org/abs/2608.18077) GigaBrain-WBC-0.5 (verify)
+- [2608.18234](https://arxiv.org/abs/2608.18234) GigaBrain-WBC-0.5 (verify)
+- [2608.20065](https://arxiv.org/abs/2608.20065) Orthogonal JEPA
+- [2608.22294](https://arxiv.org/abs/2608.22294) Beyond Instance Slots: Semantically Rich World Models for Physical Interaction Planning
+- [2608.22421](https://arxiv.org/abs/2608.22421) Where World Models Break: Natural-Input Failure Discovery
+- [2608.22750](https://arxiv.org/abs/2608.22750) MOSH-WM: Mask-Grounded Soft-Hamiltonian Dynamics for Object-Centric World Models
+- [2608.23070](https://arxiv.org/abs/2608.23070) From Generation to Simulation: How Far Are World Models from Being True Simulators?
+- [2608.23189](https://arxiv.org/abs/2608.23189) EchoWM: Open and Enterable Omnimodal World Models
+- [2608.23526](https://arxiv.org/abs/2608.23526) Correcting a Learned Physical Invariant Improves World-Model Rollouts
+- [2608.23565](https://arxiv.org/abs/2608.23565) ReWorld: An Interactive World Model with Long-Horizon Memory
+- [2608.24855](https://arxiv.org/abs/2608.24855) LeFlow: Generative Latent Flow Planning for World Models
+- [2608.24885](https://arxiv.org/abs/2608.24885) Rollout-Decoded Reconstruction (verify)
+- [2608.25017](https://arxiv.org/abs/2608.25017) Rollout-Decoded Reconstruction (verify)
+- [2608.25572](https://arxiv.org/abs/2608.25572) GaussianDream++ (verify)
+- [2608.25659](https://arxiv.org/abs/2608.25659) GaussianDream++ (verify)
+- [2608.25927](https://arxiv.org/abs/2608.25927) Code World Model
+- [2608.26239](https://arxiv.org/abs/2608.26239) WALL-SS: Scaling Long-horizon World Models via Next-Scale Autoregression
+- [2608.27033](https://arxiv.org/abs/2608.27033) SpatialCrafter (verify)
+- [2608.27073](https://arxiv.org/abs/2608.27073) SpatialCrafter (verify)
+- [2608.27328](https://arxiv.org/abs/2608.27328) R2M-Bench: Evaluating Revisit Memory via Relative Consistency in Interactive Video World Models
+- [2608.27345](https://arxiv.org/abs/2608.27345) PAWBench: How Far Are We from Probabilistically Aligned World Modeling?
+- [2608.27367](https://arxiv.org/abs/2608.27367) Successive Capacity Growth: Task-Complexity-Driven Width and Depth Expansion for Vision Transformer Encoders in JEPA World Models
+- [2608.27406](https://arxiv.org/abs/2608.27406) The Intervention Gap in Latent World Models (verify)
+- [2608.29772](https://arxiv.org/abs/2608.29772) SAGE: Self-Aware Active Learning Enables Continual Improvement in Autonomous Driving
+- [2608.29904](https://arxiv.org/abs/2608.29904) Orbit-Planner (verify)
+- [2608.29937](https://arxiv.org/abs/2608.29937) The Intervention Gap in Latent World Models (verify)
+- [2608.29998](https://arxiv.org/abs/2608.29998) The Intervention Gap in Latent World Models (verify)
+- [2608.30067](https://arxiv.org/abs/2608.30067) Orbit-Planner (verify)
+- [2608.30897](https://arxiv.org/abs/2608.30897) World-Coherent Decoding (verify)
+- [2609.00455](https://arxiv.org/abs/2609.00455) World-Coherent Decoding (verify)
+- [2609.02159](https://arxiv.org/abs/2609.02159) World-Coherent Decoding (verify)
+- [2609.02688](https://arxiv.org/abs/2609.02688) PDT: From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners
+- [2609.03225](https://arxiv.org/abs/2609.03225) StyleDrive: Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving
+- [2609.03557](https://arxiv.org/abs/2609.03557) Building Pretraining Data for World Models: An Unreal Engine-Based Pipeline for Action-Conditioned Video Generation
+- [2609.03565](https://arxiv.org/abs/2609.03565) (title not captured)
+- [2609.03572](https://arxiv.org/abs/2609.03572) Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving
+- [2609.03673](https://arxiv.org/abs/2609.03673) StateAgent: Do Video Generators Track the World Across Segments? A Benchmark and Method for World-State Reasoning in Video Continuation
+- [2609.03774](https://arxiv.org/abs/2609.03774) Discover Artificial Intelligence 26 (verify)
+- [2609.03834](https://arxiv.org/abs/2609.03834) Semantic Bayesian World Models
+- [2609.04196](https://arxiv.org/abs/2609.04196) Puffin-World, Puffin-World: Scaling a Unified Multimodal Model with Native 3D World States
+- [2609.04200](https://arxiv.org/abs/2609.04200) Principia: Relational Physics Tests for Video Models
+- [2609.04264](https://arxiv.org/abs/2609.04264) Spectral-Target Physical Latent Structuring for JEPA-Style World Models
+- [2609.04364](https://arxiv.org/abs/2609.04364) Conductor: Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles
+- [2609.10243](https://arxiv.org/abs/2609.10243) (title not captured)
+- [2609.11697](https://arxiv.org/abs/2609.11697) (title not captured)
