@@ -1,0 +1,47 @@
+# RLinf model group for IMAGO (outcome-driven RL on FastWAM imagination).
+model_type: "fastwam_imago"
+precision: bf16
+is_lora: false            # IMAGO injects its own LoRA (imago/lora.py)
+
+# Released FastWAM checkpoint that can imagine-then-act (HF: yuanty/fastwam).
+model_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224.pt
+dataset_stats_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224_dataset_stats.json
+imago_ckpt_path: null     # resume LoRA / tail weights
+
+action_dim: 7
+num_action_chunks: 8      # executed actions per step (= 2 imagined video frames)
+action_horizon: 32
+binarize_gripper: true
+
+fastwam:
+  config_dir: null        # auto-detected from the installed fastwam package
+  config_name: ${oc.env:IMAGO_ROOT}/configs/fastwam/sim_libero_optional_idm.yaml
+  overrides:
+    - model.redirect_common_files=true
+
+imago:
+  imagination_mode: idm   # idm = imagine then act; first_frame = Fast-WAM (C5)
+  train_video_steps: 4
+  train_action_steps: 4
+  eval_video_steps: 10
+  eval_action_steps: 10
+  video_sigma_shift: null
+  action_sigma_shift: null
+  nft_action_executed_only: true
+  action_grad_through_video: false
+  prompt_bank_path: ${oc.env:IMAGO_CKPT_DIR}/prompt_bank_liberoplus.pt
+  record_dir: null
+  group_size: ${algorithm.group_size}   # contiguous env groups (iso-temporal NFT)
+  rollout_precision: bf16               # bf16 | nvfp4 (Sol-RL; needs transformer-engine)
+
+imago_trainable:
+  video:
+    mode: lora            # lora | full_tail | frozen
+    num_tail_blocks: 12
+    rank: 32
+    alpha: 64
+  action:
+    mode: lora
+    num_tail_blocks: 0    # 0 = all 30 action blocks
+    rank: 32
+    alpha: 64

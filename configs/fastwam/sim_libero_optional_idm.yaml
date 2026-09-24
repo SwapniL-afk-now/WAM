@@ -1,0 +1,14 @@
+# @package _global_
+# FastWAM config for the imagine-then-act (Optional-IDM) LIBERO checkpoint.
+# Defaults are resolved against the FastWAM repo's configs/ dir by
+# imago.builder._compose (same semantics as FastWAM's sim_libero.yaml).
+defaults:
+  - train
+  - override /task: libero_optional_idm_2cam224_1e-4
+  - _self_
+
+model:
+  # Text embeddings come from the IMAGO prompt bank, not umT5 at runtime.
+  load_text_encoder: false
+  skip_dit_load_from_pretrain: true
+  action_dit_pretrained_path: null

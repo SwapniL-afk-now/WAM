@@ -1,0 +1,19 @@
+# IMAGO with all ported efficiency techniques:
+#   NVFP4 rollouts (Sol-RL), iso-temporal groups (Flash-GRPO),
+#   noise-aware weighting (TempFlow-GRPO), sliding noise window (MixGRPO).
+# Compare against liberoplus_imago_fastwam at equal wall-clock and rollouts.
+defaults:
+  - liberoplus_imago_fastwam
+  - _self_
+runner:
+  logger:
+    experiment_name: "liberoplus_imago_fast"
+algorithm:
+  imago_iso_temporal: True
+  imago_time_weight: tempflow
+  imago_noise_window: 2         # train on 2 of the 4 rollout steps at a time
+  imago_window_interval: 10
+actor:
+  model:
+    imago:
+      rollout_precision: nvfp4

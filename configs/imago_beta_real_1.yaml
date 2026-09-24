@@ -1,0 +1,9 @@
+# Realism-anchored imagination (the "imagination must stay true" end of the sweep).
+defaults:
+  - liberoplus_imago_fastwam
+  - _self_
+runner:
+  logger:
+    experiment_name: "liberoplus_imago_beta_real_1"
+algorithm:
+  imago_beta_real: 1.0

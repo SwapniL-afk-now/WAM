@@ -1,0 +1,8 @@
+defaults:
+  - liberoplus_imago_fastwam
+  - _self_
+runner:
+  logger:
+    experiment_name: "liberoplus_imago_beta_real_0p1"
+algorithm:
+  imago_beta_real: 0.1

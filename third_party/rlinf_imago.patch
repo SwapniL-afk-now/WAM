@@ -1,0 +1,81 @@
+diff --git a/examples/embodiment/train_embodied_agent.py b/examples/embodiment/train_embodied_agent.py
+index 0973571..7def712 100644
+--- a/examples/embodiment/train_embodied_agent.py
++++ b/examples/embodiment/train_embodied_agent.py
+@@ -90,6 +90,14 @@ def main(cfg) -> None:
+         from rlinf.workers.actor.fsdp_nft_policy_worker import EmbodiedNFTFSDPPolicy
+ 
+         actor_worker_cls = EmbodiedNFTFSDPPolicy
++    elif cfg.algorithm.loss_type == "embodied_joint_nft":
++        if use_training_pipeline:
++            raise ValueError(
++                "runner.use_training_pipeline=True is not supported for embodied_joint_nft."
++            )
++        from imago.worker import EmbodiedJointNFTFSDPPolicy
++
++        actor_worker_cls = EmbodiedJointNFTFSDPPolicy
+     else:
+         if use_training_pipeline:
+             from rlinf.workers.actor.fsdp_actor_worker_pipeline import (
+diff --git a/rlinf/config.py b/rlinf/config.py
+index 1c0dc51..eebae3b 100644
+--- a/rlinf/config.py
++++ b/rlinf/config.py
+@@ -101,6 +101,8 @@ SupportedModel.DEXBOTIC_PI = SupportedModel.register("dexbotic_pi", force=True)
+ SupportedModel.DEXBOTIC_DM0 = SupportedModel.register("dexbotic_dm0", force=True)
+ SupportedModel.DREAMZERO = SupportedModel.register("dreamzero", force=True)
+ SupportedModel.FASTWAM = SupportedModel.register("fastwam", force=True)
++# IMAGO: FastWAM imagine-then-act policy trained with joint-branch NFT.
++SupportedModel.FASTWAM_IMAGO = SupportedModel.register("fastwam_imago", force=True)
+ SupportedModel.COSMOS3 = SupportedModel.register("cosmos3", force=True)
+ SupportedModel.CNN_POLICY = SupportedModel.register("cnn_policy", force=True)
+ SupportedModel.FLOW_POLICY = SupportedModel.register("flow_policy", force=True)
+@@ -146,6 +148,7 @@ EMBODIED_MODEL = set(
+         SupportedModel.DEXBOTIC_DM0,
+         SupportedModel.DREAMZERO,
+         SupportedModel.FASTWAM,
++        SupportedModel.FASTWAM_IMAGO,
+         SupportedModel.COSMOS3,
+         SupportedModel.CNN_POLICY,
+         SupportedModel.FLOW_POLICY,
+diff --git a/rlinf/models/__init__.py b/rlinf/models/__init__.py
+index 8787741..9841c2b 100644
+--- a/rlinf/models/__init__.py
++++ b/rlinf/models/__init__.py
+@@ -144,6 +144,11 @@ def _register_builtin_models():
+ 
+         return get_model(cfg, torch_dtype)
+ 
++    def _build_fastwam_imago(cfg: DictConfig, torch_dtype):
++        from imago.builder import get_model
++
++        return get_model(cfg, torch_dtype)
++
+     def _build_cosmos3(cfg: DictConfig, torch_dtype):
+         from rlinf.models.embodiment.cosmos3 import get_model
+ 
+@@ -297,6 +302,12 @@ def _register_builtin_models():
+         category="embodied",
+         force=True,
+     )
++    register_model(
++        SupportedModel.FASTWAM_IMAGO.value,
++        _build_fastwam_imago,
++        category="embodied",
++        force=True,
++    )
+     register_model(
+         SupportedModel.COSMOS3.value,
+         _build_cosmos3,
+diff --git a/rlinf/workers/actor/__init__.py b/rlinf/workers/actor/__init__.py
+index 69b20a2..0138029 100644
+--- a/rlinf/workers/actor/__init__.py
++++ b/rlinf/workers/actor/__init__.py
+@@ -26,6 +26,7 @@ def get_actor_worker(cfg: DictConfig) -> type[Worker]:
+                 "embodied_sac",
+                 "embodied_dagger",
+                 "embodied_nft",
++                "embodied_joint_nft",
+             }:
+                 raise ValueError(
+                     "runner.use_training_pipeline=True is not supported for "

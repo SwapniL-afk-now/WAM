@@ -1,0 +1,14 @@
+# C1: action-only NFT. Same rollouts (imagine-then-act), imagination frozen.
+defaults:
+  - liberoplus_imago_fastwam
+  - _self_
+runner:
+  logger:
+    experiment_name: "liberoplus_c1_action_only"
+algorithm:
+  imago_video_weight: 0.0
+actor:
+  model:
+    imago_trainable:
+      video:
+        mode: frozen
