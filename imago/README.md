@@ -50,7 +50,7 @@ NFT already trains on one re-noised step per sample. That is the main saving tha
 Deliberately not ported:
 - **Sol-RL's candidate selection** (score 96 FP4 samples, keep the most contrastive 24) needs a reward that can score a sample without executing it. Robot rewards need the episode to be run.
 - **Sparse or sliding-tile video attention** gives nothing here: a 224×448, 9-frame clip is only 294 video tokens.
-- **One-step WAM distillation (DIDO, arXiv 2609.15570).** It uses DMD to go from a 4-step Wan2.2-TI2V-5B teacher to 1 step, with bounding-box and DINOv3 supervision. That saves 4→1 steps on the *video branch only*; the action denoising and cache prefill remain, so it is not a 4× faster rollout. Code is not released (the repo is README-only). Its LIBERO-Plus result, 76.6, is worth citing as a baseline. Flash-WAM targets LingBot-VA. Details and a check-back trigger are in `AGENTS.md`.
+- **One-step WAM distillation (DIDO, arXiv 2609.15570)** is not implemented yet. It distils 4→1 steps on the video branch only, with DMD plus box and DINOv3-supervised interaction tokens, and cuts latency by 32% end to end (384 vs 562 ms), not 4×. Its code is not released, but the paper's full recipe is in `research_plan/dido_implementation_guide.md`. On LIBERO-Plus, Fast-WAM scores 51.5 and DIDO 76.6, the baseline to beat.
 
 ## Setup (on the GPU server)
 

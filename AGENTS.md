@@ -54,21 +54,15 @@ With 3 GPUs set `env.train.total_num_envs=48`. The batch arithmetic is explained
 
 ## Deferred: one-step WAM distillation (DIDO)
 
-DIDO (arXiv 2609.15570; repo `github.com/LoveJu1y/DIDO-WAM`) is the most relevant way to make imagination cheaper, but **its code is not released**. As of 2026-09-24 the repo holds only a README saying "Code will come soon", with no checkpoints.
+DIDO (arXiv 2609.15570) distils the video branch of a FastWAM-style world action model to **one denoising step**. Its official code is **not released**: `github.com/LoveJu1y/DIDO-WAM` has only a README. The paper does contain a full implementation guide (Appendix B/C, Table 4). It is transcribed, with every hyperparameter and the remaining gaps, in **`research_plan/dido_implementation_guide.md`**. Follow that file if DIDO is implemented.
 
-What the paper does (from summaries; verify against the PDF before relying on it):
+Key facts:
 
-- **Teacher.** A public **4-step** Wan2.2-TI2V-5B checkpoint, adapted to robot videos. Probably a Self-Forcing distillation such as `quanhaol/Wan2.2-TI2V-5B-Turbo`; unverified.
-- **Stage I.** Distribution-matching distillation (DMD) from 4 steps to 1, plus interaction-centric tokens:
-  - object and gripper tokens supervised with **future bounding-box trajectories**;
-  - interaction tokens;
-  - alignment tokens aligned to **DINOv3** features of the target object.
-- **Stage II.** Joint fine-tuning of the video DiT, the tokens, the action expert and the proprio encoder.
-- **Results:** LIBERO 99.0, **LIBERO-Plus 76.6**, RoboTwin 92.0. Report the LIBERO-Plus number as a baseline.
-
-Implications for IMAGO:
-
-- The saving is 4→1 denoising steps on the **video branch only**. Action denoising and the video-cache prefill stay the same, so the whole rollout does **not** become 4× faster.
-- Reproducing it without the authors' code means building a DMD trainer, bounding-box labels and DINOv3 supervision: weeks of work. Don't start it before the CVPR deadline.
-- Public 4-step Wan2.2-TI2V-5B distillations (Turbo, LightX2V) are **not** drop-ins. FastWAM's video expert was fine-tuned away from the base model.
-- **Check-back trigger:** when the DIDO code or checkpoints appear, evaluate replacing IMAGO's 4-step video imagination (`imago.train_video_steps`) with a one-step distilled video expert, and re-run the profiler.
+- **Same design family as FastWAM.** Wan2.2-TI2V-5B video model, MoT action expert, and Fast-WAM's video loss in Stage II.
+- **Pipeline.** Start from a public 4-step Wan2.2-TI2V-5B checkpoint, adapt it into a robot teacher, then:
+  - Stage I: DMD2-style one-step distillation (teacher CFG 7, fake score updated every iteration, generator every 5th), plus 64 interaction tokens with box and DINOv3 supervision.
+  - Stage II: joint policy training.
+- **Speed.** 384 ms vs 562 ms for the 4-step teacher on an H100: **−32% end to end, not 4×**, because action denoising remains. Fast-WAM takes 356 ms.
+- **LIBERO-Plus.** Fast-WAM 51.5 → DIDO 76.6 (Faster-WAM 75.0). Our IMAGO base (FastWAM) therefore has large headroom; report DIDO as the baseline to beat.
+- **Cost on this server.** Stage I trains two of three 5B copies. Full fine-tuning needs FSDP full-shard on all 3 GPUs; LoRA would be a deviation from the paper. Box labels need a detector + tracker pipeline (the gripper comes from simulator state).
+- **Check-back trigger.** When the DIDO code or checkpoints appear, evaluate replacing IMAGO's 4-step video imagination (`imago.train_video_steps`) with a one-step expert and re-run `scripts/profile_rollout.py`.
