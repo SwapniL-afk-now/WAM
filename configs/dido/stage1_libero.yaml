@@ -1,0 +1,40 @@
+# DIDO Stage I (one-step DMD distillation of FastWAM's video expert) on LIBERO.
+# torchrun --nproc_per_node 3 -m imago.dido.distill configs/dido/stage1_libero.yaml
+seed: 0
+model_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224.pt   # teacher = this model
+output_dir: ${oc.env:IMAGO_CKPT_DIR}/dido_stage1
+fastwam:
+  config_dir: null
+  config_name: ${oc.env:IMAGO_ROOT}/configs/fastwam/sim_libero_optional_idm.yaml
+  overrides:
+    - model.redirect_common_files=true
+    # FastWAM-preprocessed LIBERO (HF yuanty/LIBERO-fastwam), all 4 suites as in DIDO:
+    - data.train.dataset_dirs=[${oc.env:LIBERO_DATA_ROOT}/libero_spatial_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_object_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_goal_no_noops_lerobot,${oc.env:LIBERO_DATA_ROOT}/libero_10_no_noops_lerobot]
+    - data.train.text_embedding_cache_dir=${oc.env:IMAGO_CKPT_DIR}/text_embeds_cache/libero
+
+lora:                       # student "gen" + fake-score "fake" adapters on one frozen base
+  rank: 64
+  alpha: 64
+  num_tail_blocks: 0        # 0 = all 30 video blocks
+video_expert_gradient_checkpointing: false
+
+dmd:                        # paper App. C.2
+  teacher_steps: 4          # teacher grid {1000,750,500,250} -> FastWAM 4-step grid
+  teacher_shift: 5.0        # FastWAM video infer shift
+  gen_update_interval: 5    # fake every iter, generator every 5th
+  teacher_cfg_scale: 1.0    # DIDO uses 7; FastWAM has no unconditional branch
+
+optim:
+  gen_lr: 1.0e-5            # DIDO full-FT: 1e-6 ; LoRA needs ~10x (tune)
+  fake_lr: 1.0e-6           # DIDO full-FT: 1e-7 (keep the 10:1 ratio)
+  betas: [0.0, 0.999]
+  weight_decay: 0.01
+  warmup: 500               # then constant
+  clip_grad: 1.0
+
+train:
+  steps: 3000               # DIDO LIBERO: 3K
+  global_batch_size: 128    # DIDO LIBERO: 128
+  micro_batch_size: 8       # per GPU; accum = 128 / (8 * n_gpus)
+  log_every: 20
+  save_every: 500

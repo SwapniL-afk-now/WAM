@@ -52,17 +52,41 @@ Then, in this order (details in `imago/README.md`, section "Checks to run first"
 
 With 3 GPUs set `env.train.total_num_envs=48`. The batch arithmetic is explained in the header of `configs/liberoplus_imago_fastwam.yaml`.
 
-## Deferred: one-step WAM distillation (DIDO)
+## DIDO one-step imagination (implemented, optional pipeline)
 
-DIDO (arXiv 2609.15570) distils the video branch of a FastWAM-style world action model to **one denoising step**. Its official code is **not released**: `github.com/LoveJu1y/DIDO-WAM` has only a README. The paper does contain a full implementation guide (Appendix B/C, Table 4). It is transcribed, with every hyperparameter and the remaining gaps, in **`research_plan/dido_implementation_guide.md`**. Follow that file if DIDO is implemented.
+DIDO (arXiv 2609.15570) distils the video branch to **one denoising step**. The official code is not released, so we implemented the parts IMAGO needs, following the paper's recipe (full transcription in `research_plan/dido_implementation_guide.md`).
 
-Key facts:
+| Part | File | Status |
+|---|---|---|
+| Stage I: DMD2 one-step distillation (teacher = FastWAM video expert on its 4-step grid, fake score every iteration / generator every 5th, normalised DMD gradient) | `imago/dido/distill.py`, `configs/dido/stage1_libero.yaml` | implemented |
+| Stage II: adapt the action expert to one-step imagination (λ_video 0.5, λ_act 1.0, lr 1e-4, cosine) | `imago/dido/adapt.py`, `configs/dido/stage2_libero.yaml` | implemented |
+| Dynamics-based token refinement (top ~15% of 2×2 regions kept, rest pooled) | `imago/dido/token_refine.py`, `imago.token_refine` | implemented; used in rollouts, the NFT action loss and Stage II |
+| Interaction tokens + box / DINOv3 supervision | not implemented | accuracy add-on; needs a detector/tracker label pipeline |
 
-- **Same design family as FastWAM.** Wan2.2-TI2V-5B video model, MoT action expert, and Fast-WAM's video loss in Stage II.
-- **Pipeline.** Start from a public 4-step Wan2.2-TI2V-5B checkpoint, adapt it into a robot teacher, then:
-  - Stage I: DMD2-style one-step distillation (teacher CFG 7, fake score updated every iteration, generator every 5th), plus 64 interaction tokens with box and DINOv3 supervision.
-  - Stage II: joint policy training.
-- **Speed.** 384 ms vs 562 ms for the 4-step teacher on an H100: **−32% end to end, not 4×**, because action denoising remains. Fast-WAM takes 356 ms.
-- **LIBERO-Plus.** Fast-WAM 51.5 → DIDO 76.6 (Faster-WAM 75.0). Our IMAGO base (FastWAM) therefore has large headroom; report DIDO as the baseline to beat.
-- **Cost on this server.** Stage I trains two of three 5B copies. Full fine-tuning needs FSDP full-shard on all 3 GPUs; LoRA would be a deviation from the paper. Box labels need a detector + tracker pipeline (the gripper comes from simulator state).
-- **Check-back trigger.** When the DIDO code or checkpoints appear, evaluate replacing IMAGO's 4-step video imagination (`imago.train_video_steps`) with a one-step expert and re-run `scripts/profile_rollout.py`.
+Deviations from the paper:
+
+- **No teacher-preparation phase.** FastWAM Optional-IDM is already robot-domain; its video expert is the teacher.
+- **Teacher guidance scale 1.0 instead of 7.** FastWAM is trained without prompt dropout, so it has no unconditional branch.
+- **LoRA instead of full fine-tuning.** The student and the fake score are two LoRA adapters on one frozen base (one 5B copy per GPU, fits 2–3 × 96 GB). Learning rates are about 10× the paper's (tune on the server).
+- **Stage II trains the video expert through LoRA,** merged at export, instead of full fine-tuning.
+- **Token grid adapted to FastWAM.** FastWAM has a 7×14 token grid per frame, so the edge regions are always pooled. The paper leaves the reference layer and future frame unspecified; both are config fields.
+
+Run order (after the IMAGO setup above):
+
+```bash
+export LIBERO_DATA_ROOT=/path/to/libero_mujoco3.3.2    # HF yuanty/LIBERO-fastwam, extracted
+# FastWAM text-embedding cache for the LIBERO data (FastWAM repo script):
+#   python scripts/precompute_text_embeds.py task=libero_optional_idm_2cam224_1e-4 \
+#     data.train.text_embedding_cache_dir=$IMAGO_CKPT_DIR/text_embeds_cache/libero
+torchrun --nproc_per_node 3 -m imago.dido.distill configs/dido/stage1_libero.yaml   # Stage I
+torchrun --nproc_per_node 3 -m imago.dido.adapt   configs/dido/stage2_libero.yaml   # Stage II
+bash scripts/run_imago.sh imago_dido      # IMAGO RL on the 1-step imagination
+```
+
+Checks before trusting it:
+
+- One-step imagination quality vs the 10-step teacher: compare Stage I samples with `analysis/drift.py`-style PSNR.
+- LIBERO parity of the Stage II export (expect about 98–99; DIDO reports 98.3 for one-step distillation only).
+- `scripts/profile_rollout.py` with `imago.train_video_steps=1` vs 4.
+
+Expected gain, from the paper: −32% end-to-end latency (384 vs 562 ms on an H100); the video share of rollout time drops about 4×.

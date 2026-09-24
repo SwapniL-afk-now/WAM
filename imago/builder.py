@@ -18,6 +18,7 @@ from rlinf.models.embodiment.fastwam import (
 )
 from rlinf.utils.logging import get_logger
 
+from imago.dido.token_refine import TokenRefineConfig
 from imago.lora import inject_lora, tail_blocks
 from imago.policy import FastWAMImaginePolicy, ImagoPolicyConfig
 
@@ -186,5 +187,6 @@ def get_model(cfg: DictConfig, torch_dtype=None):
         record_dir=icfg.get("record_dir", None),
         group_size=int(icfg.get("group_size", 8)),
         rollout_precision=str(icfg.get("rollout_precision", "bf16")),
+        token_refine=TokenRefineConfig(**dict(icfg.get("token_refine", {}) or {})),
     )
     return model.configure_imago(processor=processor, policy_cfg=policy_cfg)

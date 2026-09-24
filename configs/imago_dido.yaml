@@ -1,0 +1,21 @@
+# IMAGO on the DIDO-distilled one-step imagination (Stage II export):
+# 1 video denoising step per rollout chunk + dynamics-based token refinement.
+defaults:
+  - liberoplus_imago_fastwam
+  - _self_
+runner:
+  logger:
+    experiment_name: "liberoplus_imago_dido"
+actor:
+  model:
+    model_path: ${oc.env:IMAGO_CKPT_DIR}/dido_stage2/fastwam_optional_idm_dido.pt
+    dataset_stats_path: ${oc.env:IMAGO_CKPT_DIR}/libero_optional_idm_2cam224_dataset_stats.json
+    imago:
+      train_video_steps: 1
+      eval_video_steps: 1
+      token_refine:
+        enabled: true
+        keep_ratio: 0.15
+        region: 2
+        future_frame: -1
+        ref_layer: -1

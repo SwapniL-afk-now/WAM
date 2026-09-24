@@ -100,3 +100,12 @@ Interaction supervision is already on during teacher preparation. LIBERO trains 
   - tokens and heads added in the video-expert prepare/blocks;
   - token refinement adapted to FastWAM's 7×14 per-frame grid.
 - **Memory on 2–3 × 96 GB:** Stage I holds three 5B video models, two of them trained. Full fine-tuning with AdamW needs about 200 GB plus activations. That means FSDP full-shard across 3 GPUs, or LoRA on `G_θ` / `f_F`, which would be a deviation from the paper.
+
+## 8. Implementation status in this repo
+
+Details and deviations are in `AGENTS.md`, section "DIDO one-step imagination".
+
+- **Stage I:** `imago/dido/distill.py`. DMD2 as specified: grid timesteps, fake score every iteration and generator every 5th, normalised gradient, x0-regression fake loss, no GAN. The teacher is FastWAM's own video expert, run with guidance 1.0, and the student and fake score are LoRA adapters.
+- **Stage II:** `imago/dido/adapt.py`. Loss is λ_video·L_video + λ_act·L_act; the action expert conditions on the one-step imagination, plus 20% teacher forcing on the ground-truth future.
+- **Token refinement:** `imago/dido/token_refine.py`, adapted to FastWAM's 7×14 grid; the output length is fixed so batches stay rectangular.
+- **Not implemented:** interaction tokens, the box and DINOv3 losses, and the annotation pipeline (Sections 2 and 4 of this guide).

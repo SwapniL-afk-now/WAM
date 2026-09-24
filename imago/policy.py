@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import contextlib
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from types import SimpleNamespace
 from typing import Any, Optional
 
@@ -36,6 +36,8 @@ from rlinf.models.embodiment.fastwam.fastwam_policy import (
     FastWAMPolicy,
     _invert_gripper_action,
 )
+
+from imago.dido.token_refine import TokenRefineConfig, refine_cache
 
 
 @dataclass
@@ -68,6 +70,8 @@ class ImagoPolicyConfig:
     group_size: int = 8
     # Rollout precision: "bf16" or "nvfp4" (Sol-RL, needs transformer-engine).
     rollout_precision: str = "bf16"
+    # DIDO dynamics-based token refinement of the imagined-video cache.
+    token_refine: TokenRefineConfig = field(default_factory=TokenRefineConfig)
 
 
 class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
@@ -188,7 +192,7 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
             video_latents = video_latents[:, :, 0:1]
         batch = video_latents.shape[0]
         timestep = torch.zeros((batch,), dtype=video_latents.dtype, device=video_latents.device)
-        (tokens, _t, t_mod, v_context, v_context_mask, freqs, _f, _h, _w, tpf) = (
+        (tokens, _t, t_mod, v_context, v_context_mask, freqs, grid_f, grid_h, grid_w, tpf) = (
             self.video_expert.prepare(
                 x=video_latents,
                 timestep=timestep,
@@ -213,7 +217,19 @@ class FastWAMImaginePolicy(FastWAMOptionalIDM, BasePolicy):
             video_context_mask=v_context_mask,
             video_attention_mask=mask[:seq_len, :seq_len],
         )
-        return cache_k, cache_v, mask[seq_len:, :]
+        action_mask = mask[seq_len:, :]
+        refine = self.policy_cfg.token_refine
+        if refine.enabled and int(grid_f) > 1:
+            # DIDO dynamics-based token refinement: compress near-static regions
+            # of the imagined future before the action expert reads the cache.
+            cache_k, cache_v = refine_cache(
+                cache_k, cache_v, (int(grid_f), int(grid_h), int(grid_w)), refine
+            )
+            new_len = int(cache_k[0].shape[1])
+            action_mask = torch.ones(
+                (action_seq_len, new_len + action_seq_len), dtype=torch.bool, device=tokens.device
+            )  # action -> all (refined) video tokens and all action tokens
+        return cache_k, cache_v, action_mask
 
     def action_velocity(
         self,

@@ -77,6 +77,9 @@ def main() -> None:
     pcfg = policy.policy_cfg
     calls = load_calls(args.record_dir)[: args.num_calls]
 
+    if pcfg.token_refine.enabled:
+        raise SystemExit("attention_maps.py expects the unrefined cache; rerun with "
+                         "imago.token_refine.enabled=false (spatial maps need the full grid).")
     lat = calls[0].x0_video.shape  # [B, C, T, h, w]
     patch = [int(p) for p in policy.video_expert.patch_size]
     grid_t, grid_h, grid_w = lat[2] // patch[0], lat[3] // patch[1], lat[4] // patch[2]

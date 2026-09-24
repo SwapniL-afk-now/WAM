@@ -15,6 +15,7 @@ It is built on **RLinf** (the `embodied_nft` pipeline, LIBERO-Plus env, FSDP wor
 | `imago/worker.py` | `EmbodiedJointNFTFSDPPolicy` (`loss_type: embodied_joint_nft`). EMA and pretrained references come from swapping the trainable tensors into the live model, so no full second model is kept |
 | `imago/efficiency.py` | Iso-temporal groups and gradient rectification (Flash-GRPO), noise-aware weights (TempFlow-GRPO), sliding noise window (MixGRPO) |
 | `imago/lowprec.py` | NVFP4 rollouts (Sol-RL) using Transformer-Engine shadow linears with LoRA merged in |
+| `imago/dido/` | DIDO parts (arXiv 2609.15570): Stage I one-step DMD distillation (`distill.py`), Stage II action adaptation (`adapt.py`), dynamics-based token refinement (`token_refine.py`) |
 | `third_party/rlinf_imago.patch` | 23-line patch that registers the model type and loss type in RLinf `807e5fd` |
 | `configs/` | FastWAM config for the Optional-IDM checkpoint, RLinf model group, main run and controls |
 | `scripts/` | `install.sh`, `run_imago.sh`, `build_prompt_bank.py`, `make_liberoplus_splits.py`, `profile_rollout.py` |
@@ -28,6 +29,7 @@ It is built on **RLinf** (the `embodied_nft` pipeline, LIBERO-Plus env, FSDP wor
 | `c1_action_only` | C1: same rollouts, imagination frozen, action-only NFT |
 | `c5_first_frame` | C5: Fast-WAM mode (no test-time imagination), action-only NFT |
 | `imago_beta_real_1`, `imago_beta_real_0p1` | Realism-anchor sweep: "imagination must stay true" vs "free" |
+| `imago_dido` | IMAGO on the DIDO-distilled **one-step** imagination with token refinement (run `configs/dido/stage{1,2}_libero.yaml` first) |
 | `imago_fast` | IMAGO plus all efficiency techniques (NVFP4 rollouts, iso-temporal, TempFlow weights, MixGRPO window) |
 
 Not implemented yet:
@@ -50,7 +52,7 @@ NFT already trains on one re-noised step per sample. That is the main saving tha
 Deliberately not ported:
 - **Sol-RL's candidate selection** (score 96 FP4 samples, keep the most contrastive 24) needs a reward that can score a sample without executing it. Robot rewards need the episode to be run.
 - **Sparse or sliding-tile video attention** gives nothing here: a 224×448, 9-frame clip is only 294 video tokens.
-- **One-step WAM distillation (DIDO, arXiv 2609.15570)** is not implemented yet. It distils 4→1 steps on the video branch only, with DMD plus box and DINOv3-supervised interaction tokens, and cuts latency by 32% end to end (384 vs 562 ms), not 4×. Its code is not released, but the paper's full recipe is in `research_plan/dido_implementation_guide.md`. On LIBERO-Plus, Fast-WAM scores 51.5 and DIDO 76.6, the baseline to beat.
+- **DIDO interaction tokens** (object/gripper box heads, DINOv3 alignment) are not implemented. DIDO's one-step distillation and token refinement *are* implemented in `imago/dido/`; see `AGENTS.md` for the deviations and the run order.
 
 ## Setup (on the GPU server)
 

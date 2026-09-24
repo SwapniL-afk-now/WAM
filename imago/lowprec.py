@@ -48,8 +48,8 @@ def _merged_weight(module: nn.Module) -> tuple[torch.Tensor, torch.Tensor | None
     if isinstance(module, LoRALinear):
         base = module.base
         weight = base.weight.data
-        if module.enabled:
-            delta = module.scaling * (module.lora_B.data.float() @ module.lora_A.data.float())
+        delta = module.delta_weight()  # active adapter, None when disabled
+        if delta is not None:
             weight = (weight.float() + delta).to(weight.dtype)
         return weight, base.bias.data if base.bias is not None else None
     return module.weight.data, module.bias.data if module.bias is not None else None
@@ -84,8 +84,11 @@ class NVFP4Rollout:
     def _fp(self) -> tuple:
         parts = []
         for m in self.targets:
-            params = [m.base.weight, m.lora_A, m.lora_B] if isinstance(m, LoRALinear) else [m.weight]
-            parts.append(tuple(p._version for p in params))
+            if isinstance(m, LoRALinear):
+                params = [p for p in m.parameters()]  # base + all adapters
+                parts.append((m.active, m.enabled) + tuple(p._version for p in params))
+            else:
+                parts.append(tuple([m.weight._version]))
         return tuple(parts)
 
     @torch.no_grad()
