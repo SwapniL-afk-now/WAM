@@ -150,6 +150,8 @@ Unchanged. The student interface, latency and parameters are the same as the bas
 | A7 | Sparse update: last 6 / 12 / all layers; LoRA | Efficiency lever (D2) |
 | A8 | Group size G = 4 / 8 / 16 | Rollout budget |
 | A9 | Handling of all-fail / all-success groups: drop vs. FSD signal | H3 |
+| A10 | + attention distillation (`L_attn`, §12.1) | Does copying *where the teacher looks* add to copying *what it does*? |
+| A11 | + advantage-weighted attention term (RAL-style, §12.1) | Does rewarding attention help beyond rewarding actions? |
 
 ### 4.6 Analyses (the figures people will reuse)
 
@@ -245,6 +247,53 @@ It is less flashy, but it is heavily cited and would target ICML 2027.
 3. Read PFD, WAM-OPD and WMSD in full (the PDFs could not be reached from this environment) to confirm the novelty table above, especially whether PFD has an on-policy section or a stated follow-up.
 4. Set up a weekly arXiv alert for "world action model" + "self-distillation" / "on-policy".
 
+## 12. Assessed add-ons: RAL and Looped Flows
+
+### 12.1 Reinforced Attention Learning (RAL, 2602.04884): **adopt, as an add-on to FSD**
+
+**What it does:**
+- Policy-gradient RL on the model's *internal attention distributions* (last layer, averaged over heads) instead of on output tokens.
+- An *on-policy attention distillation* variant: the student matches the teacher's attention as well as its tokens.
+- Beats GRPO on image and video perception benchmarks.
+
+**No RL-on-attention for WAMs found.** Nearby VLA work shapes attention through architecture or supervision, not RL: AVA-VLA, "Look Where It Matters" (2608.02197), "Attention from Action" (2608.13422).
+
+**Why it fits FSD:**
+- The FSD teacher and student differ *only in the video context the action tokens attend to*. The teacher attends to real future tokens and the student to its imagined ones, on the **same spatio-temporal token grid**. So a divergence between their action→video attention maps is well-defined:
+  `L_attn = Σ_{i,k} w_{i,k} · KL( sg[A_teacher(action→video)] ‖ A_student(action→video) )`
+  In words: distill *where to look in the future*, not just which action to take.
+- Attention is an explicit categorical distribution, so it gives a cheap, exact log-probability for a policy-gradient term. This avoids the costly and noisy SDE likelihoods of Flow-GRPO (A11).
+- Attention maps on imagined futures, before vs. after, make a strong qualitative CVPR figure.
+
+**Cost control:** flash attention does not return attention weights. Compute them explicitly only for the few action-query tokens over video keys, at 1–3 layers. That is cheap, because action tokens ≪ video tokens.
+
+**Risk:** RAL was shown on multimodal-LLM question answering. In a video DiT, attention is spread over many layers and heads, so the "last layer, head-averaged" choice may not transfer; sweep the layers in week 3. Keep it as an ablation (A10/A11), not the core claim, until it proves itself.
+
+### 12.2 Thinking with Looped Flows (2609.11801): **defer to a follow-up paper**
+
+**What it does:**
+- Trains a weight-tied looped network with an *ordered sequence of local denoising objectives* at decreasing noise levels, with *shared noise*, instead of backpropagation through time.
+- The recurrent state carries computation across denoising steps.
+- At inference it integrates a probability flow coupled to the state, so more steps means more compute. Multiple solutions come from different initial noise.
+- Results: 58.8% on ARC-AGI-1 and 12.2% on ARC-AGI-2 with small models (EPFL / KAIST / Oxford et al., about two weeks old).
+
+**WAM mapping:** WAMs already denoise actions with a flow. A "looped-flow WAM" would carry a recurrent latent across action-denoising steps instead of rendering future video. That gives latent foresight with adaptive compute: more steps for hard states, fewer for easy ones.
+
+**Why not in the CVPR paper:**
+1. **It is an architecture and pre-training change, not a post-training recipe.** It needs retraining a WAM around a weight-tied looped core, which is not feasible in 7 weeks on top of FSD.
+2. **Unproven outside puzzles.** No result yet for large pretrained video DiTs or control.
+3. **Crowded neighbourhood.** Adaptive depth and compute for WAMs/VLAs already includes:
+   - LoopVLA (2605.09948): looped transformer with a sufficiency gate
+   - Recurrent-Depth VLA (2602.07845): weight-tied recurrent action head trained with truncated backprop
+   - Looped World Models (2606.18208)
+   - RISE adaptive imagination (2608.20430)
+   - Fast-WAM (2603.16666)
+   - Latent Futures (2608.11605)
+
+   The new part would be specifically *training* with looped-flow local objectives instead of truncated backprop. That is a narrower delta.
+
+**Follow-up paper (ICML / CoRL 2027):** a "Looped-Flow WAM", in which the imagined video branch is replaced by a looped latent trained with looped-flow objectives. It can then be post-trained with FSD, where the privileged-future teacher supervises the looped latent's foresight. It reuses all of this project's infrastructure.
+
 ## Sources
 
 - PFD: https://arxiv.org/abs/2604.25859 and https://github.com/PengchengFang-cs/PFD
@@ -258,3 +307,10 @@ It is less flashy, but it is heavily cited and would target ICML 2027.
 - OpenWAM: https://arxiv.org/abs/2609.07398 and https://github.com/OpenWAM-Official/OpenWAM
 - CRPO (exposure bias in OPSD): https://arxiv.org/abs/2607.28026
 - Reinforcement Learning via Self-Distillation: https://arxiv.org/abs/2601.20802
+- Reinforced Attention Learning (RAL): https://arxiv.org/abs/2602.04884
+- Thinking with Looped Flows: https://arxiv.org/abs/2609.11801 and https://misakitaro0414.github.io/looped-flows/
+- LoopVLA: https://arxiv.org/abs/2605.09948
+- Recurrent-Depth VLA: https://arxiv.org/abs/2602.07845
+- Looped World Models: https://arxiv.org/abs/2606.18208
+- Attention from Action, for Action: https://arxiv.org/abs/2608.13422
+- Look Where It Matters: https://arxiv.org/abs/2608.02197
