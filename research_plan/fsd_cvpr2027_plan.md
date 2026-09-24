@@ -112,6 +112,24 @@ Unchanged. The student interface, latency and parameters are the same as the bas
 | **Second backbone** | **OpenWAM** (`github.com/OpenWAM-Official/OpenWAM`; Wan2.2-5B, Wan2.1-1.3B or Cosmos-Predict2.5-2B video backbones; RoboTwin (50 tasks), LIBERO, LIBERO-plus, RoboCasa, VLABench evaluation; weights on HF) | Shows the method works across architectures. The **1.3B / 2B backbones** make RL affordable |
 | Optional third | Efficient-WAM (1B) or Fast-WAM, if code is out | Small-model point |
 
+**RL framework: RLinf (`github.com/RLinf/RLinf`), not verl-vla.** Checked 2026-09-24 against the READMEs:
+
+| | **RLinf** | **verl-vla** (v0.1, Aug 2026, built on verl) |
+|---|---|---|
+| WAM support | FastWAM (SFT + batched LIBERO eval, Sep 2026), Cosmos3, DreamZero; Wan / OpenSora world models | None (ACT, Gaussian Actor, Pi0.5, GR00T N1.6) |
+| On-policy algorithms | GRPO, PPO, Async PPO, DAPO, Reinforce++, **OPD** | None listed (SAC, TD3+BC, FPO, DSRL, RECAP) |
+| Simulators we need | RoboTwin, LIBERO, LIBERO-Plus, ManiSkill, RoboCasa | LIBERO, Isaac Lab Arena, Piper only |
+| Flow-policy RL | πRL (PPO/GRPO for flow VLAs), SAC-Flow | FPO, DSRL |
+| Strength | Scalable sim RL; used by WoVR and πRL; accepted at OSDI and RSS 2026 | Human-in-the-loop and cloud–edge real-robot data collection |
+
+**Plan:**
+- Implement FSD as a modification of RLinf's **OPD worker**, replacing the external teacher with the self-teacher that sees the real future.
+- Port PFD's attention-mask teacher into RLinf's FastWAM model. PFD is built on the FastWAM codebase, so the model code lines up.
+- RLinf lists FastWAM for SFT/eval, not yet RL, so budget week 1 for the rollout glue. A community fork, `Yutenji-Nyamu/rlinf_fastwam`, claims "Fast-WAM + RoboTwin integration for RLinf PPO and GRPO"; this is unverified, so inspect it before relying on it.
+- Consider verl-vla only later, for real-robot human-intervention data.
+
+What the neighbouring papers used: WoVR and πRL used RLinf. WAM-OPD, VAMPO and PFD each ship their own standalone code (WAM-OPD: LingBot-VA + RoboTwin; VAMPO: OpenHelix; PFD: FastWAM + DeepSpeed ZeRO-1). SimpleVLA-RL used verl (OpenVLA-OFT with GRPO).
+
 ### 4.2 Benchmarks
 
 - **RoboTwin 2.0**, the main benchmark: choose 10–16 tasks where the base model is at 20–70% success (room to improve), including randomized-clutter settings.
@@ -314,3 +332,10 @@ It is less flashy, but it is heavily cited and would target ICML 2027.
 - Looped World Models: https://arxiv.org/abs/2606.18208
 - Attention from Action, for Action: https://arxiv.org/abs/2608.13422
 - Look Where It Matters: https://arxiv.org/abs/2608.02197
+- RLinf: https://github.com/RLinf/RLinf
+- verl-vla: https://github.com/verl-project/verl-vla
+- rlinf_fastwam (community fork, unverified): https://github.com/Yutenji-Nyamu/rlinf_fastwam
+- WAM-OPD code: https://github.com/UCL-ERL/WAM-OPD
+- VAMPO code: https://github.com/OpenHelix-Team/VAMPO
+- FastWAM code: https://github.com/yuantianyuan01/FastWAM
+- SimpleVLA-RL: https://github.com/PRIME-RL/SimpleVLA-RL
